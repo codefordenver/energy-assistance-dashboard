@@ -11,3 +11,22 @@ The must haves of the project are that it:
 Stretch goal ideas:
 * Automating data collection
 * Add more types of data
+
+## Backend Setup
+1. Install python3
+
+2. Setup a virtual environment named venv by running the command:
+`python3 -m venv venv`
+
+3. Activate the virtual environment:
+Find the proper activate script based on your OS and terminal.  https://docs.python.org/3/library/venv.html
+
+- For macOS terminal use: `source venv/bin/activate`
+
+- Note: For macOS the venv can be deactivated by typing `deactivate` in the terminal
+
+4. Install dependencies:
+`pip install -r requirements.txt`
+
+5. If adding new dependencies, update the requirements file by running:
+`pip freeze > requirements.txt`
