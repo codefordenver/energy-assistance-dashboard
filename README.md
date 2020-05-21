@@ -18,25 +18,25 @@ https://docs.google.com/spreadsheets/u/3/d/1e6nSz5Mw8kloFNkSN-xi2IjnSP_pclgJy7U1
 ## Backend Setup
 1. Install python3
 
-2. Navigate to the project folder and setup a virtual environment named `venv` by running the command:
+1. Navigate to the project folder and setup a virtual environment named `venv` by running the command:
 `python3 -m venv venv`
 
-3. Activate the virtual environment:
+1. Activate the virtual environment:
 Find the proper activate script based on your OS and terminal.  https://docs.python.org/3/library/venv.html
 
 - For macOS terminal use: `source venv/bin/activate`
 
 - Note: For macOS the venv can be deactivated by typing `deactivate` in the terminal
 
-4. Install dependencies:
+1. Navigate to the `backend` folder
+
+1. Install dependencies:
 `pip install -r requirements.txt`
 
-5. If adding new dependencies, update the requirements file by running:
+1. If adding new dependencies, update the requirements file by running:
 `pip freeze > requirements.txt`
 
-6. Navigate to the `backend` folder
-
-7. Start the server
+1. Start the server
 `uvicorn main:app --reload`
 
-8. Navigate to `http://127.0.0.1:8000/` to view the server locally
+1. Navigate to `http://127.0.0.1:8000/` to view the server locally
