@@ -15,7 +15,7 @@ Stretch goal ideas:
 ## Backend Setup
 1. Install python3
 
-2. Setup a virtual environment named venv by running the command:
+2. Navigate to the project folder and setup a virtual environment named `venv` by running the command:
 `python3 -m venv venv`
 
 3. Activate the virtual environment:
@@ -30,3 +30,10 @@ Find the proper activate script based on your OS and terminal.  https://docs.pyt
 
 5. If adding new dependencies, update the requirements file by running:
 `pip freeze > requirements.txt`
+
+6. Navigate to the `backend` folder
+
+7. Start the server
+`uvicorn main:app --reload`
+
+8. Navigate to `http://127.0.0.1:8000/` to view the server locally

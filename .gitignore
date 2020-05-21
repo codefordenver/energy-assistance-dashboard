@@ -2,6 +2,7 @@
 bin/
 share/
 etc/
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
