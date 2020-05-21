@@ -11,3 +11,6 @@ The must haves of the project are that it:
 Stretch goal ideas:
 * Automating data collection
 * Add more types of data
+
+V1 of the project
+https://docs.google.com/spreadsheets/u/3/d/1e6nSz5Mw8kloFNkSN-xi2IjnSP_pclgJy7U1C1fBx68/edit?usp=sharing
