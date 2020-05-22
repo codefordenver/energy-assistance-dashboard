@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-from backend.main import app, county_list
+from main import app, county_list
 
 client = TestClient(app)
 
