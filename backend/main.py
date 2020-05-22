@@ -1,7 +1,7 @@
 from fastapi import FastAPI
+from backend.data.counties import county_list
 
 app = FastAPI()
-
 
 @app.get("/")
 async def root():
@@ -9,7 +9,7 @@ async def root():
 
 @app.get("/counties")
 async def counties():
-    return {"message": "Return all counties here!"}
+    return {"counties": county_list}
 
 @app.get("/counties/{county}")
 async def get_county_data(county: str):
