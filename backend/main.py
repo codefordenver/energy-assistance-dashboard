@@ -13,6 +13,7 @@ async def counties():
 
 @app.get("/counties/{county}")
 async def get_county_data(county: str):
+    county = county.upper()
     if county in county_list.values():
         county_data = getData(county)
         return {"data": county_data}
