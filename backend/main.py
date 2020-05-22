@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from backend.data.counties import county_list
+from data.counties import county_list
 
 app = FastAPI()
 
