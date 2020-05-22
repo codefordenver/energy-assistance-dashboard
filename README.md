@@ -32,7 +32,9 @@ Find the proper activate script based on your OS and terminal.  https://docs.pyt
 `pip install -r requirements.txt`
 
 5. If adding new dependencies, update the requirements file by running:
-`pip freeze > requirements.txt`
+`pip-chill > requirements.txt`
+
+- We are using [`pip-chill`](https://pypi.org/project/pip-chill/) which will only list top-level requirements.
 
 6. Navigate to the `backend` folder
 
