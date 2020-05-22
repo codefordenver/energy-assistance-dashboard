@@ -11,7 +11,7 @@ def test_get_counties():
     assert response.json() == {"counties": county_list}
 
 def test_get_county_data():
-    response = client.get('/counties/DENVER COUNTY')
+    response = client.get('/counties/31')
     assert response.status_code == 200
     assert response.json() == data
 

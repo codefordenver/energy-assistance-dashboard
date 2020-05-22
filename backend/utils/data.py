@@ -2,12 +2,10 @@
 # To add a new markdown cell, type '# %% [markdown]'
 # %%
 import pandas as pd
-import numpy as np
 
 def getData(area: str) -> pd.DataFrame:
   # %%
   AREA: str = area
-  processedData: pd.DataFrame = pd.DataFrame()
   
   AHS: pd.DataFrame = pd.read_csv("data/ACS-Average-Household-Size.tsv", sep='\t')
   H: pd.DataFrame = pd.read_csv("data/ACS-Households.tsv", sep='\t')
