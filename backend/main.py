@@ -1,6 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from data.counties import county_list
-
+from utils.data import getData
 app = FastAPI()
 
 @app.get("/")
@@ -13,4 +13,8 @@ async def counties():
 
 @app.get("/counties/{county}")
 async def get_county_data(county: str):
-    return {"message": f"Return specific county data here here for {county}!"}
+    if county in county_list.values():
+        county_data = getData(county)
+        return {"data": county_data}
+    
+    raise HTTPException(status_code=404, detail="County not found in database")
