@@ -15,12 +15,12 @@ There are really two parts to this web application:
 1. The first part is the user-facing side, which is a web page that
    displays a dashboard of energy visualizations. The design of this
    dashboard will be based on the version 1 visualization mockup
-   found in the Google Sheet below: [1].
+   found below in the [Google Sheet](https://github.com/codefordenver/energy-assistance-dashboard/tree/readme_update#resources).
 
 2. The other part is the admin-facing side, which is an
    [Airtable](https://airtable.com) document that stores the data
    which feeds the user-facing visualizations. Currently, the data
-   can also be found in the Google Sheet below: [1].
+   can also be found below in the [Google Sheet](https://github.com/codefordenver/energy-assistance-dashboard/tree/readme_update#resources).
 
 The idea is that administrators will be able to easily update
 the Airtable document and users will see changes reflected in the web
