@@ -50,7 +50,7 @@ async def get_county_data(county_id: str) -> CountyResponse:
             #Save the data to the cache before returning
             r.setDataFrame(county, county_data)
 
-            response.data = county_data
+            response.data = r.getDataFrame(county)
             response.last_updated = "Now"
             return response
     
@@ -58,6 +58,6 @@ async def get_county_data(county_id: str) -> CountyResponse:
 
 @app.get("/reset-cache")
 async def reset_cache() -> GenericResponse:
-    r.reset_cache()
     response = GenericResponse(message="Cache was reset")
+    r.reset_cache()
     return response
