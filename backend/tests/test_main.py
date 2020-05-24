@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app, county_list
-from tests.denver_county import data
+from tests.denver_county_response import data
 
 client = TestClient(app)
 

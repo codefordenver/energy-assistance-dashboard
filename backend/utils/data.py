@@ -3,7 +3,7 @@
 # %%
 import pandas as pd
 
-def getData(area: str) -> pd.DataFrame:
+def processData(area: str) -> pd.DataFrame:
   # %%
   AREA: str = area
   
