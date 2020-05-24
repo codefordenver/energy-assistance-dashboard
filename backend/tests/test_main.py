@@ -4,7 +4,6 @@ from tests.denver_county import data
 
 client = TestClient(app)
 
-
 def test_get_counties():
     response = client.get('/counties')
     assert response.status_code == 200
