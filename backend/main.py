@@ -5,6 +5,7 @@ from functools import lru_cache
 from fastapi import FastAPI, HTTPException
 
 #Custom Modules
+from middleware import set_cors
 from data.counties import county_list
 from utils.config import Settings
 from utils.data import processData
@@ -12,6 +13,8 @@ from utils.redis_helper import RedisHelper
 from models.response import GenericResponse, CountyResponse
 
 app = FastAPI()
+set_cors(app)
+
 
 @lru_cache()
 def get_settings() -> Settings:
@@ -26,9 +29,11 @@ async def root() -> GenericResponse:
     response = GenericResponse(message="Hello World")
     return response
 
+
 @app.get("/counties")
 async def counties():
     return {"counties": county_list}
+
 
 @app.get("/counties/{county_id}")
 async def get_county_data(county_id: str) -> CountyResponse:
