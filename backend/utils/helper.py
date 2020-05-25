@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 import redis
-from utils.date_helper import get_current_time
+from datetime import datetime
 
 class RedisHelper():
     def __init__(self, hostname, port, password):
@@ -16,11 +16,12 @@ class RedisHelper():
     def set(self, key:str, value:str):
         self.r.set(key, value)
 
-    def helperCurrentTime(self):
-        return get_current_time()
+    def getCurrentTime(self):
+        now = datetime.now()
+        return now.strftime("%H:%M:%S")
 
     def setDataFrame(self, key:str, value: pd.DataFrame):
-        current_time = self.helperCurrentTime()
+        current_time = self.getCurrentTime()
         #Create a pipeline with multiple transactions for data and time
         p = self.r.pipeline()
         p.multi()

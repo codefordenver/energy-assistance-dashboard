@@ -5,11 +5,9 @@ import unittest.mock
 
 from middleware import set_cors
 from main import app, county_list
-from tests.denver_county_response_no_cache import denver_no_cache
-from tests.denver_county_response_cache import denver_cache
+from tests.denver_county_data import cache, no_cache
 from utils.config import Settings
-from utils.redis_helper import RedisHelper
-from utils.date_helper import get_current_time
+from utils.helper import RedisHelper
 
 client = TestClient(app)
 
@@ -19,7 +17,20 @@ def get_settings() -> Settings:
 
 settings: Settings = get_settings()
 
-r = RedisHelper(settings.hostname, settings.port, settings.password)
+
+def setup_function(function):
+    """ setup any state tied to the execution of the given function.
+    Invoked for every test function in the module.
+    """
+    function.r = RedisHelper(settings.hostname, settings.port, settings.password)
+
+
+def teardown_function(function):
+    """ teardown any state that was previously setup with a setup_function
+    call.
+    """
+    del function.r
+
 
 def test_get_counties():
     response = client.get('/counties')
@@ -29,32 +40,31 @@ def test_get_counties():
 
 def test_get_county_data_no_cache():
     #response_json = json.dumps(response.__dict__)
-    r.reset_cache()
+    test_get_county_data_no_cache.r.reset_cache()
     returned_response = client.get('/counties/31')
     
     assert returned_response.status_code == 200
-    assert returned_response.json() == denver_no_cache
+    assert returned_response.json() == no_cache
 
 
-@unittest.mock.patch('utils.redis_helper.RedisHelper.helperCurrentTime')
-def test_get_county_data_cache(mock_get_current_time):
+@unittest.mock.patch('utils.helper.RedisHelper.getCurrentTime')
+def test_get_county_data_cache(mock_getCurrentTime):
     #Patch current time.  If the timing between two get_current_time falls at the end of a second this can randomly fail
-    current_time = get_current_time()
-    mock_get_current_time.return_value = current_time
-    
-    denver_cache["last_updated"] = current_time
+    current_time = "13:37:00"
+    mock_getCurrentTime.return_value = current_time
+    cache["last_updated"] = current_time
 
     #Reset and pre-seed the cache
-    r.reset_cache()
+    test_get_county_data_cache.r.reset_cache()
     client.get('/counties/31')
     
     #Return cached response
     returned_response = client.get('/counties/31')
 
-    assert mock_get_current_time.called
-    assert mock_get_current_time.call_count == 1
+    assert mock_getCurrentTime.called
+    assert mock_getCurrentTime.call_count == 1
     assert returned_response.status_code == 200
-    assert returned_response.json() == denver_cache
+    assert returned_response.json() == cache
 
 
 def test_get_county_data_county_error():

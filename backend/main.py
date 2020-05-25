@@ -9,7 +9,7 @@ from middleware import set_cors
 from data.counties import county_list
 from utils.config import Settings
 from utils.data import processData
-from utils.redis_helper import RedisHelper
+from utils.helper import RedisHelper
 from models.response import GenericResponse, CountyResponse
 
 app = FastAPI()
@@ -42,8 +42,7 @@ async def get_county_data(county_id: str) -> CountyResponse:
     if county_id in county_list:
         county: str = county_list[county_id]
 
-        county_cache_exists = r.exists(county)
-        if (county_cache_exists == 1 ): # 1 = exists, 0 = does not exist
+        if r.exists(county): # 1 = exists, 0 = does not exist
             response.data = r.getDataFrame(county)
             response.last_updated = r.getDataFrame_time(county)
             return response

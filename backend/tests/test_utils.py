@@ -1,5 +1,5 @@
 from utils.data import processData
-from tests.denver_county_raw import raw
+from tests.denver_county_data import raw
 
 def test_processData():
   returnedData = processData("DENVER COUNTY")
