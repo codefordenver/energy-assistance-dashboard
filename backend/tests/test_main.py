@@ -39,5 +39,5 @@ def test_cors():
 
     # For now, there is only one middleware set up, but this should work for multiple
     expected_mw_options: dict = {'allow_origins': ['*'], 'allow_credentials': True}
-    mw_options = [m.options for m in cors_app.user_middleware]
+    mw_options = [m.options for m in cors_app.user_middleware if hasattr(m, 'options')]
     assert expected_mw_options in mw_options
