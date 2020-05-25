@@ -24,9 +24,9 @@ https://docs.google.com/spreadsheets/u/3/d/1e6nSz5Mw8kloFNkSN-xi2IjnSP_pclgJy7U1
 1. Activate the virtual environment:
 Find the proper activate script based on your OS and terminal.  https://docs.python.org/3/library/venv.html
 
-- For macOS terminal use: `source venv/bin/activate`
+    - For macOS terminal use: `source venv/bin/activate`
 
-- Note: For macOS the venv can be deactivated by typing `deactivate` in the terminal
+    - Note: For macOS the venv can be deactivated by typing `deactivate` in the terminal
 
 1. Navigate to the `backend` folder
 
@@ -36,7 +36,9 @@ Find the proper activate script based on your OS and terminal.  https://docs.pyt
 1. If adding new dependencies, update the requirements file by running:
 `pip-chill > requirements.txt`
 
-- We are using [`pip-chill`](https://pypi.org/project/pip-chill/) which will only list top-level requirements.
+    - We are using [`pip-chill`](https://pypi.org/project/pip-chill/) which will only list top-level requirements.
+
+1. Add the `.env` file to the `backend` folder
 
 1. Start the server
 `uvicorn main:app --reload`

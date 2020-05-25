@@ -24,6 +24,7 @@ settings: Settings = get_settings()
 
 r = RedisHelper(settings.hostname, settings.port, settings.password)
 
+
 @app.get("/")
 async def root() -> GenericResponse:
     response = GenericResponse(message="Hello World")
@@ -59,6 +60,7 @@ async def get_county_data(county_id: str) -> CountyResponse:
             return response
     
     raise HTTPException(status_code=404, detail="County not found in database")
+
 
 @app.get("/reset-cache")
 async def reset_cache() -> GenericResponse:

@@ -16,8 +16,11 @@ class RedisHelper():
     def set(self, key:str, value:str):
         self.r.set(key, value)
 
+    def helperCurrentTime(self):
+        return get_current_time()
+
     def setDataFrame(self, key:str, value: pd.DataFrame):
-        current_time = get_current_time()
+        current_time = self.helperCurrentTime()
         #Create a pipeline with multiple transactions for data and time
         p = self.r.pipeline()
         p.multi()
