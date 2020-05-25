@@ -9,9 +9,8 @@ from data.counties import county_list
 from utils.config import Settings
 from utils.data import processData
 from utils.redis_helper import RedisHelper
-from utils.date_helper import get_current_time
-
 from models.response import GenericResponse, CountyResponse
+
 app = FastAPI()
 
 @lru_cache()
