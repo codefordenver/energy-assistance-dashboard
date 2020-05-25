@@ -39,7 +39,6 @@ def test_get_counties():
 
 
 def test_get_county_data_no_cache():
-    #response_json = json.dumps(response.__dict__)
     test_get_county_data_no_cache.r.reset_cache()
     returned_response = client.get('/counties/31')
     
