@@ -61,7 +61,7 @@ async def get_county_data(county_id: str) -> CountyResponse:
     
     raise HTTPException(status_code=404, detail="County not found in database")
 
-
+# ! This is for testing and should have some type of protection so the cache cannot be cleared by any user
 @app.get("/reset-cache")
 async def reset_cache() -> GenericResponse:
     response = GenericResponse(message="Cache was reset")
