@@ -73,7 +73,9 @@ Find the proper activate script based on your OS and terminal.  https://docs.pyt
 1. If adding new dependencies, update the requirements file by running:
 `pip-chill > requirements.txt`
 
-   - We are using [`pip-chill`](https://pypi.org/project/pip-chill/) which will only list top-level requirements.
+    - We are using [`pip-chill`](https://pypi.org/project/pip-chill/) which will only list top-level requirements.
+
+1. Add the `.env` file to the `backend` folder
 
 1. Start the server
 `uvicorn main:app --reload`
