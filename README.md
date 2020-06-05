@@ -83,4 +83,10 @@ Find the proper activate script based on your OS and terminal.  https://docs.pyt
 1. Navigate to `http://127.0.0.1:8000/` to view the server locally
 
 ### Frontend Setup
-TBD
+1. Navigate to the frontend folder
+
+1. Install dependencies `yarn install`
+
+1. Run the dev server `yarn dev`
+
+1. Navigate to `http://127.0.0.1:3000/` to view the frontend client locally
