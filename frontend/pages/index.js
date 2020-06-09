@@ -1,16 +1,18 @@
 import Head from 'next/head'
+import SummaryTable from '../components/SummaryTable';
 
-export default function Home() {
+const Index = (props) => {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Energy Assistance Dashboard</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div>Place county dropdown here!</div>
 
       <div>Place summary table here!</div>
+      <SummaryTable data={props} />
 
       <div>Place full stats table here!</div>
 
@@ -76,7 +78,7 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          align-items: center;
+          align-items: left;
         }
 
         main {
@@ -217,3 +219,15 @@ export default function Home() {
     </div>
   )
 }
+
+
+Index.getInitialProps = async function() {
+  const res = await fetch('http://localhost:3000/api/counties/[id].js');
+  const data = await res.json();
+  return {
+        data: data.data
+  };
+}
+
+
+export default Index;
