@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');        
+.container {
+    font-family: 'Nunito', sans-serif;
+    padding: 20px;
+}
+
+.container h3 {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 18px;
+    margin: 18px 0 6px;
+}
+
+.container table {
+    border: 1px solid rgb(197, 197, 197);
+    font-size: 13px;
+    border-collapse: collapse;
+    font-weight: 400;
+}
+
+.container thead tr {
+    height: 20px;
+    background: rgb(197, 197, 197);
+}
+
+.container tbody tr {
+    border-bottom: 1px solid rgb(197, 197, 197);
+}
+
+.container tbody tr td {
+    padding: 2px 5px;
+}
+
+.summarytable {
+    padding: 20px 0;
+}
+
+.bold {
+    font-weight: 700;
+    font-size: 17px;
+    text-align: right;
+    width: 120px; 
+}

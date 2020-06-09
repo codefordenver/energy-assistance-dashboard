@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import SummaryTable from '../components/SummaryTable';
+import styles from '../styles/global.module.css'
 
 const Index = (props) => {
   return (
-    <div className="container">
+    <div className={styles.container}>
       <Head>
         <title>Energy Assistance Dashboard</title>
         <link rel="icon" href="/favicon.ico" />
@@ -11,7 +12,6 @@ const Index = (props) => {
 
       <div>Place county dropdown here!</div>
 
-      <div>Place summary table here!</div>
       <SummaryTable data={props} />
 
       <div>Place full stats table here!</div>
@@ -222,10 +222,12 @@ const Index = (props) => {
 
 
 Index.getInitialProps = async function() {
-  const res = await fetch('http://localhost:3000/api/counties/[id].js');
+  const frontendUrl = 'http://localhost:3000'
+  const res = await fetch(`${frontendUrl}/api/counties/[id].js`);
   const data = await res.json();
+
   return {
-        data: data.data
+      selectedCountyData: data.data
   };
 }
 
