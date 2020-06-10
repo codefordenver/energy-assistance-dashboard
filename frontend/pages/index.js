@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import SummaryTable from '../components/SummaryTable';
+import CountyDropdown from '../components/CountyDropdown';
 import styles from '../styles/global.module.css'
 
 const Index = (props) => {
@@ -11,6 +12,7 @@ const Index = (props) => {
       </Head>
 
       <div>Place county dropdown here!</div>
+      <CountyDropdown data={props}/>
 
       <SummaryTable data={props} />
 
@@ -226,8 +228,11 @@ Index.getInitialProps = async function() {
   const res = await fetch(`${frontendUrl}/api/counties/[id].js`);
   const data = await res.json();
 
+  const countyRes = await fetch(`${frontendUrl}/api/counties`);
+  const countyList = await countyRes.json();
   return {
-      selectedCountyData: data.data
+      selectedCountyData: data.data,
+      countyList: countyList
   };
 }
 
