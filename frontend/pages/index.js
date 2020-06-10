@@ -11,7 +11,6 @@ const Index = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>Place county dropdown here!</div>
       <CountyDropdown data={props}/>
 
       <SummaryTable data={props} />
