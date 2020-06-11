@@ -4,18 +4,29 @@ import CountyDropdown from '../components/CountyDropdown';
 import styles from '../styles/global.module.css'
 
 class Index extends React.Component {
-  getCountyId = async function(e){
+  constructor(props) {
+    super(props);
+    this.state = {
+        selectedCountyData: this.props
+    };
+  }
+
+  getCountyId = (e) => {
     e.preventDefault();
     const id = e.target.value;
     //req to GET specific county data
     const frontendUrl = 'http://localhost:3000';
-    const res = await fetch(`${frontendUrl}/api/counties/${id}`);
-    const data = await res.json();
-    console.log(data)
+    fetch(`${frontendUrl}/api/counties/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          countyData: data
+        })
+      })
   }
 
-
   render() {
+    this.props
     return (
       <div className={styles.container}>
         <Head>
@@ -25,7 +36,7 @@ class Index extends React.Component {
 
         <CountyDropdown data={this.props} getCountyId={this.getCountyId}/>
 
-        <SummaryTable data={this.props.selectedCountyData} />
+        <SummaryTable data={this.state.selectedCountyData} />
 
         <div>Place full stats table here!</div>
 

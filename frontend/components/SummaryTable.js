@@ -2,7 +2,7 @@ import styles from '../styles/global.module.css'
 
 const SummaryTable = (props) => {
     const selectedYear = '2018';
-    const yearData = props.data[selectedYear];
+    const yearData = props.data.selectedCountyData[selectedYear];
     const percentAssisted = `${(yearData["% of Households below 200% FPL Assisted"] * 100).toFixed(2)}%`;
     
     return (
