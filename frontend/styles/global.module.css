@@ -1,9 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');        
+
 .container {
     font-family: 'Nunito', sans-serif;
     padding: 20px;
 }
 
+.top-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.eoc-logo {
+    height: 150px;
+}
+    
 .container h3 {
     font-weight: 700;
     text-transform: uppercase;

@@ -3,6 +3,8 @@ import SummaryTable from '../components/SummaryTable';
 import CountyDropdown from '../components/CountyDropdown';
 import styles from '../styles/global.module.css'
 
+const frontendUrl = 'http://localhost:3000'
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -14,8 +16,6 @@ class Index extends React.Component {
   getCountyId = (e) => {
     e.preventDefault();
     const id = e.target.value;
-    //req to GET specific county data
-    const frontendUrl = 'http://localhost:3000';
     fetch(`${frontendUrl}/api/counties/${id}`)
       .then(res => res.json())
       .then(data => {
@@ -23,10 +23,10 @@ class Index extends React.Component {
           countyData: data
         })
       })
+      .catch(err => console.log(err))
   }
 
   render() {
-    this.props
     return (
       <div className={styles.container}>
         <Head>
@@ -34,53 +34,62 @@ class Index extends React.Component {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <CountyDropdown data={this.props} getCountyId={this.getCountyId}/>
-
-        <SummaryTable data={this.state.selectedCountyData} />
-
-        <div>Place full stats table here!</div>
-
-        <div>Place Graphs here!</div>
-
-        <div>------ Delete everything below here once documentation is no longer needed ------</div>
-        
         <main>
-          <h1 className="title">
-            Welcome to <a href="https://nextjs.org">Next.js!</a>
-          </h1>
+          <div className={styles['top-container']}>
+            <div>
+              <CountyDropdown data={this.props} getCountyId={this.getCountyId}/>
 
-          <p className="description">
-            Get started by editing <code>pages/index.js</code>
-          </p>
+              <SummaryTable data={this.state.selectedCountyData} />
+            </div>
+            
+            <img src="/energy-outreach-logo.png" alt="Energy Outreach Colorado Logo" className={styles['eoc-logo']} />
+          </div>
 
-          <div className="grid">
-            <a href="https://nextjs.org/docs" className="card">
-              <h3>Documentation &rarr;</h3>
-              <p>Find in-depth information about Next.js features and API.</p>
-            </a>
+          <div>Place full stats table here!</div>
 
-            <a href="https://nextjs.org/learn" className="card">
-              <h3>Learn &rarr;</h3>
-              <p>Learn about Next.js in an interactive course with quizzes!</p>
-            </a>
+          <div>Place Graphs here!</div>
 
-            <a
-              href="https://github.com/vercel/next.js/tree/master/examples"
-              className="card"
-            >
-              <h3>Examples &rarr;</h3>
-              <p>Discover and deploy boilerplate example Next.js projects.</p>
-            </a>
+          
+          <div className="documentation">
+            <h3>------ Delete everything below here once documentation is no longer needed ------</h3>
 
-            <a
-              href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              className="card"
-            >
-              <h3>Deploy &rarr;</h3>
-              <p>
-                Instantly deploy your Next.js site to a public URL with Vercel.
-              </p>
-            </a>
+            <h1 className="title">
+              Welcome to <a href="https://nextjs.org">Next.js!</a>
+            </h1>
+
+            <p className="description">
+              Get started by editing <code>pages/index.js</code>
+            </p>
+
+            <div className="grid">
+              <a href="https://nextjs.org/docs" className="card">
+                <h3>Documentation &rarr;</h3>
+                <p>Find in-depth information about Next.js features and API.</p>
+              </a>
+
+              <a href="https://nextjs.org/learn" className="card">
+                <h3>Learn &rarr;</h3>
+                <p>Learn about Next.js in an interactive course with quizzes!</p>
+              </a>
+
+              <a
+                href="https://github.com/vercel/next.js/tree/master/examples"
+                className="card"
+              >
+                <h3>Examples &rarr;</h3>
+                <p>Discover and deploy boilerplate example Next.js projects.</p>
+              </a>
+
+              <a
+                href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+                className="card"
+              >
+                <h3>Deploy &rarr;</h3>
+                <p>
+                  Instantly deploy your Next.js site to a public URL with Vercel.
+                </p>
+              </a>
+            </div>
           </div>
         </main>
 
@@ -105,7 +114,7 @@ class Index extends React.Component {
             align-items: left;
           }
 
-          main {
+          .documentation {
             padding: 5rem 0;
             flex: 1;
             display: flex;
@@ -245,10 +254,7 @@ class Index extends React.Component {
   }
 }
 
-
 Index.getInitialProps = async function() {
-  const frontendUrl = 'http://localhost:3000'
-
   //req to GET specific county data
   const res = await fetch(`${frontendUrl}/api/counties/[id].js`);
   const data = await res.json();
@@ -262,6 +268,5 @@ Index.getInitialProps = async function() {
       countyList: countyList
   };
 }
-
 
 export default Index;
