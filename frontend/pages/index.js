@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import SummaryTable from '../components/SummaryTable';
 import CountyDropdown from '../components/CountyDropdown';
+import ParetoChart1 from '../components/ParetoChart1';
 import styles from '../styles/global.module.css'
 
 const frontendUrl = 'http://localhost:3000'
@@ -41,13 +42,14 @@ class Index extends React.Component {
 
               <SummaryTable data={this.state.selectedCountyData} />
             </div>
-            
+
             <img src="/energy-outreach-logo.png" alt="Energy Outreach Colorado Logo" className={styles['eoc-logo']} />
           </div>
 
           <div>Place full stats table here!</div>
 
           <div>Place Graphs here!</div>
+          <ParetoChart1 data={this.state.selectedCountyData}/>
 
           
           <div className="documentation">
