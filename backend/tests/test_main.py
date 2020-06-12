@@ -61,7 +61,8 @@ def test_get_county_data_cache(mock_getCurrentTime):
     returned_response = client.get('/counties/31')
 
     assert mock_getCurrentTime.called
-    assert mock_getCurrentTime.call_count == 1
+    #Called twice, once for raw data and once for processed data
+    assert mock_getCurrentTime.call_count == 2
     assert returned_response.status_code == 200
     assert returned_response.json() == cache
 

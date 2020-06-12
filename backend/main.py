@@ -14,7 +14,8 @@ from models.response import GenericResponse, CountyResponse
 
 app = FastAPI()
 set_cors(app)
-
+ 
+CACHE_DATA_FLAG = 1
 
 @lru_cache()
 def get_settings() -> Settings:
@@ -23,8 +24,6 @@ def get_settings() -> Settings:
 settings: Settings = get_settings()
 
 r = RedisHelper(settings.hostname, settings.port, settings.password)
-
-data = GetDataFromAirtable(settings.airtable_api_key)
 
 @app.get("/")
 async def root() -> GenericResponse:
@@ -42,15 +41,17 @@ async def get_county_data(county_id: str) -> CountyResponse:
     response = CountyResponse(message="Returning county data")
     if county_id in county_list:
         county: str = county_list[county_id]
-
-        if r.exists(county): # 1 = exists, 0 = does not exist
+        
+        if r.exists(county) & CACHE_DATA_FLAG: # 1 = exists, 0 = does not exist
             response.data = r.getDataFrame(county)
             response.last_updated = r.getDataFrame_time(county)
             return response
 
         else:
             #Calculate the dataset from raw data
-            county_data: pd.DataFrame = processData(county)
+            
+            data = get_raw_data()
+            county_data: pd.DataFrame = processData(county, data)
 
             #Save the data to the cache before returning
             r.setDataFrame(county, county_data)
@@ -60,6 +61,23 @@ async def get_county_data(county_id: str) -> CountyResponse:
             return response
     
     raise HTTPException(status_code=404, detail="County not found in database")
+
+def get_raw_data():
+    RAW_DATA_KEY = "RAW_DATA_KEY"
+
+    if r.exists(RAW_DATA_KEY) & CACHE_DATA_FLAG:
+        return r.getDataFrame(RAW_DATA_KEY)
+
+    else:
+        raw_data = GetDataFromAirtable(settings.airtable_api_key)
+        r.setDataFrame(RAW_DATA_KEY, raw_data)
+        return r.getDataFrame(RAW_DATA_KEY)
+    
+
+
+@app.get("/raw-data")
+async def display_raw_data():
+    return get_raw_data()
 
 # ! This is for testing and should have some type of protection so the cache cannot be cleared by any user
 @app.get("/reset-cache")
