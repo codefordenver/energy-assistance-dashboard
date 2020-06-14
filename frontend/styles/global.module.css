@@ -72,3 +72,8 @@ select.dropdown {
     text-align: right;
     width: 120px; 
 }
+
+.historical-trends-charts {
+    display: flex;
+    justify-content: space-between;
+}
