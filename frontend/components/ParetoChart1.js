@@ -9,10 +9,10 @@ import {
 } from 'react-vis';
 
 const ParetoChart1 = (props) => {
-    console.log(props.data.selectedCountyData)
     const rawData = props.data.selectedCountyData;
     const countyData = [];
     const householdsAssisted = [];
+
     Object.keys(rawData).map(year => {
         countyData.push({x: year})
         householdsAssisted.push({x: year})
@@ -22,8 +22,6 @@ const ParetoChart1 = (props) => {
         countyData[i].y = value[1]['Households below 200% FPL'];
         householdsAssisted[i].y = value[1]['Total Households Assisted'];
     })
-
-    console.log(householdsAssisted)
 
     return (
         <div>

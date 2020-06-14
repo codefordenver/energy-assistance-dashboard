@@ -49,7 +49,7 @@ class Index extends React.Component {
           <div>Place full stats table here!</div>
 
           <div>Place Graphs here!</div>
-          <ParetoChart1 data={this.state.selectedCountyData}/>
+          <ParetoChart1 data={this.state.selectedCountyDatagi}/>
 
           
           <div className="documentation">
