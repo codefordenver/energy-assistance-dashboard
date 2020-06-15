@@ -32,7 +32,7 @@ class Index extends React.Component {
       <div className={styles.container}>
         <Head>
           <title>Energy Assistance Dashboard</title>
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.png" />
         </Head>
 
         <main>
@@ -54,7 +54,14 @@ class Index extends React.Component {
             <ParetoChart1 barKey='% Households below 200% FPL' lineKey='% of Households below 200% FPL Assisted' data={this.state.selectedCountyData}/>
           </div>
 
-          
+          <div className={styles.sources}>
+            <h4>Sources</h4>
+            <p>American Community Survey 5-Year Estimates by the Census Bureau, Energy Outreach Colorado's households served, and CDHS LEAP households served</p>
+            <p>2013 LEAP data is estimated due to lack of data</p>
+          </div>
+
+
+
           <div className="documentation">
             <h3>------ Delete everything below here once documentation is no longer needed ------</h3>
 
@@ -97,17 +104,6 @@ class Index extends React.Component {
             </div>
           </div>
         </main>
-
-        <footer>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by{' '}
-            <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-          </a>
-        </footer>
 
         <style jsx>{`
           .container {
@@ -193,7 +189,6 @@ class Index extends React.Component {
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-
             max-width: 800px;
             margin-top: 3rem;
           }
@@ -258,9 +253,6 @@ class Index extends React.Component {
           .rv-discrete-color-legend-item.horizontal .rv-discrete-color-legend-item__title {
             display:inline;
             padding-left: 10px;
-          }
-          .rv-xy-plot__axis__tick__text {
-            transform: translate(10, 0)!important;
           }
         `}</style>
       </div>

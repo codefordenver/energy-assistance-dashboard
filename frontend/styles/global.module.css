@@ -75,5 +75,15 @@ select.dropdown {
 
 .historical-trends-charts {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+}
+
+.sources p {
+    font-size: 10px;
+}
+
+@media (max-width: 867px){
+    .historical-trends-charts {
+        display: block ;
+    }
 }
