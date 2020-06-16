@@ -264,16 +264,6 @@ class Index extends React.Component {
             stroke: #dcdcdc;
             stroke-width: 2px;
           }
-          .rv-hint__content {
-            border-radius: 4px;
-            padding: 10px 12px;
-            font-size: 12px;
-            background: rgba(0, 0, 0, 0.8);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            color: #fff;
-            text-align: left;
-            white-space: nowrap;
-          }
         `}</style>
       </div>
     )

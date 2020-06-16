@@ -9,18 +9,9 @@ import {
     Hint
 } from 'react-vis';
 import DiscreteColorLegend from 'react-vis/dist/legends/discrete-color-legend';
-import styles from '../styles/global.module.css'
+import styles from '../styles/global.module.css';
+import { formatPercent } from '../utils/utilities';
 
-function generateTickValues(key, maxY){
-    let dynamicTickValues = []
-    let i = 0;
-    let tickIteration = (key == 'Households below 200% FPL') ? 25000 : 0.1;
-    do {
-        dynamicTickValues.push(Math.round(i * tickIteration * 10) / 10);
-        i++;
-    } while ((i * tickIteration) < maxY + tickIteration)
-    return dynamicTickValues;
-}
 
 class ParetoChart extends React.Component {
     state = {
@@ -28,28 +19,46 @@ class ParetoChart extends React.Component {
         type: null
     };
 
+    generateTickValues(key, maxY){
+        let dynamicTickValues = [];
+        let i = 0;
+        let tickIteration = (key == 'Households below 200% FPL') ? 25000 : 0.1;
+        do {
+            dynamicTickValues.push(Math.round(i * tickIteration * 10) / 10);
+            i++;
+        } while ((i * tickIteration) < maxY + tickIteration);
+        return dynamicTickValues;
+    }
+
     render(){
-        const barKey = this.props.barKey
-        const lineKey = this.props.lineKey
-        const LEGEND = [
-            {title: barKey, color: "#46bdc6"},
-            {title: lineKey, color: '#ff6d01'},
-        ]
+        const barKey = this.props.barKey;
+        const lineKey = this.props.lineKey;
         const rawData = this.props.data.selectedCountyData;
+        const hoveredNode = this.state.hoveredNode;
+        const LEGEND = [
+            { 
+                title: barKey, 
+                color: "#46bdc6"
+            },
+            { 
+                title: lineKey, 
+                color: '#ff6d01'
+            },
+        ];
     
-        const countyData = Object.keys(rawData).map(key => {
+        const householdsInNeed = Object.keys(rawData).map(key => {
             return { x: key, y: rawData[key][barKey] }
-        })
+        });
     
         const householdsAssisted = Object.keys(rawData).map(key => {
             return { x: key, y: rawData[key][lineKey] }
-        })
+        });
     
-        const maxYValue = Math.max(...countyData.map(set =>  set.y));
+        const maxYValue = Math.max(...householdsInNeed.map(data =>  data.y));
         const minXValue = Math.min(...Object.keys(rawData));
         const maxXValue = Math.max(...Object.keys(rawData));
-        const tickValues = generateTickValues(barKey, maxYValue);
-        const maxYTickValue = Math.max(...tickValues);
+        const yTickValues = this.generateTickValues(barKey, maxYValue);
+        const maxYTickValue = Math.max(...yTickValues);
     
         const tickFormat = (barKey == '% Households below 200% FPL') 
                             ? (d) => Math.ceil(d * 100) + '.0%' 
@@ -57,7 +66,6 @@ class ParetoChart extends React.Component {
     
         return (
             <div className={styles['pareto-chart']}>
-                
                 <DiscreteColorLegend 
                     orientation="horizontal" 
                     width={500} 
@@ -71,38 +79,38 @@ class ParetoChart extends React.Component {
                     color="#46bdc6"
                     onMouseLeave={() => this.setState({hoveredNode: null, type: null})}
                 >
-                  { this.state.hoveredNode && (
-                    <Hint
-                        xType="literal"
-                        yType="literal"
-                        getX={d => d.x}
-                        getY={d => d.y}
-                        value={{
-                            Year: this.state.hoveredNode.x,
-                            Value: (this.state.type == 'bar') 
-                                ? `${this.state.hoveredNode.y} ${barKey}` 
-                                : `${this.state.hoveredNode.y} ${lineKey}`
-                        }}
-                    />
+                  {hoveredNode && (
+                        <Hint
+                            className={styles.hint}
+                            getX={d => d.x}
+                            getY={d => d.y}
+                            value={{
+                                Year: hoveredNode.x,
+                                Value: (this.state.type == 'bar') 
+                                    ? `${formatPercent(barKey, hoveredNode.y)} ${barKey}` 
+                                    : `${formatPercent(barKey, hoveredNode.y)} ${lineKey}`
+                            }}
+                        />
                     )}
                     <VerticalGridLines />
                     <HorizontalGridLines />
-                    <XAxis tickFormat={v => v.toString().replace(',', '')} />
+                    <XAxis 
+                        tickFormat={d => d.toString().replace(',', '')} 
+                    />
                     <YAxis 
-                        tickValues={tickValues} 
+                        tickValues={yTickValues} 
                         style={{ text: {transform: 'translate(0, 0)'}}} 
                         tickFormat={tickFormat}
                     />
                     <VerticalBarSeries 
-                        data={countyData}
+                        data={householdsInNeed}
                         stroke='rgba(0, 0, 0, 0)'
                         onValueMouseOver={d => this.setState({hoveredNode: d, type: 'bar'})}
                     />
                      <LineMarkSeries 
                         strokeWidth={2}
                         data={householdsAssisted}
-                        stroke='#ff6d01'
-                        style={{ fill: 'none' }}
+                        lineStyle={{ fill: 'none' , stroke: '#ff6d01' }}
                         markStyle={{ fill: '#ff6d01', stroke: 'rgba(0, 0, 0, 0)' }}
                         onValueMouseOver={d => this.setState({hoveredNode: d, type: 'line'})}
                     />
@@ -110,7 +118,6 @@ class ParetoChart extends React.Component {
             </div>  
         );
     }
-  
 }
 
 export default ParetoChart;

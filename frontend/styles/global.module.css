@@ -75,6 +75,7 @@ select.dropdown {
     width: 120px; 
 }
 
+/* Pareto Chart Styles - may also use for line graphs */
 .charts {
     margin: 50px 0;
 }
@@ -88,11 +89,26 @@ select.dropdown {
     padding: 12px;
     border: 1px solid rgb(206, 206, 206);
     margin: 0 30px 0 0;
+    position: relative;
+}
+
+.hint {
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    color: #fff;
+    text-align: left;
+    white-space: nowrap;
+    top: 60px;
+    right: 20px;
 }
 
 .sources p {
     font-size: 10px;
 }
+
 
 @media (max-width: 1200px){
     .historical-trends-charts {

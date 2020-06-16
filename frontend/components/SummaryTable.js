@@ -1,4 +1,5 @@
 import styles from '../styles/global.module.css'
+import { withComma } from '../utils/utilities'
 
 const SummaryTable = (props) => {
     const selectedYear = '2018';
@@ -33,11 +34,5 @@ const SummaryTable = (props) => {
         </div>
     )
 }
-
-
-function withComma(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
 
 export default SummaryTable;
