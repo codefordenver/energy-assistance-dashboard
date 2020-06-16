@@ -9,7 +9,7 @@ from middleware import set_cors
 from data.counties import county_list
 from utils.config import Settings
 from utils.data import processData
-from utils.helper import RedisHelper, GetDataFromAirtable
+from utils.helper import RedisHelper
 from models.response import GenericResponse, CountyResponse
 
 app = FastAPI()
@@ -24,7 +24,6 @@ settings: Settings = get_settings()
 
 r = RedisHelper(settings.hostname, settings.port, settings.password)
 
-data = GetDataFromAirtable(settings.airtable_api_key)
 
 @app.get("/")
 async def root() -> GenericResponse:
