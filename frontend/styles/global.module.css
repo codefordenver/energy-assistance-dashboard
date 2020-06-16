@@ -3,9 +3,11 @@
 .container {
     font-family: 'Nunito', sans-serif;
     padding: 20px;
+    width: 90%;
+    margin: 0 auto;
 }
 
-.top-container {
+.overview {
     display: flex;
     justify-content: space-between;
 }
@@ -73,17 +75,33 @@ select.dropdown {
     width: 120px; 
 }
 
+.charts {
+    margin: 50px 0;
+}
+
 .historical-trends-charts {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+}
+
+.pareto-chart {
+    padding: 12px;
+    border: 1px solid rgb(206, 206, 206);
+    margin: 0 30px 0 0;
 }
 
 .sources p {
     font-size: 10px;
 }
 
-@media (max-width: 867px){
+@media (max-width: 1200px){
     .historical-trends-charts {
-        display: block ;
+        flex-direction: column;
+        width: fit-content;
+    }
+    .pareto-chart {
+        margin: 20px 0 0;
     }
 }
+
+
