@@ -10,7 +10,7 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        selectedCountyData: this.props
+        selectedCountyData: this.props.selectedCountyData
     };
   }
 
@@ -28,6 +28,8 @@ class Index extends React.Component {
   }
 
   render() {
+    const selectedCountyData = this.state.selectedCountyData
+    
     return (
       <div className={styles.container}>
         <Head>
@@ -39,12 +41,14 @@ class Index extends React.Component {
           <div className={styles['overview']}>
             <div>
               <h1>Colorado Low Income Energy Stats</h1>
-
-              <CountyDropdown data={this.props} getCountyId={this.getCountyId}/>
-
-              <SummaryTable data={this.state.selectedCountyData} />
+              <CountyDropdown 
+                countyList={this.props.countyList} 
+                getCountyId={this.getCountyId}
+              />
+              <SummaryTable 
+                selectedCountyData={selectedCountyData} 
+              />
             </div>
-
             <img src="/energy-outreach-logo.png" alt="Energy Outreach Colorado Logo" className={styles['eoc-logo']} />
           </div>
 
@@ -53,8 +57,16 @@ class Index extends React.Component {
           <div className={styles.charts}>
             <h3>Historical Trends</h3>
             <div className={styles['historical-trends-charts']}>
-              <ParetoChart barKey='Households below 200% FPL' lineKey='Total Households Assisted' data={this.state.selectedCountyData}/>
-              <ParetoChart barKey='% Households below 200% FPL' lineKey='% of Households below 200% FPL Assisted' data={this.state.selectedCountyData}/>
+              <ParetoChart 
+                barKey='Households below 200% FPL' 
+                lineKey='Total Households Assisted' 
+                selectedCountyData={selectedCountyData}
+              />
+              <ParetoChart 
+                barKey='% Households below 200% FPL' 
+                lineKey='% of Households below 200% FPL Assisted' 
+                selectedCountyData={selectedCountyData}
+              />
             </div>
           </div>
 

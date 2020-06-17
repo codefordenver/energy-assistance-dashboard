@@ -28,6 +28,7 @@
     font-size: 13px;
     border-collapse: collapse;
     font-weight: 400;
+    min-width: 250px;
 }
 
 .container thead tr {
@@ -99,7 +100,6 @@ select.dropdown {
     background: rgba(0, 0, 0, 0.75);
     box-shadow: 0 2px 4px rgba(0,0,0,0.5);
     color: #fff;
-    text-align: left;
     white-space: nowrap;
     top: 60px;
     right: 20px;
