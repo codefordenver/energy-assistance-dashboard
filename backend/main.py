@@ -9,7 +9,7 @@ from middleware import set_cors
 from data.counties import county_list
 from utils.config import Settings
 from utils.data import processData
-from utils.helper import RedisHelper
+from utils.helper import RedisHelper, GetDataFromAirtable
 from models.response import GenericResponse, CountyResponse
 
 app = FastAPI()
@@ -66,3 +66,9 @@ async def reset_cache() -> GenericResponse:
     response = GenericResponse(message="Cache was reset")
     r.reset_cache()
     return response
+
+#  This is to testing GetDataFromAirtable(), it will fetch data from airtable
+@app.get("/raw-data")
+async def raw_data():
+    data = GetDataFromAirtable(settings.airtable_api_key)
+    return data
