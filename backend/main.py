@@ -71,4 +71,5 @@ async def reset_cache() -> GenericResponse:
 @app.get("/raw-data")
 async def raw_data():
     data = GetDataFromAirtable(settings.airtable_api_key)
+    data = pd.DataFrame.to_json(data)
     return data
