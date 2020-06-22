@@ -5,8 +5,8 @@ export function withComma(x) {
 
 export function formatPercent(barKey, value){
     if(barKey == '% Households below 200% FPL') {
-       return Math.ceil(value * 100) + '.0%' 
+       return Math.ceil(value * 100); 
     } else {
-        return withComma(value)
+        return `${withComma(value)} `;
     }
 }

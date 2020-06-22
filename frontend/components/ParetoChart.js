@@ -26,7 +26,7 @@ class ParetoChart extends React.Component {
         do {
             dynamicTickValues.push(Math.round(i * tickIteration * 10) / 10);
             i++;
-        } while ((i * tickIteration) < maxY + tickIteration);
+        } while ((i * tickIteration) < (maxY + tickIteration));
         return dynamicTickValues;
     }
 
@@ -84,8 +84,8 @@ class ParetoChart extends React.Component {
                             value={{
                                 Year: hoveredNode.x,
                                 Value: (this.state.type == 'bar') 
-                                    ? `${formatPercent(barKey, hoveredNode.y)} ${barKey}` 
-                                    : `${formatPercent(barKey, hoveredNode.y)} ${lineKey}`
+                                    ? `${formatPercent(barKey, hoveredNode.y)}${barKey}` 
+                                    : `${formatPercent(barKey, hoveredNode.y)}${lineKey}`
                             }}
                         />
                     )}
