@@ -24,7 +24,7 @@ def get_settings() -> Settings:
 
 settings: Settings = get_settings()
 print("Current redis port: {}".format(settings.port))
-r = RedisHelper(settings.hostname, settings.port, settings.password)
+r = RedisHelper(settings.redis_hostname, settings.redis_port, settings.redis_password)
 
 
 @app.get("/")
@@ -36,6 +36,7 @@ async def root() -> GenericResponse:
 @app.get("/counties")
 async def counties():
     return {"counties": county_list}
+
 
 
 @app.get("/counties/{county_id}")
