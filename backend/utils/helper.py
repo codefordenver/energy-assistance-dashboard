@@ -7,6 +7,7 @@ import time
 from fastapi import HTTPException
 import collections
 from utils.constants import ROW_TYPE
+import numpy as np
 
 
 class RedisHelper():
@@ -118,7 +119,8 @@ def GetDataFromAirtable(api_key: str):
                     try:
                          single.update({str(i): convert_string_to_float(response_json['records'][counter]['fields'][str(i)])})
                     except:
-                         single.update({str(i): ""})
+                        # Setting value to 0 for now to be able to process the data frame
+                         single.update({str(i): 0})
 
                 # add this single record to the default dictionary
                 tableDict[index] = single
