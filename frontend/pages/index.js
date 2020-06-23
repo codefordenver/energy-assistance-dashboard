@@ -2,6 +2,8 @@ import Head from 'next/head'
 import SummaryTable from '../components/SummaryTable';
 import CountyDropdown from '../components/CountyDropdown';
 import ParetoChart from '../components/ParetoChart';
+import HouseholdsAssisted from '../components/HouseholdsAssisted';
+import ParticipantsChart from '../components/ParticipantsChart';
 import styles from '../styles/global.module.css'
 
 const frontendUrl = 'http://localhost:3000';
@@ -65,6 +67,15 @@ class Index extends React.Component {
               <ParetoChart 
                 barKey='% Households below 200% FPL' 
                 lineKey='% of Households below 200% FPL Assisted' 
+                selectedCountyData={selectedCountyData}
+              />
+            </div>
+            <div className={styles['historical-trends-charts']}>
+              <HouseholdsAssisted 
+                title='% of Households below 200% FPL Assisted'
+                selectedCountyData={selectedCountyData}
+              />
+              <ParticipantsChart
                 selectedCountyData={selectedCountyData}
               />
             </div>
