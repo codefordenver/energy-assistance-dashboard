@@ -25,10 +25,7 @@ settings: Settings = get_settings()
 
 r = RedisHelper(settings.hostname, settings.port, settings.password)
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 @app.get("/")
 async def root() -> GenericResponse:
     response = GenericResponse(message="Hello World")
