@@ -1,1 +1,1 @@
-web: gunicorn -w 4 -k uvicorn.workers.UvicornWorker --chdir /backend main:app
+web: gunicorn -w 4 -k uvicorn.workers.UvicornWorker --pythonpath backend main:app
