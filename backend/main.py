@@ -23,7 +23,7 @@ def get_settings() -> Settings:
     return Settings()
 
 settings: Settings = get_settings()
-print("Current redis port: {}".format(settings.port))
+print("Current redis port: {}".format(settings.redis_port))
 r = RedisHelper(settings.redis_hostname, settings.redis_port, settings.redis_password)
 
 
