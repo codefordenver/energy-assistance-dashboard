@@ -25,6 +25,10 @@ settings: Settings = get_settings()
 
 r = RedisHelper(settings.hostname, settings.port, settings.password)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 @app.get("/")
 async def root() -> GenericResponse:
     response = GenericResponse(message="Hello World")
@@ -49,7 +53,6 @@ async def get_county_data(county_id: str) -> CountyResponse:
 
         else:
             #Calculate the dataset from raw data
-            
             data = get_raw_data()
             county_data: pd.DataFrame = processData(county, data)
 
@@ -73,7 +76,6 @@ def get_raw_data():
         r.setDataFrame(RAW_DATA_KEY, raw_data)
         return r.getDataFrame(RAW_DATA_KEY)
     
-
 
 @app.get("/raw-data")
 async def display_raw_data():

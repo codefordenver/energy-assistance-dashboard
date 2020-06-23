@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 import redis
-from datetime import datetime
+from datetime import datetime,date
 import requests
 import time
 from fastapi import HTTPException
@@ -79,6 +79,8 @@ def GetDataFromAirtable(api_key: str):
     params = {'api_key': api_key}
 
     tableDict = collections.defaultdict(dict)
+    # get current year
+    current_year = (date.today()).year
 
     index = 0
     # loop through all the files on Airtable
@@ -96,6 +98,7 @@ def GetDataFromAirtable(api_key: str):
 
             tableDict[index] = []
             length_data = len(response_json['records'])
+            start_year = 2010
             # loop through entire length of json response
             for counter in range(length_data):
                 single = {}
@@ -109,42 +112,13 @@ def GetDataFromAirtable(api_key: str):
                     # in case no data available simply continue to next iteration as either area and CountyFIPS
                     # is missing then don't include that record
                     continue
-                try:
-                    single.update({'2010': convert_string_to_float(response_json['records'][counter]['fields']['2010'])})
-                except:
-                    single.update({'2010': ""})
-                try:
-                    single.update({'2011': convert_string_to_float(response_json['records'][counter]['fields']['2011'])})
-                except:
-                    single.update({'2011': ""})
-                try:
-                    single.update({'2012': convert_string_to_float(response_json['records'][counter]['fields']['2012'])})
-                except:
-                    single.update({'2012': ""})
-                try:
-                    single.update({'2013': convert_string_to_float(response_json['records'][counter]['fields']['2013'])})
-                except:
-                    single.update({'2013': ""})
-                try:
-                    single.update({'2014': convert_string_to_float(response_json['records'][counter]['fields']['2014'])})
-                except:
-                    single.update({'2014': ""})
-                try:
-                    single.update({'2015': convert_string_to_float(response_json['records'][counter]['fields']['2015'])})
-                except:
-                    single.update({'2015': ""})
-                try:
-                    single.update({'2016': convert_string_to_float(response_json['records'][counter]['fields']['2016'])})
-                except:
-                    single.update({'2016': ""})
-                try:
-                    single.update({'2017': convert_string_to_float(response_json['records'][counter]['fields']['2017'])})
-                except:
-                    single.update({'2017': ""})
-                try:
-                    single.update({'2018': convert_string_to_float(response_json['records'][counter]['fields']['2018'])})
-                except:
-                    single.update({'2018': ""})
+
+                # loop from 2010 till current year to get data
+                for i in range(start_year,current_year):
+                    try:
+                         single.update({str(i): convert_string_to_float(response_json['records'][counter]['fields'][str(i)])})
+                    except:
+                         single.update({str(i): ""})
 
                 # add this single record to the default dictionary
                 tableDict[index] = single
