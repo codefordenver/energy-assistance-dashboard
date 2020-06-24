@@ -13,7 +13,6 @@ def processData(area: str, data) -> pd.DataFrame:
   THA_TYPE: str = "Total Households Assisted"
   THA_Percent_TYPE: str = "% of Households below 200% FPL Assisted"
 
-  print(DATA.loc[ROW_TYPE["PB2_TYPE"]])
   HB2: pd.DataFrame = pd.DataFrame(DATA.loc[ROW_TYPE["PB2_TYPE"]]/DATA.loc[ROW_TYPE["AHS_TYPE"]]).transpose()
   HB2["Type"] = HB2_TYPE
   HB2.set_index('Type',inplace=True)
