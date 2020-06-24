@@ -14,9 +14,9 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      HOSTNAME: ${{ secrets.HOSTNAME }}
-      PORT: ${{ secrets.PORT }}
-      PASSWORD: ${{ secrets.PASSWORD }}
+      REDIS_HOSTNAME: ${{ secrets.REDIS_HOSTNAME }}
+      REDIS_PORT: ${{ secrets.REDIS_PORT }}
+      REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
       AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
 
     steps:
