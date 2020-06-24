@@ -14,18 +14,6 @@ export function formatPercent(barKey, value){
     }
 }
 
-
-export function generateTickValues(tickIteration, maxY){
-    let dynamicTickValues = [];
-    let i = 0;
-    do {
-        dynamicTickValues.push((i * tickIteration * 10).toFixed(2) / 10);
-        i++;
-    } while ((i * tickIteration) < (maxY + tickIteration));
-    return dynamicTickValues;
-}
-
-
 export function generateRegressionData(selectedCountyData, title){
     const regressionData = Object.keys(selectedCountyData).map(key => {
         return [ Number(key), Number(selectedCountyData[key][title]) ]
@@ -44,5 +32,22 @@ export function formatData(selectedCountyData, title){
     return Object.keys(selectedCountyData).map(key => {
         return { x: key, y: Number(selectedCountyData[key][title]) }
     });
+}
+
+
+export function minMax(selectedCountyData, yValues, yValuesAlt){
+    const minXValue = Math.min(...Object.keys(selectedCountyData));
+    const maxXValue = Math.max(...Object.keys(selectedCountyData));
+
+    const yValues1 = Math.max(...yValues.map(data =>  data.y));
+    const yValues2 = yValuesAlt ? Math.max(...yValuesAlt.map(data =>  data.y)) : 0;
+    const maxYValue = Math.max(yValues1, yValues2);
+
+    return { minXValue, maxXValue, maxYValue }
+}
+
+
+export function formatTickPercent(d){
+    return `${Math.ceil(d * 100)}%`
 }
 

@@ -11,7 +11,7 @@ import {
 import DiscreteColorLegend from 'react-vis/dist/legends/discrete-color-legend';
 import styles from '../styles/global.module.css';
 import { 
-    generateTickValues, 
+    minMax, 
     withComma, 
     generateRegressionData, 
     formatData 
@@ -40,13 +40,7 @@ class ParticipantsChart extends React.Component {
         
         const LEAPParticipants = formatData(selectedCountyData, title1);
         const EAParticipants = formatData(selectedCountyData, title2);
-       
-        const maxYValue = Math.max(...LEAPParticipants.map(data =>  data.y));
-        const minXValue = Math.min(...Object.keys(selectedCountyData));
-        const maxXValue = Math.max(...Object.keys(selectedCountyData));
-        const yTickValues = generateTickValues(5000, maxYValue);
-        const maxYTickValue = Math.max(...yTickValues);
-
+        const { minXValue, maxXValue, maxYValue } = minMax(selectedCountyData, LEAPParticipants, EAParticipants);
         const LEAPRegressionData = generateRegressionData(selectedCountyData, title1);
         const EARegressionData = generateRegressionData(selectedCountyData, title2);
 
@@ -61,7 +55,7 @@ class ParticipantsChart extends React.Component {
                     height={300} 
                     width={500} 
                     xDomain={[minXValue, maxXValue]}
-                    yDomain={[0, maxYTickValue]} 
+                    yDomain={[0, maxYValue]} 
                     onMouseLeave={() => this.setState({hoveredNode: null})}
                 >
                 { hoveredNode && (
@@ -81,7 +75,6 @@ class ParticipantsChart extends React.Component {
                         tickFormat={d => d.toString().replace(',', '')} 
                     />
                     <YAxis 
-                        tickValues={yTickValues} 
                         style={{ text: {transform: 'translate(0, 0)'}}} 
                     />
                     <LineMarkSeries 
@@ -90,6 +83,7 @@ class ParticipantsChart extends React.Component {
                         lineStyle={{ fill: 'none' , stroke: '#46bdc6' }}
                         markStyle={{ fill: '#46bdc6', stroke: 'rgba(0, 0, 0, 0)' }}
                         onValueMouseOver={d => this.setState({hoveredNode: d})}
+                        curve={'curveMonotoneX'}
                     />
                     <LineSeries 
                         strokeWidth={2}
@@ -102,6 +96,7 @@ class ParticipantsChart extends React.Component {
                         lineStyle={{ fill: 'none' , stroke: '#ff6d01' }}
                         markStyle={{ fill: '#ff6d01', stroke: 'rgba(0, 0, 0, 0)' }}
                         onValueMouseOver={d => this.setState({hoveredNode: d})}
+                        curve={'curveMonotoneX'}
                     />
                     <LineSeries 
                         strokeWidth={2}

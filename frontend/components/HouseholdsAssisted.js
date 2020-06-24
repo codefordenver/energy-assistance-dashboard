@@ -10,7 +10,7 @@ import {
 } from 'react-vis';
 import DiscreteColorLegend from 'react-vis/dist/legends/discrete-color-legend';
 import styles from '../styles/global.module.css';
-import { generateTickValues, generateRegressionData, formatData  } from '../utils/utilities';
+import { minMax, generateRegressionData, formatData, formatTickPercent } from '../utils/utilities';
 
 class HouseholdsAssisted extends React.Component {
     state = {
@@ -28,14 +28,7 @@ class HouseholdsAssisted extends React.Component {
         ];
 
         const householdsAssisted = formatData(selectedCountyData, title);
-
-        const maxYValue = Math.max(...householdsAssisted.map(data =>  data.y));
-        const minXValue = Math.min(...Object.keys(selectedCountyData));
-        const maxXValue = Math.max(...Object.keys(selectedCountyData));
-        const yTickValues = generateTickValues(0.05, maxYValue);
-        const maxYTickValue = Math.max(...yTickValues);
-        const tickFormat = (d) => `${Math.ceil(d * 100)}%`;
-
+        const { minXValue, maxXValue, maxYValue } = minMax(selectedCountyData, householdsAssisted);
         const regressionData = generateRegressionData(selectedCountyData, title);
 
         return (
@@ -49,7 +42,7 @@ class HouseholdsAssisted extends React.Component {
                     height={300} 
                     width={500} 
                     xDomain={[minXValue, maxXValue]}
-                    yDomain={[0, maxYTickValue]} 
+                    yDomain={[0, maxYValue]} 
                     onMouseLeave={() => this.setState({hoveredNode: null})}
                 >
                 { hoveredNode && (
@@ -69,9 +62,8 @@ class HouseholdsAssisted extends React.Component {
                         tickFormat={d => d.toString().replace(',', '')} 
                     />
                     <YAxis 
-                        tickValues={yTickValues} 
                         style={{ text: {transform: 'translate(0, 0)'}}} 
-                        tickFormat={tickFormat}
+                        tickFormat={(d) => formatTickPercent(d)}
                     />
                     <LineMarkSeries 
                         strokeWidth={2}
@@ -79,6 +71,7 @@ class HouseholdsAssisted extends React.Component {
                         lineStyle={{ fill: 'none' , stroke: '#46bdc6' }}
                         markStyle={{ fill: '#46bdc6', stroke: 'rgba(0, 0, 0, 0)' }}
                         onValueMouseOver={d => this.setState({hoveredNode: d})}
+                        curve={'curveMonotoneX'}
                     />
                     <LineSeries 
                         strokeWidth={2}

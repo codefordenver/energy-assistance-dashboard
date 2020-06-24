@@ -6,7 +6,7 @@ import HouseholdsAssisted from '../components/HouseholdsAssisted';
 import ParticipantsChart from '../components/ParticipantsChart';
 import styles from '../styles/global.module.css'
 
-const frontendUrl = 'http://localhost:3000';
+const frontendUrl = 'https://energy-assistance-dashboard.herokuapp.com';
 
 class Index extends React.Component {
   constructor(props) {
@@ -19,19 +19,18 @@ class Index extends React.Component {
   getCountyId = (e) => {
     e.preventDefault();
     const id = e.target.value;
-    fetch(`${frontendUrl}/api/counties/${id}`)
+    fetch(`${frontendUrl}/counties/${id}`)
       .then(res => res.json())
       .then(data => {
         this.setState({
-          countyData: data
+          selectedCountyData: data
         })
       })
       .catch(err => console.log(err))
   }
 
   render() {
-    const selectedCountyData = this.state.selectedCountyData
-    
+    const selectedCountyData = this.state.selectedCountyData.data
     return (
       <div className={styles.container}>
         <Head>
@@ -82,6 +81,8 @@ class Index extends React.Component {
           </div>
 
           <div className={styles.sources}>
+            <h4>Last Updated</h4>
+            <p>{ this.state.selectedCountyData.last_updated }</p>
             <h4>Sources</h4>
             <p>American Community Survey 5-Year Estimates by the Census Bureau, Energy Outreach Colorado's households served, and CDHS LEAP households served</p>
             <p>2013 LEAP data is estimated due to lack of data</p>
@@ -156,15 +157,15 @@ class Index extends React.Component {
 
 Index.getInitialProps = async function() {
   //req to GET specific county data
-  const res = await fetch(`${frontendUrl}/api/counties/[id].js`);
+  const res = await fetch(`${frontendUrl}/counties/0`);
   const data = await res.json();
 
   //req to GET all counties
-  const countyRes = await fetch(`${frontendUrl}/api/counties`);
+  const countyRes = await fetch(`${frontendUrl}/counties`);
   const countyList = await countyRes.json();
 
   return {
-      selectedCountyData: data.data,
+      selectedCountyData: data,
       countyList: countyList
   };
 }

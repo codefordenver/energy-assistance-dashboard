@@ -2,7 +2,7 @@ import styles from '../styles/global.module.css'
 import { withComma } from '../utils/utilities'
 
 const SummaryTable = (props) => {
-    const selectedYear = '2018';
+    const selectedYear = 2018;
     const yearData = props.selectedCountyData[selectedYear];
     return (
         <div className={styles.summarytable}>
@@ -37,7 +37,6 @@ const SummaryTable = (props) => {
                         </tbody> )
                     }
             </table>
-           
         </div>
     )
 }

@@ -10,7 +10,7 @@ import {
 } from 'react-vis';
 import DiscreteColorLegend from 'react-vis/dist/legends/discrete-color-legend';
 import styles from '../styles/global.module.css';
-import { formatPercent, generateTickValues } from '../utils/utilities';
+import { formatPercent, minMax, formatTickPercent } from '../utils/utilities';
 
 
 class ParetoChart extends React.Component {
@@ -22,7 +22,6 @@ class ParetoChart extends React.Component {
     render(){
         const { barKey, lineKey, selectedCountyData } = this.props;
         const hoveredNode = this.state.hoveredNode;
-        const tickIteration = (barKey == 'Households below 200% FPL') ? 25000 : 0.1;
         const LEGEND = [
             { 
                 title: barKey, 
@@ -40,16 +39,10 @@ class ParetoChart extends React.Component {
     
         const householdsAssisted = Object.keys(selectedCountyData).map(key => {
             return { x: key, y: selectedCountyData[key][lineKey] }
-        });
-    
-        const maxYValue = Math.max(...householdsInNeed.map(data =>  data.y));
-        const minXValue = Math.min(...Object.keys(selectedCountyData));
-        const maxXValue = Math.max(...Object.keys(selectedCountyData));
-        const yTickValues = generateTickValues(tickIteration, maxYValue);
-        const maxYTickValue = Math.max(...yTickValues);
-    
+        });   
+        const { minXValue, maxXValue, maxYValue } = minMax(selectedCountyData, householdsInNeed, householdsAssisted);
         const tickFormat = (barKey == '% Households below 200% FPL') 
-                            ? (d) => Math.ceil(d * 100) + '.0%' 
+                            ? (d) => formatTickPercent(d)
                             : null;
         return (
             <div className={styles['chart']}>
@@ -62,7 +55,7 @@ class ParetoChart extends React.Component {
                     height={300} 
                     width={500} 
                     xDomain={[minXValue, maxXValue]}
-                    yDomain={[0, maxYTickValue]} 
+                    yDomain={[0, maxYValue]} 
                     color="#46bdc6"
                     onMouseLeave={() => this.setState({hoveredNode: null, type: null})}
                 >
@@ -85,7 +78,6 @@ class ParetoChart extends React.Component {
                         tickFormat={d => d.toString().replace(',', '')} 
                     />
                     <YAxis 
-                        tickValues={yTickValues} 
                         style={{ text: {transform: 'translate(0, 0)'}}} 
                         tickFormat={tickFormat}
                     />
@@ -100,6 +92,7 @@ class ParetoChart extends React.Component {
                         lineStyle={{ fill: 'none' , stroke: '#ff6d01' }}
                         markStyle={{ fill: '#ff6d01', stroke: 'rgba(0, 0, 0, 0)' }}
                         onValueMouseOver={d => this.setState({hoveredNode: d, type: 'line'})}
+                        curve={'curveMonotoneX'}
                     />
                 </XYPlot>
             </div>
