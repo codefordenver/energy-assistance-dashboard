@@ -3,11 +3,11 @@ from fastapi import FastAPI
 from functools import lru_cache
 import unittest.mock
 
-from middleware import set_cors
-from main import app, county_list
-from tests.denver_county_data import cache, no_cache
-from utils.config import Settings
-from utils.helper import RedisHelper
+from backend.middleware import set_cors
+from backend.main import app, county_list
+from backend.tests.denver_county_data import cache, no_cache
+from backend.utils.config import Settings
+from backend.utils.helper import RedisHelper
 
 client = TestClient(app)
 
@@ -22,13 +22,15 @@ def setup_function(function):
     """ setup any state tied to the execution of the given function.
     Invoked for every test function in the module.
     """
-    function.r = RedisHelper(settings.hostname, settings.port, settings.password)
+    function.r = RedisHelper(settings.redis_hostname, settings.redis_port, settings.redis_password)
+    function.r.reset_cache()
 
 
 def teardown_function(function):
     """ teardown any state that was previously setup with a setup_function
     call.
     """
+    function.r.reset_cache()
     del function.r
 
 
@@ -39,14 +41,13 @@ def test_get_counties():
 
 
 def test_get_county_data_no_cache():
-    test_get_county_data_no_cache.r.reset_cache()
     returned_response = client.get('/counties/31')
     
     assert returned_response.status_code == 200
     assert returned_response.json() == no_cache
 
 
-@unittest.mock.patch('utils.helper.RedisHelper.getCurrentTime')
+@unittest.mock.patch('backend.utils.helper.RedisHelper.getCurrentTime')
 def test_get_county_data_cache(mock_getCurrentTime):
     #Patch current time.  If the timing between two get_current_time falls at the end of a second this can randomly fail
     current_time = "13:37:00"
@@ -54,14 +55,14 @@ def test_get_county_data_cache(mock_getCurrentTime):
     cache["last_updated"] = current_time
 
     #Reset and pre-seed the cache
-    test_get_county_data_cache.r.reset_cache()
     client.get('/counties/31')
     
     #Return cached response
     returned_response = client.get('/counties/31')
 
     assert mock_getCurrentTime.called
-    assert mock_getCurrentTime.call_count == 1
+    #Called twice, once for raw data and once for processed data
+    assert mock_getCurrentTime.call_count == 2
     assert returned_response.status_code == 200
     assert returned_response.json() == cache
 

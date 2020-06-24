@@ -6,6 +6,8 @@ import requests
 import time
 from fastapi import HTTPException
 import collections
+from backend.utils.constants import ROW_TYPE
+import numpy as np
 
 
 class RedisHelper():
@@ -61,9 +63,17 @@ def GetDataFromAirtable(api_key: str):
     """
     # list of filename from Airtable
     # skipping these 2 files as of now --> "EOC - Utility Territories.csv","EOC - Primary Energy Sources.csv",
-    AirtableFileNames = ["EOC - Xcel EA Participants", "CDHS - LEAP Participants", "EOC - EA Participants",
-                         "ACS - Population below 200 Percent FPL", "ACS - Average Household Size",
-                         "ACS - Median Household Income", "ACS - Households", "ACS - Population"]
+    
+    
+    AirtableFileNames = {
+        "EOC - Xcel EA Participants": ROW_TYPE["XEAP_TYPE"], 
+        "CDHS - LEAP Participants": ROW_TYPE["LEAPP_TYPE"], 
+        "EOC - EA Participants": ROW_TYPE["EAP_TYPE"],
+        "ACS - Population below 200 Percent FPL": ROW_TYPE["PB2_TYPE"], 
+        "ACS - Average Household Size":  ROW_TYPE["AHS_TYPE"],
+        "ACS - Median Household Income": ROW_TYPE["MHI_TYPE"] , 
+        "ACS - Households": ROW_TYPE["H_TYPE"], 
+        "ACS - Population": ROW_TYPE["P_TYPE"]}
 
     url = "https://api.airtable.com/v0/appfSbArpaXGKBjzU/"
 
@@ -76,7 +86,6 @@ def GetDataFromAirtable(api_key: str):
     index = 0
     # loop through all the files on Airtable
     for fileName in AirtableFileNames:
-
         url = "https://api.airtable.com/v0/appfSbArpaXGKBjzU/"
         url = url + fileName
 
@@ -95,7 +104,8 @@ def GetDataFromAirtable(api_key: str):
             for counter in range(length_data):
                 single = {}
 
-                single.update({'TYPE': fileName})
+                single.update({'TABLE': fileName})
+                single.update({'Type': AirtableFileNames[fileName]})
                 try:
                     single.update({'Area': response_json['records'][counter]['fields']['Area'],
                                    'CountyFIPS': int(response_json['records'][counter]['fields']['CountyFIPS'])})
@@ -107,16 +117,17 @@ def GetDataFromAirtable(api_key: str):
                 # loop from 2010 till current year to get data
                 for i in range(start_year,current_year):
                     try:
-                         single.update({str(i): float(response_json['records'][counter]['fields'][str(i)])})
+                         single.update({str(i): convert_string_to_float(response_json['records'][counter]['fields'][str(i)])})
                     except:
-                         single.update({str(i): ""})
+                        # Setting value to 0 for now to be able to process the data frame
+                         single.update({str(i): 0})
 
                 # add this single record to the default dictionary
                 tableDict[index] = single
 
                 index = index + 1
 
-            time.sleep(1)
+            time.sleep(0.25)
 
         else:
             # raise exception if some error in fetching the file and response code is not 200
@@ -127,5 +138,9 @@ def GetDataFromAirtable(api_key: str):
     # transpose the table
     data = data.transpose()
     # set the index
-    data = data.set_index(['TYPE', 'CountyFIPS'])
+    #data = data.set_index(['TYPE', 'CountyFIPS'])
     return data
+
+def convert_string_to_float(string:str):
+    converted_string = string.replace(',','')
+    return float(converted_string)
