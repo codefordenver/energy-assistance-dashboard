@@ -38,7 +38,6 @@ async def counties():
     return {"counties": county_list}
 
 
-
 @app.get("/counties/{county_id}")
 async def get_county_data(county_id: str) -> CountyResponse:
     response = CountyResponse(message="Returning county data")

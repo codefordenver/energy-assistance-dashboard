@@ -22,13 +22,15 @@ def setup_function(function):
     """ setup any state tied to the execution of the given function.
     Invoked for every test function in the module.
     """
-    function.r = RedisHelper(settings.hostname, settings.port, settings.password)
+    function.r = RedisHelper(settings.redis_hostname, settings.redis_port, settings.redis_password)
+    function.r.reset_cache()
 
 
 def teardown_function(function):
     """ teardown any state that was previously setup with a setup_function
     call.
     """
+    function.r.reset_cache()
     del function.r
 
 
@@ -39,7 +41,6 @@ def test_get_counties():
 
 
 def test_get_county_data_no_cache():
-    test_get_county_data_no_cache.r.reset_cache()
     returned_response = client.get('/counties/31')
     
     assert returned_response.status_code == 200
@@ -54,7 +55,6 @@ def test_get_county_data_cache(mock_getCurrentTime):
     cache["last_updated"] = current_time
 
     #Reset and pre-seed the cache
-    test_get_county_data_cache.r.reset_cache()
     client.get('/counties/31')
     
     #Return cached response
