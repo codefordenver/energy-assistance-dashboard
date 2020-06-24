@@ -1,5 +1,5 @@
 import pandas as pd
-from utils.constants import ROW_TYPE
+from backend.utils.constants import ROW_TYPE
 
 def processData(area: str, data) -> pd.DataFrame:
   AREA: str = area

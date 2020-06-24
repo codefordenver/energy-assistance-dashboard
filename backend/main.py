@@ -5,12 +5,12 @@ from functools import lru_cache
 from fastapi import FastAPI, HTTPException
 
 #Custom Modules
-from middleware import set_cors
-from data.counties import county_list
-from utils.config import Settings
-from utils.data import processData
-from utils.helper import RedisHelper, GetDataFromAirtable
-from models.response import GenericResponse, CountyResponse
+from backend.middleware import set_cors
+from backend.data.counties import county_list
+from backend.utils.config import Settings
+from backend.utils.data import processData
+from backend.utils.helper import RedisHelper, GetDataFromAirtable
+from backend.models.response import GenericResponse, CountyResponse
 
 app = FastAPI()
 set_cors(app)

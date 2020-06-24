@@ -6,7 +6,7 @@ import requests
 import time
 from fastapi import HTTPException
 import collections
-from utils.constants import ROW_TYPE
+from backend.utils.constants import ROW_TYPE
 import numpy as np
 
 

@@ -3,11 +3,11 @@ from fastapi import FastAPI
 from functools import lru_cache
 import unittest.mock
 
-from middleware import set_cors
-from main import app, county_list
-from tests.denver_county_data import cache, no_cache
-from utils.config import Settings
-from utils.helper import RedisHelper
+from backend.middleware import set_cors
+from backend.main import app, county_list
+from backend.tests.denver_county_data import cache, no_cache
+from backend.utils.config import Settings
+from backend.utils.helper import RedisHelper
 
 client = TestClient(app)
 
@@ -47,7 +47,7 @@ def test_get_county_data_no_cache():
     assert returned_response.json() == no_cache
 
 
-@unittest.mock.patch('utils.helper.RedisHelper.getCurrentTime')
+@unittest.mock.patch('backend.utils.helper.RedisHelper.getCurrentTime')
 def test_get_county_data_cache(mock_getCurrentTime):
     #Patch current time.  If the timing between two get_current_time falls at the end of a second this can randomly fail
     current_time = "13:37:00"
