@@ -3,9 +3,11 @@
 .container {
     font-family: 'Nunito', sans-serif;
     padding: 20px;
+    width: 90%;
+    margin: 0 auto;
 }
 
-.top-container {
+.overview {
     display: flex;
     justify-content: space-between;
 }
@@ -26,6 +28,7 @@
     font-size: 13px;
     border-collapse: collapse;
     font-weight: 400;
+    min-width: 250px;
 }
 
 .container thead tr {
@@ -72,3 +75,49 @@ select.dropdown {
     text-align: right;
     width: 120px; 
 }
+
+/* Pareto Chart Styles - may also use for line graphs */
+.charts {
+    margin: 50px 0;
+}
+
+.historical-trends-charts {
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart {
+    padding: 12px;
+    border: 1px solid rgb(206, 206, 206);
+    margin: 0 30px 50px 0;
+    position: relative;
+}
+
+.hint {
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    color: #fff;
+    white-space: nowrap;
+    top: 60px;
+    right: 20px;
+}
+
+.sources p {
+    font-size: 10px;
+}
+
+
+@media (max-width: 1200px){
+    .historical-trends-charts {
+        flex-direction: column;
+        width: fit-content;
+    }
+    .pareto-chart {
+        margin: 20px 0 0;
+    }
+}
+
+
