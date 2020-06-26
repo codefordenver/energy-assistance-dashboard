@@ -1,0 +1,4 @@
+[build]
+  base = "frontend"
+  publish = "frontend/out/"
+  command = "yarn run build && yarn run export"
