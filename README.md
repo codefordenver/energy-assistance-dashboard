@@ -90,3 +90,16 @@ Find the proper activate script based on your OS and terminal.  https://docs.pyt
 1. Run the dev server `yarn dev`
 
 1. Navigate to `http://127.0.0.1:3000/` to view the frontend client locally
+
+### Testing
+
+1. From the root or backend (or eventually front end folder), run `pytest`. 
+This will look for files that start with `test_`.
+
+1. To run tests with coverage, run `covereage run -m pytest` 
+followed by `coverage report`.
+
+    1. `coverage report -m` will show more detail, including line numbers that are not being tested.
+    1. `coverage html -d coverage_html` will create html reports, with hyperlinked access to see the code itself. 
+    Open up `coverage_html/index.html` in your browser.
+    1. Coverage has a lot of options. You can read the docs here: https://coverage.readthedocs.io/en/coverage-5.1/index.html 
