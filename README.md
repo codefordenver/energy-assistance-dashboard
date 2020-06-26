@@ -86,6 +86,7 @@ Find the proper activate script based on your OS and terminal.  https://docs.pyt
 1. Navigate to the frontend folder
 
 1. Install dependencies `yarn install`
+   1. If yarn is not installed, `brew install yarn`
 
 1. Run the dev server `yarn dev`
 
