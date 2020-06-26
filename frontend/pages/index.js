@@ -29,6 +29,7 @@ class Index extends React.Component {
   }
 
   render() {
+    console.log(process.env.NODE_ENV)
     const selectedCountyData = this.state.selectedCountyData.data
     return (
       <div className={styles.container}>
