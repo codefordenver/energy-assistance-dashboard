@@ -18,8 +18,11 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 To learn more about Next.js, take a look at the following resources:
 
+- [Next.js Homepage](https://nextjs.org)
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Examples](https://github.com/vercel/next.js/tree/master/examples) - Discover and deploy boilerplate example Next.js projects.
+- [Deploy](https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app) -  Instantly deploy your Next.js site to a public URL with Vercel.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
