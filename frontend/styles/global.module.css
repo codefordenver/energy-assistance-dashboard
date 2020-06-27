@@ -121,7 +121,7 @@ select.dropdown {
 }
 
 
-@media (max-width: 10in){
+@media (max-width: 8.5in){
     .historical-trends-charts {
         flex-direction: column;
         width: fit-content;
