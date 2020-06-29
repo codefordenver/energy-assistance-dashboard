@@ -2,9 +2,11 @@
 
 .container {
     font-family: 'Nunito', sans-serif;
+    background-color: white;
     padding: 20px;
     width:8.5in;
-    margin: 0 auto;
+    margin: 30px auto;
+    box-shadow: 0 5px 25px 0 rgba(0,0,0, .25);
 }
 
 .overview {
@@ -80,7 +82,7 @@ select.dropdown {
 
 /* Pareto Chart Styles - may also use for line graphs */
 .charts {
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .historical-trends-charts {
@@ -89,7 +91,7 @@ select.dropdown {
 
 .chart-container{
     border: 1px solid rgb(206, 206, 206);
-    margin: 0 20px 20px 0;
+    margin: 0 10px 10px 0;
 }
 
 .chart {
@@ -134,6 +136,9 @@ select.dropdown {
 }
 
 @media print {
+    .container {
+        box-shadow: none;
+    }
     .print-title {
         font-size:18px;
     }
