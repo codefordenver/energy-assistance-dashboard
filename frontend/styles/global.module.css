@@ -2,14 +2,17 @@
 
 .container {
     font-family: 'Nunito', sans-serif;
+    background-color: white;
     padding: 20px;
-    width: 90%;
-    margin: 0 auto;
+    width:8.5in;
+    margin: 30px auto;
+    box-shadow: 0 5px 25px 0 rgba(0,0,0, .25);
 }
 
 .overview {
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
 }
 
 .eoc-logo {
@@ -34,6 +37,7 @@
 .container thead tr {
     height: 22px;
     background: rgb(206, 206, 206);
+    color-adjust:exact;
 }
 
 .container tbody tr {
@@ -78,18 +82,22 @@ select.dropdown {
 
 /* Pareto Chart Styles - may also use for line graphs */
 .charts {
-    margin: 50px 0;
+    margin: 10px 0;
 }
 
 .historical-trends-charts {
     display: flex;
-    justify-content: space-between;
+}
+
+.chart-container{
+    border: 1px solid rgb(206, 206, 206);
+    margin: 0 10px 10px 0;
 }
 
 .chart {
+    width:4in;
+    height:2in;
     padding: 12px;
-    border: 1px solid rgb(206, 206, 206);
-    margin: 0 30px 50px 0;
     position: relative;
 }
 
@@ -105,18 +113,47 @@ select.dropdown {
     right: 20px;
 }
 
+.sources h4 {
+    margin-block-start: 1em;
+    margin-block-end: 1em
+}
+
 .sources p {
     font-size: 10px;
 }
 
 
-@media (max-width: 1200px){
+@media (max-width: 8.5in){
     .historical-trends-charts {
         flex-direction: column;
         width: fit-content;
     }
+    
     .pareto-chart {
         margin: 20px 0 0;
+    }
+
+}
+
+@media print {
+    .container {
+        box-shadow: none;
+    }
+    .print-title {
+        font-size:18px;
+    }
+
+    .container h3{
+        font-size:14px;
+    }
+    
+    .historical-trends-charts {
+        flex-direction: row;
+        width: fit-content;
+    }
+
+    .no-print{
+        display: none !important;
     }
 }
 
