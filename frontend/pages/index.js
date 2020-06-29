@@ -5,7 +5,8 @@ import ParetoChart from '../components/ParetoChart';
 import HouseholdsAssisted from '../components/HouseholdsAssisted';
 import ParticipantsChart from '../components/ParticipantsChart';
 import styles from '../styles/global.module.css'
-import config from '../config'
+
+const backendURL = process.env.API_ENDPOINT;
 
 class Index extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Index extends React.Component {
   getCountyId = (e) => {
     e.preventDefault();
     const id = e.target.value;
-    fetch(`${config.API_ENDPOINT}/counties/${id}`)
+    fetch(`${backendURL}/counties/${id}`)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -29,7 +30,6 @@ class Index extends React.Component {
   }
 
   render() {
-    console.log(process.env.NODE_ENV)
     const selectedCountyData = this.state.selectedCountyData.data
     return (
       <div className={styles.container}>
@@ -155,13 +155,13 @@ class Index extends React.Component {
   }
 }
 
-Index.getInitialProps = async function() {
+Index.getInitialProps = async function({ params }) {
   //req to GET specific county data
-  const res = await fetch(`${config.API_ENDPOINT}/counties/0`);
+  const res = await fetch(`${backendURL}/counties/0`);
   const data = await res.json();
 
   //req to GET all counties
-  const countyRes = await fetch(`${config.API_ENDPOINT}/counties`);
+  const countyRes = await fetch(`${backendURL}/counties`);
   const countyList = await countyRes.json();
 
   return {
