@@ -40,10 +40,6 @@
     color-adjust:exact;
 }
 
-.container tbody tr {
-    border-bottom: 1px solid rgb(206, 206, 206);
-}
-
 .container tbody tr td {
     padding: 2px 5px;
 }
@@ -71,6 +67,10 @@ select.dropdown {
 
 .summarytable {
     padding: 20px 0;
+}
+
+.summarytable tbody tr {
+    border-bottom: 1px solid rgb(206, 206, 206);
 }
 
 .bold {
@@ -124,6 +124,10 @@ select.dropdown {
 
 .full-stats-table {
     width: 100%;
+}
+
+.full-stats-table-body tr:nth-child(even) {
+    background: rgb(242, 242, 242);
 }
 
 .full-stats-heading {

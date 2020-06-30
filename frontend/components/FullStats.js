@@ -1,21 +1,18 @@
 import styles from '../styles/global.module.css'
-import { formatNumber } from '../utils/utilities'
+import { formatCellData } from '../utils/utilities'
 
 const FullStats = (props) => {
-    const availableYears = Object.keys(props.selectedCountyData).reverse();
-    const countyData = availableYears.map(key => {
-        return { [key]: props.selectedCountyData[key] };
-    });
+    const selectedCountyData = props.selectedCountyData;
 
-    const itemKeys = Object.keys(countyData[0]['2019']);
-
+    const availableYears = Object.keys(selectedCountyData).reverse();
+    const itemKeys = Object.keys(selectedCountyData[availableYears[0]]);
     const tableData = itemKeys.map(key => {
-        const values = availableYears.map(item => props.selectedCountyData[item][key] );
+        const values = availableYears.map(item => selectedCountyData[item][key] );
         return { [key] : [...values] }
     });
     
     return (
-        <div className={styles.summarytable}>
+        <div className={styles.statstable}>
             <h3>Full Stats</h3>
                 <table class={styles['full-stats-table']}>
                     <thead>
@@ -28,17 +25,17 @@ const FullStats = (props) => {
                             })}
                         </tr>
                     </thead>
-                    { props.selectedCountyData 
-                    ? ( <tbody>
+                    { selectedCountyData 
+                    ? ( <tbody class={styles['full-stats-table-body']}>
                            { tableData.map(item => {
-                               const topValue = Object.keys(item)[0]
-                               const tableValues = Object.values(item)[0]
+                               const cellData = Object.entries(item)[0];
                                return (
                                 <tr>
-                                    <td className={styles['full-stats-row-heading']}>{ topValue }</td>
-                                    { tableValues.map(value => {
+                                    <td className={styles['full-stats-row-heading']}>{ cellData[0] }</td>
+                                    { cellData[1].map(value => {
+                                        let val = value ? value : 0
                                         return (
-                                        <td className={styles['full-stats-data']}>{ formatNumber(value ? value : 0) }</td>
+                                            <td className={styles['full-stats-data']}>{ formatCellData(val, cellData[0]) }</td>
                                         )
                                     })}
                                 </tr>  
@@ -47,7 +44,7 @@ const FullStats = (props) => {
                         </tbody> ) 
                     : ( <tbody>
                             <tr>
-                                <td>No Data for {selectedYear}</td>
+                                <td>No Data available</td>
                                 <td></td>
                             </tr>
                         </tbody> )

@@ -51,9 +51,11 @@ export function formatTickPercent(d){
 }
 
 
-export function formatNumber(value){
-    if(value < 1 && value !== 0){
+export function formatCellData(value, name){
+    if(name === '% Households below 200% FPL' || name === '% of Households below 200% FPL Assisted'){
         return Math.ceil(value * 100) + '%';
+    } else if (name === 'Median Household Income') {
+        return `$${withComma(value)}`
     } else {
         return withComma(value);
     }
