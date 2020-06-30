@@ -5,7 +5,6 @@ export function withComma(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-
 export function formatPercent(barKey, value){
     if(barKey == '% Households below 200% FPL') {
        return Math.ceil(value * 100); 
@@ -51,3 +50,11 @@ export function formatTickPercent(d){
     return `${Math.ceil(d * 100)}%`
 }
 
+
+export function formatNumber(value){
+    if(value < 1 && value !== 0){
+        return Math.ceil(value * 100) + '%';
+    } else {
+        return withComma(value);
+    }
+}

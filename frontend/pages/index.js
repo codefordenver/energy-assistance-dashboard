@@ -4,6 +4,7 @@ import CountyDropdown from '../components/CountyDropdown';
 import ParetoChart from '../components/ParetoChart';
 import HouseholdsAssisted from '../components/HouseholdsAssisted';
 import ParticipantsChart from '../components/ParticipantsChart';
+import FullStats from '../components/FullStats';
 import styles from '../styles/global.module.css'
 
 const backendURL = process.env.API_ENDPOINT;
@@ -34,14 +35,14 @@ class Index extends React.Component {
     return (
       <div className={styles.container}>
         <Head>
-          <title>Energy Assistance Dashboard</title>
+          <title className="print-title">Energy Assistance Dashboard</title>
           <link rel="icon" href="/favicon.png" />
         </Head>
 
         <main>
           <div className={styles['overview']}>
             <div>
-              <h1>Colorado Low Income Energy Stats</h1>
+              <h1 className={styles['print-title']}>Colorado Low Income Energy Stats</h1>
               <CountyDropdown 
                 countyList={this.props.countyList} 
                 getCountyId={this.getCountyId}
@@ -53,7 +54,11 @@ class Index extends React.Component {
             <img src="/energy-outreach-logo.png" alt="Energy Outreach Colorado Logo" className={styles['eoc-logo']} />
           </div>
 
-          <div>Place full stats table here!</div>
+          <div>
+            <FullStats 
+               selectedCountyData={selectedCountyData} 
+            />
+          </div>
 
           <div className={styles.charts}>
             <h3>Historical Trends</h3>
@@ -81,11 +86,10 @@ class Index extends React.Component {
           </div>
 
           <div className={styles.sources}>
-            <h4>Last Updated</h4>
-            <p>{ this.state.selectedCountyData.last_updated }</p>
             <h4>Sources</h4>
             <p>American Community Survey 5-Year Estimates by the Census Bureau, Energy Outreach Colorado's households served, and CDHS LEAP households served</p>
             <p>2013 LEAP data is estimated due to lack of data</p>
+            <p>Data Last Updated:  { this.state.selectedCountyData.last_updated }</p>
           </div>
         </main>
         
@@ -97,6 +101,7 @@ class Index extends React.Component {
             font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
               Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
               sans-serif;
+              background-color: #e6e6e6;
           }
           * {
             box-sizing: border-box;
@@ -133,10 +138,17 @@ class Index extends React.Component {
             border-radius: 1px;
             padding: 9px 10px;
           }
+
           .rv-discrete-color-legend-item.horizontal {
             display: inline-block;
           }
+
           .rv-discrete-color-legend-item.horizontal .rv-discrete-color-legend-item__title {
+            display:inline;
+            padding-left: 10px;
+          }
+
+          .rv-discrete-color-legend-item.vertical .rv-discrete-color-legend-item__title {
             display:inline;
             padding-left: 10px;
           }

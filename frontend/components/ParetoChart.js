@@ -1,5 +1,5 @@
 import { 
-    XYPlot, 
+    FlexibleXYPlot,
     VerticalBarSeries, 
     XAxis, 
     YAxis, 
@@ -44,57 +44,57 @@ class ParetoChart extends React.Component {
         const tickFormat = (barKey == '% Households below 200% FPL') 
                             ? (d) => formatTickPercent(d)
                             : null;
+
         return (
-            <div className={styles['chart']}>
+            <div className={styles['chart-container']}>
                 <DiscreteColorLegend 
-                    orientation="horizontal" 
-                    width={500} 
+                    orientation="vertical" 
                     items={LEGEND} 
-                />
-                <XYPlot 
-                    height={300} 
-                    width={500} 
-                    xDomain={[minXValue, maxXValue]}
-                    yDomain={[0, maxYValue]} 
-                    color="#46bdc6"
-                    onMouseLeave={() => this.setState({hoveredNode: null, type: null})}
-                >
-                {hoveredNode && (
+                    />
+                <div className={styles['chart']}>
+                    <FlexibleXYPlot 
+                        xDomain={[minXValue, maxXValue]}
+                        yDomain={[0, maxYValue]} 
+                        color="#46bdc6"
+                        onMouseLeave={() => this.setState({hoveredNode: null, type: null})}
+                        >
+                    {hoveredNode && (
                         <Hint
-                            className={styles.hint}
-                            getX={d => d.x}
-                            getY={d => d.y}
-                            value={{
-                                Year: hoveredNode.x,
-                                Value: (this.state.type == 'bar') 
-                                    ? `${formatPercent(barKey, hoveredNode.y)}${barKey}` 
-                                    : `${formatPercent(barKey, hoveredNode.y)}${lineKey}`
-                            }}
+                        className={styles.hint}
+                        getX={d => d.x}
+                        getY={d => d.y}
+                        value={{
+                            Year: hoveredNode.x,
+                            Value: (this.state.type == 'bar') 
+                            ? `${formatPercent(barKey, hoveredNode.y)}${barKey}` 
+                            : `${formatPercent(barKey, hoveredNode.y)}${lineKey}`
+                        }}
                         />
-                    )}
-                    <VerticalGridLines />
-                    <HorizontalGridLines />
-                    <XAxis 
-                        tickFormat={d => d.toString().replace(',', '')} 
-                    />
-                    <YAxis 
-                        style={{ text: {transform: 'translate(0, 0)'}}} 
-                        tickFormat={tickFormat}
-                    />
-                    <VerticalBarSeries 
-                        data={householdsInNeed}
-                        stroke='rgba(0, 0, 0, 0)'
-                        onValueMouseOver={d => this.setState({hoveredNode: d, type: 'bar'})}
-                    />
-                    <LineMarkSeries 
-                        strokeWidth={2}
-                        data={householdsAssisted}
-                        lineStyle={{ fill: 'none' , stroke: '#ff6d01' }}
-                        markStyle={{ fill: '#ff6d01', stroke: 'rgba(0, 0, 0, 0)' }}
-                        onValueMouseOver={d => this.setState({hoveredNode: d, type: 'line'})}
-                        curve={'curveMonotoneX'}
-                    />
-                </XYPlot>
+                        )}
+                        <VerticalGridLines />
+                        <HorizontalGridLines />
+                        <XAxis 
+                            tickFormat={d => d.toString().replace(',', '')} 
+                            />
+                        <YAxis 
+                            style={{ text: {transform: 'translate(0, 0)'}}} 
+                            tickFormat={tickFormat}
+                            />
+                        <VerticalBarSeries 
+                            data={householdsInNeed}
+                            stroke='rgba(0, 0, 0, 0)'
+                            onValueMouseOver={d => this.setState({hoveredNode: d, type: 'bar'})}
+                            />
+                        <LineMarkSeries 
+                            strokeWidth={2}
+                            data={householdsAssisted}
+                            lineStyle={{ fill: 'none' , stroke: '#ff6d01' }}
+                            markStyle={{ fill: '#ff6d01', stroke: 'rgba(0, 0, 0, 0)' }}
+                            onValueMouseOver={d => this.setState({hoveredNode: d, type: 'line'})}
+                            curve={'curveMonotoneX'}
+                            />
+                    </FlexibleXYPlot>
+                </div>
             </div>
         );
     }
