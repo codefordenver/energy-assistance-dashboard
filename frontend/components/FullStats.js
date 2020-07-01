@@ -18,24 +18,24 @@ const FullStats = (props) => {
                     <thead>
                         <tr>
                             <td></td>
-                            { availableYears.map(year => {
+                            { availableYears.map((year, i) => {
                                 return (
-                                    <td className={styles['full-stats-heading']}>{ year }</td>
+                                    <td key={i} className={styles['full-stats-heading']}>{ year }</td>
                                 )
                             })}
                         </tr>
                     </thead>
                     { selectedCountyData 
                     ? ( <tbody className={styles['full-stats-table-body']}>
-                           { tableData.map(item => {
+                           { tableData.map((item, i) => {
                                const cellData = Object.entries(item)[0];
                                return (
-                                    <tr>
+                                    <tr key={i} >
                                         <td className={styles['full-stats-row-heading']}>{ cellData[0] }</td>
-                                        { cellData[1].map(value => {
-                                            let val = value ? value : 0
+                                        { cellData[1].map((value, i) => {
+                                            const val = value ? value : 0;
                                             return (
-                                                <td className={styles['full-stats-data']}>{ formatCellData(val, cellData[0]) }</td>
+                                                <td key={i} className={styles['full-stats-data']}>{ formatCellData(val, cellData[0]) }</td>
                                             )
                                         })}
                                     </tr>  
