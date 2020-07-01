@@ -14,7 +14,7 @@ const FullStats = (props) => {
     return (
         <div className={styles.statstable}>
             <h3>Full Stats</h3>
-                <table class={styles['full-stats-table']}>
+                <table className={styles['full-stats-table']}>
                     <thead>
                         <tr>
                             <td></td>
