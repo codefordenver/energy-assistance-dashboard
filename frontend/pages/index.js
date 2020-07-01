@@ -7,7 +7,7 @@ import ParticipantsChart from '../components/ParticipantsChart';
 import FullStats from '../components/FullStats';
 import styles from '../styles/global.module.css'
 
-const backendURL = process.env.API_ENDPOINT;
+const backendURL = 'https://energy-assistance-dashboard.herokuapp.com';
 
 class Index extends React.Component {
   constructor(props) {

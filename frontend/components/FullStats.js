@@ -26,19 +26,19 @@ const FullStats = (props) => {
                         </tr>
                     </thead>
                     { selectedCountyData 
-                    ? ( <tbody class={styles['full-stats-table-body']}>
+                    ? ( <tbody className={styles['full-stats-table-body']}>
                            { tableData.map(item => {
                                const cellData = Object.entries(item)[0];
                                return (
-                                <tr>
-                                    <td className={styles['full-stats-row-heading']}>{ cellData[0] }</td>
-                                    { cellData[1].map(value => {
-                                        let val = value ? value : 0
-                                        return (
-                                            <td className={styles['full-stats-data']}>{ formatCellData(val, cellData[0]) }</td>
-                                        )
-                                    })}
-                                </tr>  
+                                    <tr>
+                                        <td className={styles['full-stats-row-heading']}>{ cellData[0] }</td>
+                                        { cellData[1].map(value => {
+                                            let val = value ? value : 0
+                                            return (
+                                                <td className={styles['full-stats-data']}>{ formatCellData(val, cellData[0]) }</td>
+                                            )
+                                        })}
+                                    </tr>  
                                )
                            })}
                         </tbody> ) 
