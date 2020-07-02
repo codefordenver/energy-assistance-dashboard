@@ -4,9 +4,10 @@ import CountyDropdown from '../components/CountyDropdown';
 import ParetoChart from '../components/ParetoChart';
 import HouseholdsAssisted from '../components/HouseholdsAssisted';
 import ParticipantsChart from '../components/ParticipantsChart';
+import FullStats from '../components/FullStats';
 import styles from '../styles/global.module.css'
 
-const frontendUrl = 'https://energy-assistance-dashboard.herokuapp.com';
+const backendURL = 'https://energy-assistance-dashboard.herokuapp.com';
 
 class Index extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class Index extends React.Component {
   getCountyId = (e) => {
     e.preventDefault();
     const id = e.target.value;
-    fetch(`${frontendUrl}/counties/${id}`)
+    fetch(`${backendURL}/counties/${id}`)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -53,7 +54,11 @@ class Index extends React.Component {
             <img src="/energy-outreach-logo.png" alt="Energy Outreach Colorado Logo" className={styles['eoc-logo']} />
           </div>
 
-          <div>Place full stats table here!</div>
+          <div>
+            <FullStats 
+               selectedCountyData={selectedCountyData} 
+            />
+          </div>
 
           <div className={styles.charts}>
             <h3>Historical Trends</h3>
@@ -162,13 +167,13 @@ class Index extends React.Component {
   }
 }
 
-Index.getInitialProps = async function() {
+Index.getInitialProps = async function({ params }) {
   //req to GET specific county data
-  const res = await fetch(`${frontendUrl}/counties/0`);
+  const res = await fetch(`${backendURL}/counties/0`);
   const data = await res.json();
 
   //req to GET all counties
-  const countyRes = await fetch(`${frontendUrl}/counties`);
+  const countyRes = await fetch(`${backendURL}/counties`);
   const countyList = await countyRes.json();
 
   return {
