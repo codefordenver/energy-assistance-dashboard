@@ -12,11 +12,13 @@ import styles from "../styles/global.module.css";
 const frontendUrl = "https://energy-assistance-dashboard.herokuapp.com";
 
 function Index(props) {
-  const [selectedCountyData, setSelectedCountyData] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const countyQuery = router.query.county;
+
+  const [selectedCountyData, setSelectedCountyData] = useState("");
+  const [selectedCountyUpdated, setSelectedCountyUpdated] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   //req to GET specific county data
   const getCountyData = async (id = "0") => {
@@ -26,6 +28,7 @@ function Index(props) {
 
     if (res.ok) {
       setSelectedCountyData(data.data);
+      setSelectedCountyUpdated(data.last_updated);
       setError(null);
     } else {
       setError(res.status);
@@ -128,7 +131,7 @@ function Index(props) {
               households served
             </p>
             <p>2013 LEAP data is estimated due to lack of data</p>
-            <p>Data Last Updated: {selectedCountyData.last_updated}</p>
+            <p>Data Last Updated: {selectedCountyUpdated}</p>
           </div>
         </main>
 
