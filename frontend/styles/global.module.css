@@ -40,10 +40,6 @@
     color-adjust:exact;
 }
 
-.container tbody tr {
-    border-bottom: 1px solid rgb(206, 206, 206);
-}
-
 .container tbody tr td {
     padding: 2px 5px;
 }
@@ -71,6 +67,10 @@ select.dropdown {
 
 .summarytable {
     padding: 20px 0;
+}
+
+.summarytable tbody tr {
+    border-bottom: 1px solid rgb(206, 206, 206);
 }
 
 .bold {
@@ -121,6 +121,32 @@ select.dropdown {
 .sources p {
     font-size: 10px;
 }
+
+.full-stats-table {
+    width: 100%;
+}
+
+.full-stats-table-body tr:nth-child(even) {
+    background: rgb(242, 242, 242);
+}
+
+.full-stats-heading {
+    font-weight: 600;
+    padding: 0 5px 0 10px;
+    text-align: right;
+    font-size: 12px;
+}
+
+.full-stats-data {
+    text-align: right;
+    font-size: 12px;
+}
+
+.full-stats-row-heading {
+    max-width: 180px;
+    font-size: 12px;
+}
+
 
 @media (max-width: 8.5in){
     .historical-trends-charts {

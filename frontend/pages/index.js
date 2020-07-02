@@ -7,9 +7,10 @@ import CountyDropdown from "../components/CountyDropdown";
 import ParetoChart from "../components/ParetoChart";
 import HouseholdsAssisted from "../components/HouseholdsAssisted";
 import ParticipantsChart from "../components/ParticipantsChart";
+import FullStats from '../components/FullStats';
 import styles from "../styles/global.module.css";
 
-const frontendUrl = "https://energy-assistance-dashboard.herokuapp.com";
+const backendUrl = "https://energy-assistance-dashboard.herokuapp.com";
 
 function Index(props) {
   const router = useRouter();
@@ -23,7 +24,7 @@ function Index(props) {
   //req to GET specific county data
   const getCountyData = async (id = "0") => {
     setLoading(true);
-    const res = await fetch(`${frontendUrl}/counties/${id}`);
+    const res = await fetch(`${backendUrl}/counties/${id}`);
     const data = await res.json();
 
     if (res.ok) {
@@ -98,7 +99,11 @@ function Index(props) {
             />
           </div>
 
-          <div>Place full stats table here!</div>
+          <div>
+            <FullStats 
+               selectedCountyData={selectedCountyData} 
+            />
+          </div>
 
           <div className={styles.charts}>
             <h3>Historical Trends</h3>
@@ -212,7 +217,7 @@ function Index(props) {
 
 Index.getInitialProps = async () => {
   //req to GET all counties
-  const countyRes = await fetch(`${frontendUrl}/counties`);
+  const countyRes = await fetch(`${backendURL}/counties`);
   const countyList = await countyRes.json();
 
   return {
