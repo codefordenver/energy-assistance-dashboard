@@ -80,7 +80,7 @@ function Index(props) {
         { loading ? (
           <Loader />
           ) : error ? (
-            <h3>The selected county could not be found, please try another.</h3>
+            <h3 className={styles["error-text"]}>The selected county could not be found, please try another.</h3>
           ) : (
           <div>
             <div>

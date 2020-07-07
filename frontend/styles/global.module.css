@@ -151,6 +151,12 @@ select.dropdown {
     font-size: 10px;
 }
 
+h3.error-text {
+    text-transform: none;
+    font-weight: 500;
+    padding: 10px 0 0;
+}
+
 
 @media (max-width: 8.5in){
     .historical-trends-charts {
