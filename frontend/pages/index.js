@@ -69,13 +69,16 @@ function Index(props) {
         <div className={styles["overview"]}>
           <div>
             <h1 className={styles["print-title"]}>
-              Colorado Low Income Energy Stats
+              Colorado Low Income <br/>Energy Stats
             </h1>
-            <CountyDropdown
-              countyList={countyList}
-              getCountyId={getCountyId}
-              selectedCountyName={countyQuery}
-            />
+            <div class={styles["print-report"]}>
+              <span class={styles["print-label"]}>Report for:</span>
+              <CountyDropdown
+                countyList={props.countyList}
+                getCountyId={getCountyId}
+                selectedCountyName={countyQuery}
+              />
+            </div>
           </div>
           <img
             src='/energy-outreach-logo.png'
@@ -83,11 +86,11 @@ function Index(props) {
             className={styles["eoc-logo"]}
           />
         </div>
-        {loading ? (
+        { loading ? (
           <Loader />
-        ) : error ? (
-          <h1>The selected county could not be found, please try another.</h1>
-        ) : (
+          ) : error ? (
+            <h3 className={styles["error-text"]}>The selected county could not be found, please try another.</h3>
+          ) : (
           <div>
             <div>
               <SummaryTable selectedCountyData={selectedCountyData} />
@@ -125,7 +128,6 @@ function Index(props) {
                 households served
               </p>
               <p>2013 LEAP data is estimated due to lack of data</p>
-              <p>Data Last Updated: {selectedCountyUpdated}</p>
             </div>
           </div>
         )}
