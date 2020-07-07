@@ -74,11 +74,11 @@ function Index(props) {
             className={styles["eoc-logo"]}
           />
         </div>
-        {loading ? (
+        { loading ? (
           <Loader />
-        ) : error ? (
-          <h1>The selected county could not be found, please try another.</h1>
-        ) : (
+          ) : error ? (
+            <h1>The selected county could not be found, please try another.</h1>
+          ) : (
           <div>
             <div>
               <SummaryTable selectedCountyData={selectedCountyData} />
@@ -116,7 +116,6 @@ function Index(props) {
                 households served
               </p>
               <p>2013 LEAP data is estimated due to lack of data</p>
-              <p>Data Last Updated: {selectedCountyUpdated}</p>
             </div>
           </div>
         )}
@@ -168,12 +167,6 @@ function Index(props) {
           padding: 9px 10px;
         }
 
-<<<<<<< HEAD
-Index.getInitialProps = async function({ params }) {
-  //req to GET specific county data
-  const res = await fetch(`${backendURL}/counties/0`);
-  const data = await res.json();
-=======
         .rv-discrete-color-legend-item.horizontal {
           display: inline-block;
         }
@@ -183,7 +176,6 @@ Index.getInitialProps = async function({ params }) {
           display: inline;
           padding-left: 10px;
         }
->>>>>>> upstream/master
 
         .rv-discrete-color-legend-item.vertical
           .rv-discrete-color-legend-item__title {

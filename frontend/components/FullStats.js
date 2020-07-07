@@ -33,11 +33,7 @@ const FullStats = (props) => {
                                     <tr key={i} >
                                         <td className={styles['full-stats-row-heading']}>{ cellData[0] }</td>
                                         { cellData[1].map((value, i) => {
-<<<<<<< HEAD
                                             const val = value ? value : '0';
-=======
-                                            const val = value ? value : 0;
->>>>>>> upstream/master
                                             return (
                                                 <td key={i} className={styles['full-stats-data']}>{ formatCellData(val, cellData[0]) }</td>
                                             )
