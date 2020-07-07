@@ -17,9 +17,7 @@ export const getKeyByValue = (object, value) =>
 
 function Index(props) {
   const { countyList } = props;
-
-  const router = useRouter();
-  const countyQuery = router.query.county;
+  const countyQuery = props.query.county;
 
   const [selectedCountyData, setSelectedCountyData] = useState(null);
   const [selectedCountyUpdated, setSelectedCountyUpdated] = useState(null);
@@ -54,9 +52,8 @@ function Index(props) {
   };
 
   useEffect(() => {
-    let countyQuery = router.query.county;
-    countyQuery = countyQuery ? countyQuery : "COLORADO STATE"; 
-    console.log(countyQuery);
+    const { query } = props;
+    const countyQuery = query.county ? query.county : "COLORADO STATE"
     getCountyData(countyQuery);
   }, []);
 
@@ -71,7 +68,8 @@ function Index(props) {
         <div className={styles["overview"]}>
           <div>
             <h1 className={styles["print-title"]}>
-              Colorado Low Income <br/>Energy Stats
+              Colorado Low Income <br />
+              Energy Stats
             </h1>
             <div class={styles["print-report"]}>
               <span class={styles["print-label"]}>Report for:</span>
@@ -88,11 +86,13 @@ function Index(props) {
             className={styles["eoc-logo"]}
           />
         </div>
-        { loading ? (
+        {loading ? (
           <Loader />
-          ) : error ? (
-            <h3 className={styles["error-text"]}>The selected county could not be found, please try another.</h3>
-          ) : (
+        ) : error ? (
+          <h3 className={styles["error-text"]}>
+            The selected county could not be found, please try another.
+          </h3>
+        ) : (
           <div>
             <div>
               <SummaryTable selectedCountyData={selectedCountyData} />
@@ -210,13 +210,14 @@ function Index(props) {
   );
 }
 
-Index.getInitialProps = async () => {
+Index.getInitialProps = async ({ query }) => {
   //req to GET all counties
   const countyRes = await fetch(`${backendURL}/counties`);
   const countyList = await countyRes.json();
 
   return {
     countyList: countyList,
+    query: query,
   };
 };
 
