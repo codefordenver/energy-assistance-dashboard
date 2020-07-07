@@ -56,6 +56,7 @@ function Index(props) {
   useEffect(() => {
     let countyQuery = router.query.county;
     countyQuery = countyQuery ? countyQuery : "COLORADO STATE"; 
+    console.log(countyQuery);
     getCountyData(countyQuery);
   }, []);
 
