@@ -17,7 +17,6 @@ function Index(props) {
   const countyQuery = router.query.county;
 
   const [selectedCountyData, setSelectedCountyData] = useState(null);
-  const [selectedCountyName, setSelectedCountyName] = useState(null);
   const [selectedCountyUpdated, setSelectedCountyUpdated] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
