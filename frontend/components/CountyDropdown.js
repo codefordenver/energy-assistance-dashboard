@@ -1,8 +1,9 @@
+import { getKeyByValue } from "../pages";
 import styles from "../styles/global.module.css";
 
 export default function CountyDropdown(props) {
-  const { selectedCountyId } = props;
-  const countyArray = Object.entries(props.countyList.counties);
+  const { selectedCountyName, countyList, getCountyId } = props;
+  const countyArray = Object.entries(countyList.counties);
   return (
     <div className={styles["dropdown-container"]}>
       <label htmlFor='county-dropdown' className={styles["no-print"]}>
@@ -11,8 +12,8 @@ export default function CountyDropdown(props) {
       <select
         className={styles.dropdown}
         name='county-dropdown'
-        value={selectedCountyId}
-        onChange={(e) => props.getCountyId(e)}
+        value={getKeyByValue(countyList.counties, selectedCountyName)}
+        onChange={(e) => getCountyId(e)}
       >
         {countyArray.map((county) => {
           return (
