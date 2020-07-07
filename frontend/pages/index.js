@@ -12,9 +12,12 @@ import styles from "../styles/global.module.css";
 
 const backendURL = "https://energy-assistance-dashboard.herokuapp.com";
 
+export const getKeyByValue = (object, value) =>
+  Object.keys(object).find((key) => object[key] === value);
+
 function Index(props) {
-  const router = useRouter();
-  const countyQuery = router.query.county;
+  const { countyList } = props;
+  const countyQuery = props.query.county;
 
   const [selectedCountyData, setSelectedCountyData] = useState(null);
   const [selectedCountyUpdated, setSelectedCountyUpdated] = useState(null);
@@ -22,8 +25,12 @@ function Index(props) {
   const [loading, setLoading] = useState(true);
 
   //req to GET specific county data
-  const getCountyData = async (id = "0") => {
+  const getCountyData = async (id) => {
+    const countyKey = getKeyByValue(countyList.counties, id);
+    id = countyKey ? countyKey : id;
+
     setLoading(true);
+    Router.push({ pathname: "/", query: { county: countyList.counties[id] } });
     const res = await fetch(`${backendURL}/counties/${id}`);
     const data = await res.json();
 
@@ -35,7 +42,6 @@ function Index(props) {
       setError(res.status);
     }
 
-    Router.push({ pathname: "/", query: { county: id } });
     setLoading(false);
   };
 
@@ -46,6 +52,8 @@ function Index(props) {
   };
 
   useEffect(() => {
+    const { query } = props;
+    const countyQuery = query.county ? query.county : "COLORADO STATE"
     getCountyData(countyQuery);
   }, []);
 
@@ -60,14 +68,15 @@ function Index(props) {
         <div className={styles["overview"]}>
           <div>
             <h1 className={styles["print-title"]}>
-              Colorado Low Income <br/>Energy Stats
+              Colorado Low Income <br />
+              Energy Stats
             </h1>
             <div class={styles["print-report"]}>
               <span class={styles["print-label"]}>Report for:</span>
               <CountyDropdown
-                countyList={props.countyList}
+                countyList={countyList}
                 getCountyId={getCountyId}
-                selectedCountyId={countyQuery}
+                selectedCountyName={countyQuery}
               />
             </div>
           </div>
@@ -77,11 +86,13 @@ function Index(props) {
             className={styles["eoc-logo"]}
           />
         </div>
-        { loading ? (
+        {loading ? (
           <Loader />
-          ) : error ? (
-            <h3 className={styles["error-text"]}>The selected county could not be found, please try another.</h3>
-          ) : (
+        ) : error ? (
+          <h3 className={styles["error-text"]}>
+            The selected county could not be found, please try another.
+          </h3>
+        ) : (
           <div>
             <div>
               <SummaryTable selectedCountyData={selectedCountyData} />
@@ -199,13 +210,14 @@ function Index(props) {
   );
 }
 
-Index.getInitialProps = async () => {
+Index.getInitialProps = async ({ query }) => {
   //req to GET all counties
   const countyRes = await fetch(`${backendURL}/counties`);
   const countyList = await countyRes.json();
 
   return {
     countyList: countyList,
+    query: query,
   };
 };
 
