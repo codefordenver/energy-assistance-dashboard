@@ -167,7 +167,7 @@ select.dropdown {
 @media print {
     .container {
         box-shadow: none;
-        padding: 10px;
+        padding: 0px;
         margin: 5px auto;
         position: relative;
     }
