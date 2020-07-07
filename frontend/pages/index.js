@@ -13,7 +13,7 @@ import styles from "../styles/global.module.css";
 const backendURL = "https://energy-assistance-dashboard.herokuapp.com";
 
 export const getKeyByValue = (object, value) =>
-Object.keys(object).find((key) => object[key] === value);
+  Object.keys(object).find((key) => object[key] === value);
 
 function Index(props) {
   const { countyList } = props;
@@ -74,7 +74,7 @@ function Index(props) {
             <div class={styles["print-report"]}>
               <span class={styles["print-label"]}>Report for:</span>
               <CountyDropdown
-                countyList={props.countyList}
+                countyList={countyList}
                 getCountyId={getCountyId}
                 selectedCountyName={countyQuery}
               />

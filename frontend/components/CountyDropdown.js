@@ -12,7 +12,7 @@ export default function CountyDropdown(props) {
       <select
         className={styles.dropdown}
         name='county-dropdown'
-        value={getKeyByValue(selectedCountyName)}
+        value={getKeyByValue(countyList.counties, selectedCountyName)}
         onChange={(e) => getCountyId(e)}
       >
         {countyArray.map((county) => {
