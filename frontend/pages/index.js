@@ -32,6 +32,7 @@ function Index(props) {
     id = countyKey ? countyKey : id;
 
     setLoading(true);
+    Router.push({ pathname: "/", query: { county: countyList.counties[id] } });
     const res = await fetch(`${backendURL}/counties/${id}`);
     const data = await res.json();
 
@@ -43,7 +44,6 @@ function Index(props) {
       setError(res.status);
     }
 
-    Router.push({ pathname: "/", query: { county: countyList.counties[id] } });
     setLoading(false);
   };
 
@@ -54,7 +54,8 @@ function Index(props) {
   };
 
   useEffect(() => {
-    const countyQuery = countyQuery ? countyQuery : "COLORADO STATE"; 
+    let countyQuery = router.query.county;
+    countyQuery = countyQuery ? countyQuery : "COLORADO STATE"; 
     getCountyData(countyQuery);
   }, []);
 
