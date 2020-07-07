@@ -16,7 +16,7 @@
 }
 
 .eoc-logo {
-    height: 150px;
+    height: 140px;
 }
     
 .container h3 {
@@ -42,6 +42,10 @@
 
 .container tbody tr td {
     padding: 2px 5px;
+}
+
+.print-label {
+    display: none;
 }
 
 .dropdown-container label {
@@ -139,12 +143,18 @@ select.dropdown {
 
 .full-stats-data {
     text-align: right;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .full-stats-row-heading {
     max-width: 180px;
-    font-size: 12px;
+    font-size: 10px;
+}
+
+h3.error-text {
+    text-transform: none;
+    font-weight: 500;
+    padding: 10px 0 0;
 }
 
 
@@ -163,13 +173,56 @@ select.dropdown {
 @media print {
     .container {
         box-shadow: none;
-    }
-    .print-title {
-        font-size:18px;
+        padding: 0px;
+        margin: 5px auto;
+        position: relative;
     }
 
-    .container h3{
-        font-size:14px;
+    .print-report {
+        display: flex;
+    }
+    
+    .print-label {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 0;
+        margin-top: 1px;
+    }
+
+    select.dropdown {
+        font-size: 15px;
+        padding: 0 0 20px 0;
+        border: none;
+        margin: 0 0 0 10px;
+    }
+
+    .container h3 {
+        font-size: 14px;
+    }
+
+    .container table {
+        font-size: 10px;
+    }
+
+    .container thead tr {
+        height: 16px;
+    }
+
+    .eoc-logo {
+        height: 140px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .bold {
+        font-size: 10px;
+    }
+
+    .summarytable {
+        padding: 0 0;
     }
     
     .historical-trends-charts {
@@ -177,9 +230,29 @@ select.dropdown {
         width: fit-content;
     }
 
-    .no-print{
+    .no-print,
+    .print-title {
         display: none !important;
     }
+
+    .rv-discrete-color-legend-item {
+        padding: 5px 10px 0px;
+    }
+
+    .global_chart__2UJn_ {
+        height: 1.8in;
+        padding: 6px 10px 6px;
+    }
+
+    .sources h4 {
+        margin: 4px 0;
+    }
+    
+    .sources p {
+        font-size: 8px;
+        margin: 2px 0;
+    }
+
 }
 
 
