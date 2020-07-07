@@ -44,6 +44,10 @@
     padding: 2px 5px;
 }
 
+.print-label {
+    display: none;
+}
+
 .dropdown-container label {
     display: block;
     padding: 0 0 8px;
@@ -168,6 +172,26 @@ select.dropdown {
         position: relative;
     }
 
+    .print-report {
+        display: flex;
+    }
+    
+    .print-label {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 0;
+        margin-top: 1px;
+    }
+
+    select.dropdown {
+        font-size: 15px;
+        padding: 0 0 20px 0;
+        border: none;
+        margin: 0 0 0 10px;
+    }
+
     .container h3 {
         font-size: 14px;
     }
@@ -212,11 +236,6 @@ select.dropdown {
     .global_chart__2UJn_ {
         height: 1.8in;
         padding: 6px 10px 6px;
-    }
-
-    select.dropdown {
-        font-size: 10px;
-        padding: 6px;
     }
 
     .sources h4 {

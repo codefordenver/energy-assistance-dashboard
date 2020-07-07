@@ -17,6 +17,7 @@ function Index(props) {
   const countyQuery = router.query.county;
 
   const [selectedCountyData, setSelectedCountyData] = useState(null);
+  const [selectedCountyName, setSelectedCountyName] = useState(null);
   const [selectedCountyUpdated, setSelectedCountyUpdated] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -60,13 +61,16 @@ function Index(props) {
         <div className={styles["overview"]}>
           <div>
             <h1 className={styles["print-title"]}>
-              Colorado Low Income Energy Stats
+              Colorado Low Income <br/>Energy Stats
             </h1>
-            <CountyDropdown
-              countyList={props.countyList}
-              getCountyId={getCountyId}
-              selectedCountyId={countyQuery}
-            />
+            <div class={styles["print-report"]}>
+              <span class={styles["print-label"]}>Report for:</span>
+              <CountyDropdown
+                countyList={props.countyList}
+                getCountyId={getCountyId}
+                selectedCountyId={countyQuery}
+              />
+            </div>
           </div>
           <img
             src='/energy-outreach-logo.png'
@@ -77,7 +81,7 @@ function Index(props) {
         { loading ? (
           <Loader />
           ) : error ? (
-            <h1>The selected county could not be found, please try another.</h1>
+            <h3>The selected county could not be found, please try another.</h3>
           ) : (
           <div>
             <div>
