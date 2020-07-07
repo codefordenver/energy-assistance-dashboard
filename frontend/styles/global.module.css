@@ -99,9 +99,9 @@ select.dropdown {
 }
 
 .chart {
-    width:4in;
-    height:2in;
-    padding: 12px;
+    width: 3.98in;
+    height: 1.9in;
+    padding: 12px 12px 0;
     position: relative;
 }
 
@@ -113,7 +113,7 @@ select.dropdown {
     box-shadow: 0 2px 4px rgba(0,0,0,0.5);
     color: #fff;
     white-space: nowrap;
-    top: 60px;
+    top: 10px;
     right: 20px;
 }
 
@@ -157,6 +157,15 @@ h3.error-text {
     padding: 10px 0 0;
 }
 
+.sources h4 {
+    font-size: 12px;
+    margin: 4px 0;
+}
+
+.sources p {
+    font-size: 9px;
+    margin: 2px 0;
+}
 
 @media (max-width: 8.5in){
     .historical-trends-charts {
