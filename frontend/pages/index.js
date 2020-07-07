@@ -12,7 +12,12 @@ import styles from "../styles/global.module.css";
 
 const backendURL = "https://energy-assistance-dashboard.herokuapp.com";
 
+export const getKeyByValue = (object, value) =>
+Object.keys(object).find((key) => object[key] === value);
+
 function Index(props) {
+  const { countyList } = props;
+
   const router = useRouter();
   const countyQuery = router.query.county;
 
@@ -22,7 +27,10 @@ function Index(props) {
   const [loading, setLoading] = useState(true);
 
   //req to GET specific county data
-  const getCountyData = async (id = "0") => {
+  const getCountyData = async (id) => {
+    const countyKey = getKeyByValue(countyList.counties, id);
+    id = countyKey ? countyKey : id;
+
     setLoading(true);
     const res = await fetch(`${backendURL}/counties/${id}`);
     const data = await res.json();
@@ -35,7 +43,7 @@ function Index(props) {
       setError(res.status);
     }
 
-    Router.push({ pathname: "/", query: { county: id } });
+    Router.push({ pathname: "/", query: { county: countyList.counties[id] } });
     setLoading(false);
   };
 
@@ -46,6 +54,7 @@ function Index(props) {
   };
 
   useEffect(() => {
+    const countyQuery = countyQuery ? countyQuery : "COLORADO STATE"; 
     getCountyData(countyQuery);
   }, []);
 
@@ -63,9 +72,9 @@ function Index(props) {
               Colorado Low Income Energy Stats
             </h1>
             <CountyDropdown
-              countyList={props.countyList}
+              countyList={countyList}
               getCountyId={getCountyId}
-              selectedCountyId={countyQuery}
+              selectedCountyName={countyQuery}
             />
           </div>
           <img
