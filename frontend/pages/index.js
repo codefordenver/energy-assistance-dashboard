@@ -71,8 +71,8 @@ function Index(props) {
               Colorado Low Income <br />
               Energy Stats
             </h1>
-            <div class={styles["print-report"]}>
-              <span class={styles["print-label"]}>Report for:</span>
+            <div className={styles["print-report"]}>
+              <span className={styles["print-label"]}>Report for:</span>
               <CountyDropdown
                 countyList={countyList}
                 getCountyId={getCountyId}
@@ -86,7 +86,7 @@ function Index(props) {
             className={styles["eoc-logo"]}
           />
         </div>
-        {loading ? (
+        { loading ? (
           <Loader />
         ) : error ? (
           <h3 className={styles["error-text"]}>
@@ -174,23 +174,21 @@ function Index(props) {
           box-sizing: border-box;
           overflow-y: auto;
           font-size: 12px;
+          padding-top: 12px;
         }
         .rv-discrete-color-legend-item {
           color: #3a3a48;
           border-radius: 1px;
-          padding: 9px 10px;
+          padding: 0px 18px 2px;
         }
-
         .rv-discrete-color-legend-item.horizontal {
           display: inline-block;
         }
-
         .rv-discrete-color-legend-item.horizontal
           .rv-discrete-color-legend-item__title {
           display: inline;
           padding-left: 10px;
         }
-
         .rv-discrete-color-legend-item.vertical
           .rv-discrete-color-legend-item__title {
           display: inline;
@@ -204,6 +202,9 @@ function Index(props) {
         .rv-discrete-color-legend-item__color__path {
           stroke: #dcdcdc;
           stroke-width: 2px;
+        }
+        .rv-xy-plot__axis__tick__text {
+          font-size: 10px;
         }
       `}</style>
     </div>

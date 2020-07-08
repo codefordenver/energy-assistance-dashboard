@@ -40,7 +40,7 @@ class HouseholdsAssisted extends React.Component {
                 <div className={styles['chart']}>
                     <FlexibleXYPlot  
                         xDomain={[minXValue, maxXValue]}
-                        yDomain={[0, maxYValue]} 
+                        yDomain={[0, (maxYValue * 1.2)]} 
                         onMouseLeave={() => this.setState({hoveredNode: null})}
                     >
                     { hoveredNode && (
