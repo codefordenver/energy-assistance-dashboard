@@ -16,9 +16,6 @@ Router.onRouteChangeError = () => {
 
 const Header = () => (
   <div className={("bar", styles["no-print"])}>
-    <Link href='/'>
-      <a>Energy Assistance Dashboard</a>
-    </Link>
     <Nav />
   </div>
 );
