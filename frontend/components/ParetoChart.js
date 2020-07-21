@@ -54,21 +54,21 @@ class ParetoChart extends React.Component {
                 <div className={styles['chart']}>
                     <FlexibleXYPlot 
                         xDomain={[minXValue, maxXValue]}
-                        yDomain={[0, (maxYValue * 1.2)]} 
+                        yDomain={[0, (maxYValue * 1.25)]} 
                         color="#46bdc6"
                         onMouseLeave={() => this.setState({hoveredNode: null, type: null})}
                         >
                     {hoveredNode && (
                         <Hint
-                        className={styles.hint}
-                        getX={d => d.x}
-                        getY={d => d.y}
-                        value={{
-                            Year: hoveredNode.x,
-                            Value: (this.state.type == 'bar') 
-                            ? `${formatPercent(barKey, hoveredNode.y)}${barKey}` 
-                            : `${formatPercent(barKey, hoveredNode.y)}${lineKey}`
-                        }}
+                            className={styles.hint}
+                            getX={d => d.x}
+                            getY={d => d.y}
+                            value={{
+                                Year: hoveredNode.x,
+                                Value: (this.state.type == 'bar') 
+                                ? `${formatPercent(barKey, hoveredNode.y)}${barKey}` 
+                                : `${formatPercent(barKey, hoveredNode.y)}${lineKey}`
+                            }}
                         />
                         )}
                         <VerticalGridLines />
