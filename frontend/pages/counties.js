@@ -1,7 +1,22 @@
-// TODO: Create home page
+import { useState, useEffect } from "react";
+import Router, { useRouter } from "next/router";
+import Loader from "../components/Loader";
+import SummaryTable from "../components/SummaryTable";
+import CountyDropdown from "../components/CountyDropdown";
+import ParetoChart from "../components/ParetoChart";
+import HouseholdsAssisted from "../components/HouseholdsAssisted";
+import ParticipantsChart from "../components/ParticipantsChart";
+import FullStats from "../components/FullStats";
+import styles from "../styles/global.module.css";
 
-function Index(props) {
-<<<<<<< HEAD
+const backendURL = "https://energy-assistance-dashboard.herokuapp.com";
+
+export const getKeyByValue = (object, value) =>
+  Object.keys(object).find((key) => object[key] === value);
+
+// TODO: Refactor counties function so that the counties/[id].js files is used to determine the count instead of the query.
+
+function Counties(props) {
   const { countyList } = props;
   const countyQuery = props.query.county;
 
@@ -16,7 +31,7 @@ function Index(props) {
     id = countyKey ? countyKey : id;
 
     setLoading(true);
-    Router.push({ pathname: "/", query: { county: countyList.counties[id] } });
+    Router.push({ pathname: "/counties", query: { county: countyList.counties[id] } });
     const res = await fetch(`${backendURL}/counties/${id}`);
     const data = await res.json();
 
@@ -45,12 +60,6 @@ function Index(props) {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title className='print-title'>Energy Assistance Dashboard</title>
-        <link rel='icon' href='/favicon.png' />
-      </Head>
-
-      <main>
         <div className={styles["overview"]}>
           <div>
             <h1 className={styles["print-title"]}>
@@ -119,7 +128,6 @@ function Index(props) {
             </div>
           </div>
         )}
-      </main>
 
       <style jsx global>{`
         html,
@@ -193,13 +201,19 @@ function Index(props) {
           font-size: 10px;
         }
       `}</style>
-=======
-  return(
-    <div>
-      Home Page
->>>>>>> upstream/master
     </div>
-  )
+  );
 }
 
-export default Index;
+Counties.getInitialProps = async ({ query }) => {
+  //req to GET all counties
+  const countyRes = await fetch(`${backendURL}/counties`);
+  const countyList = await countyRes.json();
+
+  return {
+    countyList: countyList,
+    query: query,
+  };
+};
+
+export default Counties;

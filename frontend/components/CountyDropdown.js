@@ -1,4 +1,4 @@
-import { getKeyByValue } from "../pages";
+import { getKeyByValue } from "../pages/counties";
 import styles from "../styles/global.module.css";
 
 export default function CountyDropdown(props) {

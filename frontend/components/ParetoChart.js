@@ -54,7 +54,7 @@ class ParetoChart extends React.Component {
                 <div className={styles['chart']}>
                     <FlexibleXYPlot 
                         xDomain={[minXValue, maxXValue]}
-                        yDomain={[0, (maxYValue * 1.25)]} 
+                        yDomain={[0, (maxYValue * 1.2)]} 
                         color="#46bdc6"
                         onMouseLeave={() => this.setState({hoveredNode: null, type: null})}
                         >

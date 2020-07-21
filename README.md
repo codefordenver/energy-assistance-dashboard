@@ -78,7 +78,7 @@ Find the proper activate script based on your OS and terminal.  https://docs.pyt
 1. Add the `.env` file to the `backend` folder
 
 1. Start the server
-`uvicorn main:app --reload`
+`uvicorn backend.main:app --reload`
 
 1. Navigate to `http://127.0.0.1:8000/` to view the server locally
 
