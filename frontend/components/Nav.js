@@ -8,7 +8,13 @@ const Nav = () => (
   <nav className={nav.navbar}>
     <div className={nav.brand}>
       <Link href='/'>
-        <a>Energy Assistance Dashboard</a>
+        <a>
+          <img
+            src='/energy-outreach-logo.png'
+            alt='Energy Outreach Colorado Logo'
+            className={nav.logo}
+          />
+        </a>
       </Link>
     </div>
     <div className={nav['nav-links']}>

@@ -1,0 +1,12 @@
+.container {
+    font-family: 'Nunito', sans-serif;
+}
+
+.container h1 {
+    background: #516e6f;
+    color: #fff;
+    padding: 50px;
+    margin: 0;
+}
+
+
