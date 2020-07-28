@@ -60,15 +60,15 @@ class ParetoChart extends React.Component {
                         >
                     {hoveredNode && (
                         <Hint
-                        className={styles.hint}
-                        getX={d => d.x}
-                        getY={d => d.y}
-                        value={{
-                            Year: hoveredNode.x,
-                            Value: (this.state.type == 'bar') 
-                            ? `${formatPercent(barKey, hoveredNode.y)}${barKey}` 
-                            : `${formatPercent(barKey, hoveredNode.y)}${lineKey}`
-                        }}
+                            className={styles.hint}
+                            getX={d => d.x}
+                            getY={d => d.y}
+                            value={{
+                                Year: hoveredNode.x,
+                                Value: (this.state.type == 'bar') 
+                                ? `${formatPercent(barKey, hoveredNode.y)}${barKey}` 
+                                : `${formatPercent(barKey, hoveredNode.y)}${lineKey}`
+                            }}
                         />
                         )}
                         <VerticalGridLines />
