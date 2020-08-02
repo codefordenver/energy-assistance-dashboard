@@ -10,15 +10,10 @@ export const getKeyByValue = (object, value) =>
 // TODO: Refactor counties function so that the counties/[id].js files is used to determine the count instead of the query.
 
 function Counties(props) {
-  const router = useRouter();
-  const { countyList, query } = props;
-  // const [selectedCountyData, setSelectedCountyData] = useState(null);
-  
-  const [selectedCountyUpdated, setSelectedCountyUpdated] = useState(null);
+  const { countyList } = props;
+
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
-
 
   return (
     <div className={styles.container}>
@@ -56,60 +51,6 @@ function Counties(props) {
         a {
           color: inherit;
           text-decoration: none;
-        }
-        .rv-xy-plot__axis__line {
-          fill: none;
-          stroke-width: 2px;
-          stroke: #e6e6e9;
-        }
-        .rv-xy-plot__axis__tick__line {
-          stroke: #e6e6e9;
-        }
-        .rv-xy-plot__axis__tick__text {
-          fill: #6b6b76;
-          font-size: 11px;
-        }
-        .rv-xy-plot__grid-lines__line {
-          stroke: #e6e6e9;
-        }
-        .rv-xy-plot__series rv-xy-plot__series--bar rect {
-          border-top-left: 3px;
-        }
-        .rv-discrete-color-legend {
-          box-sizing: border-box;
-          overflow-y: auto;
-          font-size: 12px;
-          padding-top: 12px;
-        }
-        .rv-discrete-color-legend-item {
-          color: #3a3a48;
-          border-radius: 1px;
-          padding: 0px 18px 2px;
-        }
-        .rv-discrete-color-legend-item.horizontal {
-          display: inline-block;
-        }
-        .rv-discrete-color-legend-item.horizontal
-          .rv-discrete-color-legend-item__title {
-          display: inline;
-          padding-left: 10px;
-        }
-        .rv-discrete-color-legend-item.vertical
-          .rv-discrete-color-legend-item__title {
-          display: inline;
-          padding-left: 10px;
-        }
-        .rv-discrete-color-legend-item__color {
-          display: inline-block;
-          vertical-align: middle;
-          overflow: visible;
-        }
-        .rv-discrete-color-legend-item__color__path {
-          stroke: #dcdcdc;
-          stroke-width: 2px;
-        }
-        .rv-xy-plot__axis__tick__text {
-          font-size: 10px;
         }
       `}</style>
     </div>

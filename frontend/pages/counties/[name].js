@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useState } from "react";
 
 import Loader from "../../components/Loader";
 import SummaryTable from "../../components/SummaryTable";
@@ -17,14 +16,11 @@ export const getKeyByValue = (object, value) =>
 // TODO: Refactor counties function so that the counties/[id].js files is used to determine the count instead of the query.
 
 function Counties(props) {
-  const { countyList, county, query } = props;
-  // const [selectedCountyData, setSelectedCountyData] = useState(null);
+  const { countyList, county } = props;
+  const selectedCountyData = county.data;
   
-  const [selectedCountyUpdated, setSelectedCountyUpdated] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const selectedCountyData = county.data;
 
   return (
     <div className={styles.container}>
@@ -48,7 +44,7 @@ function Counties(props) {
           className={styles["eoc-logo"]}
         />
       </div>
-      {(loading || !selectedCountyData) ? (
+      {(!selectedCountyData) ? (
         <Loader />
       ) : error ? (
         <h3 className={styles["error-text"]}>
