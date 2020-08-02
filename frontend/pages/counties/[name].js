@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import CountyDropdown from "../components/CountyDropdown";
-import styles from "../styles/global.module.css";
-import { BACKEND_URL } from "../utils/constants";
+import Loader from "../../components/Loader";
+import SummaryTable from "../../components/SummaryTable";
+import CountyDropdown from "../../components/CountyDropdown";
+import ParetoChart from "../../components/ParetoChart";
+import HouseholdsAssisted from "../../components/HouseholdsAssisted";
+import ParticipantsChart from "../../components/ParticipantsChart";
+import FullStats from "../../components/FullStats";
+import styles from "../../styles/global.module.css";
+import { BACKEND_URL } from "../../utils/constants";
 
 export const getKeyByValue = (object, value) =>
   Object.keys(object).find((key) => object[key] === value);
@@ -10,15 +16,14 @@ export const getKeyByValue = (object, value) =>
 // TODO: Refactor counties function so that the counties/[id].js files is used to determine the count instead of the query.
 
 function Counties(props) {
-  const router = useRouter();
-  const { countyList, query } = props;
+  const { countyList, county, query } = props;
   // const [selectedCountyData, setSelectedCountyData] = useState(null);
   
   const [selectedCountyUpdated, setSelectedCountyUpdated] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-
+  const selectedCountyData = county.data;
 
   return (
     <div className={styles.container}>
@@ -42,6 +47,53 @@ function Counties(props) {
           className={styles["eoc-logo"]}
         />
       </div>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <h3 className={styles["error-text"]}>
+          The selected county could not be found, please try another.
+        </h3>
+      ) : (
+        <div>
+          <div>
+            <SummaryTable selectedCountyData={selectedCountyData} />
+            <FullStats selectedCountyData={selectedCountyData} />
+          </div>
+
+          <div className={styles.charts}>
+            <h3>Historical Trends</h3>
+            <div className={styles["historical-trends-charts"]}>
+              <ParetoChart
+                barKey='Households below 200% FPL'
+                lineKey='Total Households Assisted'
+                selectedCountyData={selectedCountyData}
+              />
+              <ParetoChart
+                barKey='% Households below 200% FPL'
+                lineKey='% of Households below 200% FPL Assisted'
+                selectedCountyData={selectedCountyData}
+              />
+            </div>
+            <div className={styles["historical-trends-charts"]}>
+              <HouseholdsAssisted
+                title='% of Households below 200% FPL Assisted'
+                selectedCountyData={selectedCountyData}
+              />
+              <ParticipantsChart selectedCountyData={selectedCountyData} />
+            </div>
+          </div>
+
+          <div className={styles.sources}>
+            <h4>Sources</h4>
+            <p>
+              American Community Survey 5-Year Estimates by the Census Bureau,
+              Energy Outreach Colorado's households served, and CDHS LEAP
+              households served
+            </p>
+            <p>2013 LEAP data is estimated due to lack of data</p>
+          </div>
+        </div>
+      )}
 
       <style jsx global>{`
         html,
@@ -121,9 +173,21 @@ Counties.getInitialProps = async ({ query }) => {
   const countyListRes = await fetch(`${BACKEND_URL}/counties`);
   const countyList = await countyListRes.json();
 
+  //req to GET the selected counties data
+  const countyName = query.name;
+  const countyId = getKeyByValue(countyList.counties, countyName);
+  
+  const countyDataRes = await fetch(`${BACKEND_URL}/counties/${countyId}`);
+  const countyData = await countyDataRes.json();
+
   return {
     countyList: countyList,
     query: query,
+    county: {
+      id: countyId,
+      name: countyName,
+      data: countyData.data,
+    },
   };
 };
 
