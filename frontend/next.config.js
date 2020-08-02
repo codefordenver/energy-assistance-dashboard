@@ -1,4 +1,5 @@
 const { BACKEND_URL } = require("./utils/constants");
+const fetch = require("node-fetch")
 
 module.exports = {
   exportPathMap: async function (
