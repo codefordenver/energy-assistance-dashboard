@@ -19,14 +19,11 @@ module.exports = {
 
     // console.log(counties);
     counties.map((county) => {
-      console.log(county)
       pathMap[`/counties/${county}`] = {
-        page: "/counties",
+        page: "/counties/[name]",
         query: { name: county },
       };
     });
-
-    console.log(pathMap);
 
     return pathMap;
   },
