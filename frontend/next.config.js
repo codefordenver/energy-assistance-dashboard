@@ -14,8 +14,18 @@ module.exports = {
     //req to GET all counties
     const countyRes = await fetch(`${BACKEND_URL}/counties`);
     const countyList = await countyRes.json();
+    const counties = Object.values(countyList.counties);
 
-    console.log(countyList);
+    // console.log(counties);
+    counties.map((county) => {
+      console.log(county)
+      pathMap[`/counties/${county}`] = {
+        page: "/counties",
+        query: { name: county },
+      };
+    });
+
+    console.log(pathMap);
 
     return pathMap;
   },
