@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-
+import useSWR from "swr";
 import Loader from "../../components/Loader";
 import SummaryTable from "../../components/SummaryTable";
 import CountyDropdown from "../../components/CountyDropdown";
@@ -16,15 +16,28 @@ export const getKeyByValue = (object, value) =>
 
 // TODO: Refactor counties function so that the counties/[id].js files is used to determine the count instead of the query.
 
+async function fetcher(path) {
+  //https://next-site-git-new-docs.zeit.now.sh/docs/basic-features/data-fetching
+  //req to GET the selected counties data
+  const countyDataRes = await fetch(`${BACKEND_URL}/counties/${path}`);
+  const countyData = await countyDataRes.json();
+  return countyData
+}
+
 function Counties(props) {
-  const { countyList, county, query } = props;
-  // const [selectedCountyData, setSelectedCountyData] = useState(null);
-  
+  const { countyList } = props;
+
   const [selectedCountyUpdated, setSelectedCountyUpdated] = useState(null);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const selectedCountyData = county.data;
+  const router = useRouter();
+  const { name } = router.query;
+
+  const countyId = getKeyByValue(countyList.counties, name);
+  const { data, error } = useSWR(countyId, fetcher);
+
+  const county = data;
 
   return (
     <div className={styles.container}>
@@ -36,10 +49,7 @@ function Counties(props) {
           </h1>
           <div className={styles["print-report"]}>
             <span className={styles["print-label"]}>Report for:</span>
-            <CountyDropdown
-              countyList={countyList}
-              setLoading={setLoading}
-            />
+            <CountyDropdown countyList={countyList} setLoading={setLoading} />
           </div>
         </div>
         <img
@@ -48,7 +58,7 @@ function Counties(props) {
           className={styles["eoc-logo"]}
         />
       </div>
-      {(loading || !selectedCountyData) ? (
+      {!county ? (
         <Loader />
       ) : error ? (
         <h3 className={styles["error-text"]}>
@@ -57,8 +67,8 @@ function Counties(props) {
       ) : (
         <div>
           <div>
-            <SummaryTable selectedCountyData={selectedCountyData} />
-            <FullStats selectedCountyData={selectedCountyData} />
+            <SummaryTable selectedCountyData={county.data} />
+            <FullStats selectedCountyData={county.data} />
           </div>
 
           <div className={styles.charts}>
@@ -67,20 +77,20 @@ function Counties(props) {
               <ParetoChart
                 barKey='Households below 200% FPL'
                 lineKey='Total Households Assisted'
-                selectedCountyData={selectedCountyData}
+                selectedCountyData={county.data}
               />
               <ParetoChart
                 barKey='% Households below 200% FPL'
                 lineKey='% of Households below 200% FPL Assisted'
-                selectedCountyData={selectedCountyData}
+                selectedCountyData={county.data}
               />
             </div>
             <div className={styles["historical-trends-charts"]}>
               <HouseholdsAssisted
                 title='% of Households below 200% FPL Assisted'
-                selectedCountyData={selectedCountyData}
+                selectedCountyData={county.data}
               />
-              <ParticipantsChart selectedCountyData={selectedCountyData} />
+              <ParticipantsChart selectedCountyData={county.data} />
             </div>
           </div>
 
@@ -174,21 +184,9 @@ Counties.getInitialProps = async ({ query }) => {
   const countyListRes = await fetch(`${BACKEND_URL}/counties`);
   const countyList = await countyListRes.json();
 
-  //req to GET the selected counties data
-  const countyName = query.name;
-  const countyId = getKeyByValue(countyList.counties, countyName);
-  
-  const countyDataRes = await fetch(`${BACKEND_URL}/counties/${countyId}`);
-  const countyData = await countyDataRes.json();
-
   return {
     countyList: countyList,
     query: query,
-    county: {
-      id: countyId,
-      name: countyName,
-      data: countyData.data,
-    },
   };
 };
 
