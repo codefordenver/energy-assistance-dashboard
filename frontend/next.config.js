@@ -17,7 +17,6 @@ module.exports = {
     const countyList = await countyRes.json();
     const counties = Object.values(countyList.counties);
 
-    // console.log(counties);
     counties.map((county) => {
       pathMap[`/counties/${county}`] = {
         page: "/counties/[name]",

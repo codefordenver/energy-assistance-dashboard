@@ -44,7 +44,7 @@ function Counties(props) {
           className={styles["eoc-logo"]}
         />
       </div>
-      {(!selectedCountyData) ? (
+      {(loading || !selectedCountyData) ? (
         <Loader />
       ) : error ? (
         <h3 className={styles["error-text"]}>

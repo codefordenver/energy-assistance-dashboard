@@ -12,7 +12,6 @@ export default function CountyDropdown(props) {
 
   const [countyName, setCountyName] = useState(name)
 
-  console.log(router.query);
   const getCountyData = async (id) => {
     const selectedCountyName = countyList.counties[id];
     
