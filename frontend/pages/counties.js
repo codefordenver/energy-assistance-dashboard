@@ -61,10 +61,9 @@ function Counties(props) {
   return (
     <div className={styles.container}>
         <div className={styles["overview"]}>
-          <div>
+          <div className={styles['title-container']}>
             <h1 className={styles["print-title"]}>
-              Colorado Low Income <br />
-              Energy Stats
+              Colorado Low Income Energy Stats
             </h1>
             <div className={styles["print-report"]}>
               <span className={styles["print-label"]}>Report for:</span>
@@ -81,54 +80,56 @@ function Counties(props) {
             className={styles["eoc-logo"]}
           />
         </div>
-        { loading ? (
-          <Loader />
-        ) : error ? (
-          <h3 className={styles["error-text"]}>
-            The selected county could not be found, please try another.
-          </h3>
-        ) : (
-          <div>
+        <div className={styles['content-container']}>
+          { loading ? (
+            <Loader />
+          ) : error ? (
+            <h3 className={styles["error-text"]}>
+              The selected county could not be found, please try another.
+            </h3>
+          ) : (
             <div>
-              <SummaryTable selectedCountyData={selectedCountyData} />
-              <FullStats selectedCountyData={selectedCountyData} />
-            </div>
-
-            <div className={styles.charts}>
-              <h3>Historical Trends</h3>
-              <div className={styles["historical-trends-charts"]}>
-                <ParetoChart
-                  barKey='Households below 200% FPL'
-                  lineKey='Total Households Assisted'
-                  selectedCountyData={selectedCountyData}
-                />
-                <ParetoChart
-                  barKey='% Households below 200% FPL'
-                  lineKey='% of Households below 200% FPL Assisted'
-                  selectedCountyData={selectedCountyData}
-                />
+              <div>
+                <SummaryTable selectedCountyData={selectedCountyData} />
+                <FullStats selectedCountyData={selectedCountyData} />
               </div>
-              <div className={styles["historical-trends-charts"]}>
-                <HouseholdsAssisted
-                  title='% of Households below 200% FPL Assisted'
-                  selectedCountyData={selectedCountyData}
-                />
-                <ParticipantsChart selectedCountyData={selectedCountyData} />
+
+              <div className={styles.charts}>
+                <h3>Historical Trends</h3>
+                <div className={styles["historical-trends-charts"]}>
+                  <ParetoChart
+                    barKey='Households below 200% FPL'
+                    lineKey='Total Households Assisted'
+                    selectedCountyData={selectedCountyData}
+                  />
+                  <ParetoChart
+                    barKey='% Households below 200% FPL'
+                    lineKey='% of Households below 200% FPL Assisted'
+                    selectedCountyData={selectedCountyData}
+                  />
+                </div>
+                <div className={styles["historical-trends-charts"]}>
+                  <HouseholdsAssisted
+                    title='% of Households below 200% FPL Assisted'
+                    selectedCountyData={selectedCountyData}
+                  />
+                  <ParticipantsChart selectedCountyData={selectedCountyData} />
+                </div>
+              </div>
+
+              <div className={styles.sources}>
+                <h4>Sources</h4>
+                <p>
+                  American Community Survey 5-Year Estimates by the Census Bureau,
+                  Energy Outreach Colorado's households served, and CDHS LEAP
+                  households served
+                </p>
+                <p>2013 LEAP data is estimated due to lack of data</p>
               </div>
             </div>
-
-            <div className={styles.sources}>
-              <h4>Sources</h4>
-              <p>
-                American Community Survey 5-Year Estimates by the Census Bureau,
-                Energy Outreach Colorado's households served, and CDHS LEAP
-                households served
-              </p>
-              <p>2013 LEAP data is estimated due to lack of data</p>
-            </div>
-          </div>
-        )}
-
+            )}
+        </div>
+    
       <style jsx global>{`
         html,
         body {
