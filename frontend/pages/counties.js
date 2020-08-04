@@ -18,10 +18,9 @@ function Counties(props) {
   return (
     <div className={styles.container}>
       <div className={styles["overview"]}>
-        <div>
+      <div className={styles['title-container']}>
           <h1 className={styles["print-title"]}>
-            Colorado Low Income <br />
-            Energy Stats
+            Colorado Low Income Energy Stats
           </h1>
           <div className={styles["print-report"]}>
             <span className={styles["print-label"]}>Report for:</span>

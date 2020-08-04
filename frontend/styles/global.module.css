@@ -3,10 +3,7 @@
 .container {
     font-family: 'Nunito', sans-serif;
     background-color: white;
-    padding: 20px;
-    width:8.5in;
-    margin: 30px auto;
-    box-shadow: 0 5px 25px 0 rgba(0,0,0, .25);
+    min-height: 100vh;
 }
 
 .overview {
@@ -15,8 +12,29 @@
     margin: 0 auto;
 }
 
+.title-container {
+    width: 100%;
+}
+
+.print-title {
+    background: #516e6f;
+    color: #fff;
+    padding: 50px;
+    margin: 0 0 20px 0;
+    width: 100%;
+}
+
 .eoc-logo {
-    height: 140px;
+    display: none;
+    width: 0;
+}
+
+.print-report {
+    padding: 20px 60px 0;
+}
+
+.content-container {
+    padding: 0 60px 40px;
 }
     
 .container h3 {
@@ -87,15 +105,17 @@ select.dropdown {
 /* Pareto Chart Styles - may also use for line graphs */
 .charts {
     margin: 10px 0;
+    padding: 20px 0;
 }
 
 .historical-trends-charts {
     display: flex;
+    padding-bottom: 30px;
 }
 
-.chart-container{
+.chart-container {
     border: 1px solid rgb(206, 206, 206);
-    margin: 0 10px 10px 0;
+    margin: 0 40px 10px 0;
 }
 
 .chart {
@@ -138,17 +158,17 @@ select.dropdown {
     font-weight: 600;
     padding: 0 5px 0 10px;
     text-align: right;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .full-stats-data {
     text-align: right;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 .full-stats-row-heading {
     max-width: 180px;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 h3.error-text {
@@ -185,10 +205,22 @@ h3.error-text {
         padding: 0px;
         margin: 5px auto;
         position: relative;
+        width:8.5in;
+    }
+
+    .eoc-logo {
+        display: block;
+        height: 140px;
+        width: 340px;
     }
 
     .print-report {
         display: flex;
+        padding: 0;
+    }
+
+    .content-container {
+        padding: 0;
     }
     
     .print-label {
@@ -233,10 +265,31 @@ h3.error-text {
     .summarytable {
         padding: 0 0;
     }
+
+    .charts {
+        padding: 0;
+    }
+
+    .chart-container {
+        margin: 0 10px 10px 0;
+    }
+
+    .full-stats-heading {
+        font-size: 12px;
+    }
+    
+    .full-stats-data {
+        font-size: 10px;
+    }
+    
+    .full-stats-row-heading {
+        font-size: 10px;
+    }
     
     .historical-trends-charts {
         flex-direction: row;
         width: fit-content;
+        padding: 0;
     }
 
     .no-print,
