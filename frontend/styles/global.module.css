@@ -1,9 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');        
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+
 
 .container {
-    font-family: 'Nunito', sans-serif;
     background-color: white;
     min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    padding-bottom: 10px;
+}
+
+.content-container {
+    padding-left: 30px;
+    width: 100%;
+}
+
+.logo {
+    width: 200px;
+    height: 100px;
+}
+
+.layout {
+    display: flex;
+}
+
+.sidebar {
+    padding: 0 30px;
+    width: 300px;
+}
+
+.sidebar h1 {
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    line-height: 1.7;
+    position: relative;
+}
+
+.sidebar span.bold {
+    font-weight: 500;
+    font-size: 32px;
+    z-index: 10;
+    position: absolute;
+}
+
+.sidebar .highlight {
+    background: #fedb8d;
+    padding: 0 10px;
+    margin: 24px -10px;
+    height: 30px;
+    width: 122px;
+    z-index: 0;
+    position: absolute;
+}
+
+.sidebar .highlight-assistance {
+    background: #fedb8d;
+    padding: 0 10px;
+    margin: 24px -10px;
+    height: 30px;
+    width: 194px;
+    z-index: 0;
+    position: absolute;
 }
 
 .overview {
@@ -17,11 +73,10 @@
 }
 
 .print-title {
-    background: #516e6f;
-    color: #fff;
     padding: 50px;
     margin: 0 0 20px 0;
     width: 100%;
+    display: none;
 }
 
 .eoc-logo {
@@ -30,10 +85,10 @@
 }
 
 .print-report {
-    padding: 20px 60px 0;
+    padding: 50px 60px 0;
 }
 
-.content-container {
+.data-container {
     padding: 0 60px 40px;
 }
     
@@ -45,7 +100,6 @@
 }
 
 .container table {
-    border: 1px solid rgb(206, 206, 206);
     font-size: 13px;
     border-collapse: collapse;
     font-weight: 400;
@@ -54,12 +108,14 @@
 
 .container thead tr {
     height: 22px;
-    background: rgb(206, 206, 206);
+    background: rgb(212, 212, 212);
+    border: 1px solid rgb(212, 212, 212);
     color-adjust:exact;
 }
 
 .container tbody tr td {
     padding: 2px 5px;
+    border: 1px solid rgb(212, 212, 212);
 }
 
 .print-label {
@@ -73,7 +129,7 @@
 
 select.dropdown {
     font-size: 15px;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     padding: 8px;
     width: 250px;
@@ -187,6 +243,10 @@ h3.error-text {
     margin: 2px 0;
 }
 
+#blockColorblindContent {
+    display: none;
+}
+
 @media (max-width: 8.5in){
     .historical-trends-charts {
         flex-direction: column;
@@ -199,6 +259,8 @@ h3.error-text {
 
 }
 
+/* PRINT STYLES
+========================== */
 @media print {
     .container {
         box-shadow: none;
@@ -208,10 +270,8 @@ h3.error-text {
         width:8.5in;
     }
 
-    .eoc-logo {
-        display: block;
-        height: 140px;
-        width: 340px;
+    .sidebar {
+        display: none;
     }
 
     .print-report {
@@ -219,7 +279,8 @@ h3.error-text {
         padding: 0;
     }
 
-    .content-container {
+    .content-container,
+    .data-container {
         padding: 0;
     }
     
@@ -249,13 +310,6 @@ h3.error-text {
 
     .container thead tr {
         height: 16px;
-    }
-
-    .eoc-logo {
-        height: 140px;
-        position: absolute;
-        top: 0;
-        right: 0;
     }
 
     .bold {
@@ -314,7 +368,6 @@ h3.error-text {
         font-size: 8px;
         margin: 2px 0;
     }
-
 }
 
 

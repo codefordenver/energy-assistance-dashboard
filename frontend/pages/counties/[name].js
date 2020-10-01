@@ -37,13 +37,8 @@ function Counties(props) {
             />
           </div>
         </div>
-        <img
-          src='/energy-outreach-logo.png'
-          alt='Energy Outreach Colorado Logo'
-          className={styles["eoc-logo"]}
-        />
       </div>
-      <div className={styles['content-container']}>
+      <div className={styles['data-container']}>
         {(loading || !selectedCountyData) ? (
           <Loader />
         ) : error ? (

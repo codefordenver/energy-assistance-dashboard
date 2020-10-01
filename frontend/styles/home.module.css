@@ -1,10 +1,42 @@
 .container {
-    font-family: 'Nunito', sans-serif;
+    min-height: 60vh;
+    font-family: 'Roboto', sans-serif;
+    padding: 40px 60px 10px;
 }
 
 .container h1 {
-    background: #516e6f;
-    color: #fff;
     padding: 50px;
     margin: 0;
 }
+
+.container p {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+}
+
+.explore:hover,
+.help:hover {
+    cursor: pointer;
+}
+
+.explore, 
+.help {
+    color: white;
+    padding: 10px 12px;
+    border-radius: 7px;
+    margin: 20px 0;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+.explore {
+    background: #00b380;
+}
+
+.help {
+    background: #f16772;
+}
+
