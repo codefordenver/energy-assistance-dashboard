@@ -8,6 +8,13 @@ function MyApp({ Component, pageProps }) {
         #blockColorblindContent {
           display: none;
         }
+        * {
+          box-sizing: border-box;
+        }
+        body {
+          background: #e5e5e5;
+          font-family: 'Roboto', sans-serif;
+        }
       `}</style>
     </Page>
     

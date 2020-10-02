@@ -4,7 +4,8 @@ import Link from "next/link";
 function Index(props) {
   return(
     <div className={home.container}>
-      <p>In Colorado, thousands of families can’t afford to pay their energy bills. Living in Energy Poverty is a modern burden. The State of Colorado’s Department of Human Services and Energy Outreach Colorado are trying to solve the problem, but your State, your county, and your neighbors still  need more help. Explore the data to see how energy assistance is provided in your county and statewide.</p>
+      <p>In Colorado, thousands of families can’t afford to pay their energy bills. Living in Energy Poverty is a modern burden. 
+        <a className={home.link} href="https://www.colorado.gov/cdhs">The State of Colorado’s Department of Human Services</a> and <a className={home.link} href="https://www.energyoutreach.org/">Energy Outreach Colorado</a> are trying to solve the problem, but your State, your county, and your neighbors still  need more help. Explore the data to see how energy assistance is provided in your county and statewide.</p>
       <Link href='/counties'>
           <button className={home.explore}>Explore the Data</button>
       </Link> 

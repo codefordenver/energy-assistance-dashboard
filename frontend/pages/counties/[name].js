@@ -26,9 +26,6 @@ function Counties(props) {
     <div className={styles.container}>
       <div className={styles["overview"]}>
         <div className={styles['title-container']}>
-          <h1 className={styles["print-title"]}>
-            Colorado Low Income Energy Stats
-          </h1>
           <div className={styles["print-report"]}>
             <span className={styles["print-label"]}>Report for:</span>
             <CountyDropdown
@@ -94,9 +91,6 @@ function Counties(props) {
           padding: 0;
           margin: 0;
           background-color: #e6e6e6;
-        }
-        * {
-          box-sizing: border-box;
         }
         a {
           color: inherit;

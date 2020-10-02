@@ -2,10 +2,13 @@ import Link from "next/link";
 import nav from "../styles/nav.module.css";
 
 
-// TODO: Add Navbar Styles
-
 const Nav = () => (
   <nav className={nav.navbar}>
+    <img
+        src='/lightbulb.png'
+        alt='Lightbulb'
+        className={nav['lightbulb']}
+    />
     <div className={nav['nav-links']}>
       <Link href='/'>
         <a>Home</a>

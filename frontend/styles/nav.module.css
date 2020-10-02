@@ -1,12 +1,22 @@
 .navbar {
 	margin: 0 0 0 auto;
-	font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: flex-end;
-    padding: 40px 50px 24px;
+    padding: 40px 40px 24px;
     background: #fff;
-	border-bottom: 3px solid #fedb8d;
+	border-bottom: 1px solid #fcb61a;
+	margin-right: 40px;
+	position: relative;
+	box-shadow: 0px 4px 2px -2px rgba(0, 0, 0, 0.09);
 }
+
+.lightbulb {
+	width: 70px;
+	position: absolute;
+	bottom: -32px;
+	left: -32px;
+}
+
 
 .nav-links {
 	width: 400px;
@@ -21,7 +31,7 @@
     text-decoration: none;
 	color: #000;
 	position: relative;
-	font-size: 20px;
+	font-size: 22px;
 	font-weight: 600;
 }
 
@@ -29,10 +39,10 @@
 	content: "";
 	position: absolute;
 	width: 100%;
-	height: 2px;
+	height: 1px;
 	top: -8px;
 	left: 0;
-	background-color: #fedb8d;
+	background-color: #fcb61a;
 	visibility: hidden;
 	transform: scaleX(0);
 	transition: all 0.3s ease-in-out 0s;
@@ -42,12 +52,6 @@
 	visibility: visible;
 	transform: scaleX(1);
 }
-
-.logo {
-	width: 200px;
-	height: 85px;
-}
-
 
 @media print {
 	.navbar {

@@ -3,6 +3,7 @@ import Meta from "./Meta";
 import Footer from "./Footer";
 import Nav from "./Nav";
 import global from "../styles/global.module.css";
+import sidebar from "../styles/sidebar.module.css";
 
 
 function Page (props) {
@@ -11,15 +12,15 @@ function Page (props) {
         <Meta />
         <Header />
         <div className={global.layout}>
-          <div className={global.sidebar}>
+          <div className={sidebar.sidebar}>
             <h1>
-              <div className={global.highlight}></div>
-              <span className={global.bold}>
+              <div className={sidebar['highlight-energy']}></div>
+              <span className={sidebar.bold}>
                 Energy
               </span>
               <br></br> 
-              <div className={global['highlight-assistance']}></div>
-              <span class={global.bold}>
+              <div className={sidebar['highlight-assistance']}></div>
+              <span className={sidebar.bold}>
                 Assistance
               </span>
               <br></br> 

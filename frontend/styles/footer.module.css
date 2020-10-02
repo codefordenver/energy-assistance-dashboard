@@ -2,10 +2,10 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    letter-spacing: 1.1px;
-    margin: 40px 50px 40px;
+    line-height: 1.6;
+    letter-spacing: 0.8px;
+    margin: 40px 50px 0;
     background: #fff;
     border-top: 2px solid #4d4d4d;
 }
@@ -13,6 +13,10 @@
 .footer-content {
     width: 300px;
     font-size: 12px;
+}
+
+.footer-content a {
+    text-decoration: underline;
 }
 
 .footer-links {

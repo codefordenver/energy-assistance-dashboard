@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
 
-
+/* MAIN AND LAYOUT STYLES */
 .container {
     background-color: white;
-    min-height: 100vh;
-    font-family: 'Roboto', sans-serif;
+    min-height: 70vh;
     padding-bottom: 10px;
 }
 
@@ -13,75 +12,23 @@
     width: 100%;
 }
 
-.logo {
-    width: 200px;
-    height: 100px;
-}
-
 .layout {
     display: flex;
 }
 
-.sidebar {
-    padding: 0 30px;
-    width: 300px;
-}
+/* COUNTY DATA STLYES */
 
-.sidebar h1 {
+.dropdown-container label,
+.container h3  {
+    font-weight: 700;
     text-transform: uppercase;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    line-height: 1.7;
-    position: relative;
-}
-
-.sidebar span.bold {
-    font-weight: 500;
-    font-size: 32px;
-    z-index: 10;
-    position: absolute;
-}
-
-.sidebar .highlight {
-    background: #fedb8d;
-    padding: 0 10px;
-    margin: 24px -10px;
-    height: 30px;
-    width: 122px;
-    z-index: 0;
-    position: absolute;
-}
-
-.sidebar .highlight-assistance {
-    background: #fedb8d;
-    padding: 0 10px;
-    margin: 24px -10px;
-    height: 30px;
-    width: 194px;
-    z-index: 0;
-    position: absolute;
+    font-size: 16px; 
 }
 
 .overview {
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
-}
-
-.title-container {
-    width: 100%;
-}
-
-.print-title {
-    padding: 50px;
-    margin: 0 0 20px 0;
-    width: 100%;
-    display: none;
-}
-
-.eoc-logo {
-    display: none;
-    width: 0;
 }
 
 .print-report {
@@ -93,14 +40,11 @@
 }
     
 .container h3 {
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 18px;
     margin: 18px 0 6px;
 }
 
 .container table {
-    font-size: 13px;
+    font-size: 12px;
     border-collapse: collapse;
     font-weight: 400;
     min-width: 250px;
@@ -118,8 +62,12 @@
     border: 1px solid rgb(212, 212, 212);
 }
 
+/* DROPDOWN */
 .print-label {
     display: none;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .dropdown-container label {
@@ -128,9 +76,8 @@
 }
 
 select.dropdown {
-    font-size: 15px;
+    font-size: 14px;
     font-family: 'Roboto', sans-serif;
-    font-weight: 700;
     padding: 8px;
     width: 250px;
     border: 1px solid rgb(206, 206, 206);
@@ -143,6 +90,7 @@ select.dropdown {
     background-size: .5em auto, 100%;
 }
 
+
 .summarytable {
     padding: 20px 0;
 }
@@ -153,12 +101,38 @@ select.dropdown {
 
 .bold {
     font-weight: 700;
-    font-size: 17px;
+    font-size: 16px;
     text-align: right;
     width: 120px; 
 }
 
-/* Pareto Chart Styles - may also use for line graphs */
+/* DATA TABLE */
+.full-stats-table {
+    width: 95%;
+}
+
+.full-stats-table-body tr:nth-child(even) {
+    background: rgb(242, 242, 242);
+}
+
+.full-stats-heading {
+    font-weight: 600;
+    padding: 0 5px 0 10px;
+    text-align: right;
+    font-size: 13px;
+}
+
+.full-stats-data {
+    text-align: right;
+    font-size: 11px;
+}
+
+.full-stats-row-heading {
+    max-width: 160px;
+    font-size: 11px;
+}
+
+/* PARETO CHARTS */
 .charts {
     margin: 10px 0;
     padding: 20px 0;
@@ -193,40 +167,6 @@ select.dropdown {
     right: 20px;
 }
 
-.sources h4 {
-    margin-block-start: 1em;
-    margin-block-end: 1em
-}
-
-.sources p {
-    font-size: 10px;
-}
-
-.full-stats-table {
-    width: 100%;
-}
-
-.full-stats-table-body tr:nth-child(even) {
-    background: rgb(242, 242, 242);
-}
-
-.full-stats-heading {
-    font-weight: 600;
-    padding: 0 5px 0 10px;
-    text-align: right;
-    font-size: 15px;
-}
-
-.full-stats-data {
-    text-align: right;
-    font-size: 13px;
-}
-
-.full-stats-row-heading {
-    max-width: 180px;
-    font-size: 13px;
-}
-
 h3.error-text {
     text-transform: none;
     font-weight: 500;
@@ -243,56 +183,53 @@ h3.error-text {
     margin: 2px 0;
 }
 
-#blockColorblindContent {
-    display: none;
-}
-
-@media (max-width: 8.5in){
+@media (max-width: 1200px){
     .historical-trends-charts {
         flex-direction: column;
         width: fit-content;
     }
-    
     .pareto-chart {
         margin: 20px 0 0;
     }
-
 }
 
-/* PRINT STYLES
-========================== */
+/* PRINT STYLES */
 @media print {
+     /* General */
     .container {
-        box-shadow: none;
         padding: 0px;
         margin: 5px auto;
         position: relative;
-        width:8.5in;
+        width: 8.5in;
+    }
+    .content-container,
+    .data-container,
+    .summarytable, 
+    .charts {
+        padding: 0;
+    }
+    .full-stats-data,
+    .full-stats-row-heading,
+    .bold,
+    .container table,
+    .full-stats-heading  {
+        font-size: 10px;
+    }
+    .container h3 {
+        font-size: 14px;
     }
 
-    .sidebar {
-        display: none;
-    }
-
+    /* Title */
     .print-report {
         display: flex;
         padding: 0;
     }
-
-    .content-container,
-    .data-container {
-        padding: 0;
-    }
-    
     .print-label {
         display: block;
-        font-size: 15px;
-        font-weight: 700;
-        text-transform: uppercase;
-        padding: 0;
-        margin-top: 1px;
     }
-
+    .no-print {
+        display: none !important;
+    }
     select.dropdown {
         font-size: 15px;
         padding: 0 0 20px 0;
@@ -300,74 +237,34 @@ h3.error-text {
         margin: 0 0 0 10px;
     }
 
-    .container h3 {
-        font-size: 14px;
-    }
-
-    .container table {
-        font-size: 10px;
-    }
-
+    /* Tables */
     .container thead tr {
         height: 16px;
     }
-
-    .bold {
-        font-size: 10px;
-    }
-
-    .summarytable {
-        padding: 0 0;
-    }
-
-    .charts {
-        padding: 0;
-    }
-
+    
+    /* Charts */
     .chart-container {
         margin: 0 10px 10px 0;
     }
-
-    .full-stats-heading {
-        font-size: 12px;
-    }
-    
-    .full-stats-data {
-        font-size: 10px;
-    }
-    
-    .full-stats-row-heading {
-        font-size: 10px;
-    }
-    
     .historical-trends-charts {
         flex-direction: row;
         width: fit-content;
         padding: 0;
     }
-
-    .no-print,
-    .print-title {
-        display: none !important;
-    }
-
     .rv-discrete-color-legend-item {
         padding: 5px 10px 0px;
     }
-
     .global_chart__2UJn_ {
         height: 1.8in;
         padding: 6px 10px 6px;
     }
 
+    /* Sources */
     .sources h4 {
         margin: 4px 0;
     }
-    
     .sources p {
         font-size: 8px;
         margin: 2px 0;
     }
 }
-
-
