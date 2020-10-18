@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Router from "next/router";
 import NProgress from "nprogress";
-import Nav from "./Nav";
 import styles from "../styles/global.module.css";
 
 Router.onRouteChangeStart = () => {
@@ -15,9 +14,7 @@ Router.onRouteChangeError = () => {
 };
 
 const Header = () => (
-  <div className={("bar", styles["no-print"])}>
-    <Nav />
-  </div>
+  <div className={("bar", styles["no-print"])}></div>
 );
 
 export default Header;

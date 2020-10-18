@@ -1,9 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');        
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
 
+/* MAIN AND LAYOUT STYLES */
 .container {
-    font-family: 'Nunito', sans-serif;
     background-color: white;
-    min-height: 100vh;
+    min-height: 70vh;
+    padding-bottom: 10px;
+}
+
+.content-container {
+    padding-left: 30px;
+    width: 100%;
+}
+
+.layout {
+    display: flex;
+}
+
+/* COUNTY DATA STLYES */
+
+.dropdown-container label,
+.container h3  {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 16px; 
 }
 
 .overview {
@@ -12,41 +31,20 @@
     margin: 0 auto;
 }
 
-.title-container {
-    width: 100%;
-}
-
-.print-title {
-    background: #516e6f;
-    color: #fff;
-    padding: 50px;
-    margin: 0 0 20px 0;
-    width: 100%;
-}
-
-.eoc-logo {
-    display: none;
-    width: 0;
-}
-
 .print-report {
-    padding: 20px 60px 0;
+    padding: 50px 60px 0;
 }
 
-.content-container {
+.data-container {
     padding: 0 60px 40px;
 }
     
 .container h3 {
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 18px;
     margin: 18px 0 6px;
 }
 
 .container table {
-    border: 1px solid rgb(206, 206, 206);
-    font-size: 13px;
+    font-size: 12px;
     border-collapse: collapse;
     font-weight: 400;
     min-width: 250px;
@@ -54,16 +52,22 @@
 
 .container thead tr {
     height: 22px;
-    background: rgb(206, 206, 206);
+    background: rgb(212, 212, 212);
+    border: 1px solid rgb(212, 212, 212);
     color-adjust:exact;
 }
 
 .container tbody tr td {
     padding: 2px 5px;
+    border: 1px solid rgb(212, 212, 212);
 }
 
+/* DROPDOWN */
 .print-label {
     display: none;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .dropdown-container label {
@@ -72,9 +76,8 @@
 }
 
 select.dropdown {
-    font-size: 15px;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
     padding: 8px;
     width: 250px;
     border: 1px solid rgb(206, 206, 206);
@@ -87,6 +90,7 @@ select.dropdown {
     background-size: .5em auto, 100%;
 }
 
+
 .summarytable {
     padding: 20px 0;
 }
@@ -97,12 +101,38 @@ select.dropdown {
 
 .bold {
     font-weight: 700;
-    font-size: 17px;
+    font-size: 16px;
     text-align: right;
     width: 120px; 
 }
 
-/* Pareto Chart Styles - may also use for line graphs */
+/* DATA TABLE */
+.full-stats-table {
+    width: 95%;
+}
+
+.full-stats-table-body tr:nth-child(even) {
+    background: rgb(242, 242, 242);
+}
+
+.full-stats-heading {
+    font-weight: 600;
+    padding: 0 5px 0 10px;
+    text-align: right;
+    font-size: 13px;
+}
+
+.full-stats-data {
+    text-align: right;
+    font-size: 11px;
+}
+
+.full-stats-row-heading {
+    max-width: 160px;
+    font-size: 11px;
+}
+
+/* PARETO CHARTS */
 .charts {
     margin: 10px 0;
     padding: 20px 0;
@@ -137,40 +167,6 @@ select.dropdown {
     right: 20px;
 }
 
-.sources h4 {
-    margin-block-start: 1em;
-    margin-block-end: 1em
-}
-
-.sources p {
-    font-size: 10px;
-}
-
-.full-stats-table {
-    width: 100%;
-}
-
-.full-stats-table-body tr:nth-child(even) {
-    background: rgb(242, 242, 242);
-}
-
-.full-stats-heading {
-    font-weight: 600;
-    padding: 0 5px 0 10px;
-    text-align: right;
-    font-size: 15px;
-}
-
-.full-stats-data {
-    text-align: right;
-    font-size: 13px;
-}
-
-.full-stats-row-heading {
-    max-width: 180px;
-    font-size: 13px;
-}
-
 h3.error-text {
     text-transform: none;
     font-weight: 500;
@@ -187,51 +183,53 @@ h3.error-text {
     margin: 2px 0;
 }
 
-@media (max-width: 8.5in){
+@media (max-width: 1200px){
     .historical-trends-charts {
         flex-direction: column;
         width: fit-content;
     }
-    
     .pareto-chart {
         margin: 20px 0 0;
     }
-
 }
 
+/* PRINT STYLES */
 @media print {
+     /* General */
     .container {
-        box-shadow: none;
         padding: 0px;
         margin: 5px auto;
         position: relative;
-        width:8.5in;
+        width: 8.5in;
+    }
+    .content-container,
+    .data-container,
+    .summarytable, 
+    .charts {
+        padding: 0;
+    }
+    .full-stats-data,
+    .full-stats-row-heading,
+    .bold,
+    .container table,
+    .full-stats-heading  {
+        font-size: 10px;
+    }
+    .container h3 {
+        font-size: 14px;
     }
 
-    .eoc-logo {
-        display: block;
-        height: 140px;
-        width: 340px;
-    }
-
+    /* Title */
     .print-report {
         display: flex;
         padding: 0;
     }
-
-    .content-container {
-        padding: 0;
-    }
-    
     .print-label {
         display: block;
-        font-size: 15px;
-        font-weight: 700;
-        text-transform: uppercase;
-        padding: 0;
-        margin-top: 1px;
     }
-
+    .no-print {
+        display: none !important;
+    }
     select.dropdown {
         font-size: 15px;
         padding: 0 0 20px 0;
@@ -239,82 +237,34 @@ h3.error-text {
         margin: 0 0 0 10px;
     }
 
-    .container h3 {
-        font-size: 14px;
-    }
-
-    .container table {
-        font-size: 10px;
-    }
-
+    /* Tables */
     .container thead tr {
         height: 16px;
     }
-
-    .eoc-logo {
-        height: 140px;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-
-    .bold {
-        font-size: 10px;
-    }
-
-    .summarytable {
-        padding: 0 0;
-    }
-
-    .charts {
-        padding: 0;
-    }
-
+    
+    /* Charts */
     .chart-container {
         margin: 0 10px 10px 0;
     }
-
-    .full-stats-heading {
-        font-size: 12px;
-    }
-    
-    .full-stats-data {
-        font-size: 10px;
-    }
-    
-    .full-stats-row-heading {
-        font-size: 10px;
-    }
-    
     .historical-trends-charts {
         flex-direction: row;
         width: fit-content;
         padding: 0;
     }
-
-    .no-print,
-    .print-title {
-        display: none !important;
-    }
-
     .rv-discrete-color-legend-item {
         padding: 5px 10px 0px;
     }
-
     .global_chart__2UJn_ {
         height: 1.8in;
         padding: 6px 10px 6px;
     }
 
+    /* Sources */
     .sources h4 {
         margin: 4px 0;
     }
-    
     .sources p {
         font-size: 8px;
         margin: 2px 0;
     }
-
 }
-
-

@@ -1,0 +1,44 @@
+/* SIDEBAR STYLES */
+.sidebar {
+    padding: 0 36px 0 40px;
+    width: 300px;
+}
+
+.sidebar h1 {
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 1.2px;
+    line-height: 1.6;
+    position: relative;
+}
+
+.sidebar span.bold {
+    font-weight: 600;
+    font-size: 32px;
+    z-index: 10;
+    position: absolute;
+}
+
+.sidebar .highlight-energy,
+.sidebar .highlight-assistance {
+    background: #fedb8d;
+    padding: 0 10px;
+    margin: 24px -10px;
+    height: 28px;
+    z-index: 0;
+    position: absolute;
+}
+
+.sidebar .highlight-energy {
+    width: 149px;
+}
+
+.sidebar .highlight-assistance {
+    width: 224px;
+}
+
+@media print {
+   .sidebar {
+       display: none;
+   }
+}

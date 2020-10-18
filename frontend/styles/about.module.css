@@ -1,12 +1,20 @@
 .container {
-    font-family: 'Nunito', sans-serif;
+    padding: 40px 60px 60px;
 }
 
-.container h1 {
-    background: #516e6f;
-    color: #fff;
-    padding: 50px;
-    margin: 0;
+.container p {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 0.6px;
 }
 
+.eoc-logo,
+.cfd-logo {
+    width: 300px;
+    margin: 20px 0;
+}
 
+.eoc-logo {
+    margin-left: -12px;
+}

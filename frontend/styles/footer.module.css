@@ -1,0 +1,55 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.8px;
+    margin: 40px 50px 0;
+    background: #fff;
+    border-top: 2px solid #4d4d4d;
+}
+
+.footer-content {
+    width: 300px;
+    font-size: 12px;
+}
+
+.footer-content a {
+    text-decoration: underline;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.cfd-logo{
+    width: 140px;
+    padding-left: 20px;
+}
+
+.eoc-logo {
+    width: 136px;
+}
+
+.link {
+    color: #4d4d4d;
+    padding: 0 2px;
+}
+
+@media print {
+	.footer {
+		margin: 0;
+    }
+
+    .footer-content {
+        font-size: 10px;
+    }
+    
+    .footer .eoc-logo,
+    .footer .cfd-logo {
+        width: 100px;
+    }
+}
