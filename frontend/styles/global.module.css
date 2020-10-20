@@ -10,6 +10,7 @@
 .content-container {
     padding-left: 30px;
     width: 100%;
+    min-height: 85vh;
 }
 
 .layout {
@@ -181,6 +182,18 @@ h3.error-text {
 .sources p {
     font-size: 9px;
     margin: 2px 0;
+}
+
+@media (max-width:767px){
+    .layout {
+        flex-direction: column;
+    } 
+    .data-container {
+        padding: 10px 20px 10px 10px;
+    }
+    .print-report {
+        padding: 30px 20px 10px 10px;
+    }
 }
 
 @media (max-width: 1200px){
