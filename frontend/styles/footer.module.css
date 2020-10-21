@@ -41,6 +41,7 @@
 
 @media (max-width:767px){
     .footer {
+        margin: 10px 10px 0;
         flex-direction: column-reverse;
         align-items: flex-start;
     }
