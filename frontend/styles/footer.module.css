@@ -39,6 +39,17 @@
     padding: 0 2px;
 }
 
+@media (max-width:767px){
+    .footer {
+        margin: 10px 10px 0;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+    .footer p {
+        padding-left: 10px;
+    }
+}
+
 @media print {
 	.footer {
 		margin: 0;

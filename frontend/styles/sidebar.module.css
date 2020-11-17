@@ -37,6 +37,12 @@
     width: 224px;
 }
 
+@media (max-width:767px){
+    .sidebar {
+        padding: 0 20px;
+    }
+}
+
 @media print {
    .sidebar {
        display: none;

@@ -18,3 +18,9 @@
 .eoc-logo {
     margin-left: -12px;
 }
+
+@media (max-width:767px){
+    .container {
+        padding: 10px 20px 10px 10px;
+    }
+}

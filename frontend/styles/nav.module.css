@@ -53,6 +53,19 @@
 	transform: scaleX(1);
 }
 
+@media (max-width:767px){
+	.navbar {
+		display: block;
+		padding: 20px 0 20px 10px;
+	}
+	.nav-links {
+		width: 280px;
+	}
+	.lightbulb {
+		display: none;
+	}
+}
+
 @media print {
 	.navbar {
 		display: none;

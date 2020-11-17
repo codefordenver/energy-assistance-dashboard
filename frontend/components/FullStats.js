@@ -14,42 +14,44 @@ const FullStats = (props) => {
     return (
         <div className={styles.statstable}>
             <h3>Full Stats</h3>
-                <table className={styles['full-stats-table']}>
-                    <thead>
-                        <tr>
-                            <td></td>
-                            { availableYears.map((year, i) => {
+                <div className={styles['stats-table-container']}>
+                    <table className={styles['full-stats-table']}>
+                        <thead>
+                            <tr>
+                                <td></td>
+                                { availableYears.map((year, i) => {
+                                    return (
+                                        <td key={i} className={styles['full-stats-heading']}>{ year }</td>
+                                    )
+                                })}
+                            </tr>
+                        </thead>
+                        { selectedCountyData 
+                        ? ( <tbody className={styles['full-stats-table-body']}>
+                            { tableData.map((item, i) => {
+                                const cellData = Object.entries(item)[0];
                                 return (
-                                    <td key={i} className={styles['full-stats-heading']}>{ year }</td>
+                                        <tr key={i} >
+                                            <td className={styles['full-stats-row-heading']}>{ cellData[0] }</td>
+                                            { cellData[1].map((value, i) => {
+                                                const val = value ? value : '0';
+                                                return (
+                                                    <td key={i} className={styles['full-stats-data']}>{ formatCellData(val, cellData[0]) }</td>
+                                                )
+                                            })}
+                                        </tr>  
                                 )
                             })}
-                        </tr>
-                    </thead>
-                    { selectedCountyData 
-                    ? ( <tbody className={styles['full-stats-table-body']}>
-                           { tableData.map((item, i) => {
-                               const cellData = Object.entries(item)[0];
-                               return (
-                                    <tr key={i} >
-                                        <td className={styles['full-stats-row-heading']}>{ cellData[0] }</td>
-                                        { cellData[1].map((value, i) => {
-                                            const val = value ? value : '0';
-                                            return (
-                                                <td key={i} className={styles['full-stats-data']}>{ formatCellData(val, cellData[0]) }</td>
-                                            )
-                                        })}
-                                    </tr>  
-                               )
-                           })}
-                        </tbody> ) 
-                    : ( <tbody>
-                            <tr>
-                                <td>No Data available</td>
-                                <td></td>
-                            </tr>
-                        </tbody> )
-                    }
-            </table>
+                            </tbody> ) 
+                        : ( <tbody>
+                                <tr>
+                                    <td>No Data available</td>
+                                    <td></td>
+                                </tr>
+                            </tbody> )
+                        }
+                </table>
+            </div>
         </div>
     )
 }

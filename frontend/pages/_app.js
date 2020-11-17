@@ -5,9 +5,6 @@ function MyApp({ Component, pageProps }) {
     <Page>
       <Component {...pageProps} />
       <style jsx global>{`
-        #blockColorblindContent {
-          display: none;
-        }
         * {
           box-sizing: border-box;
         }
