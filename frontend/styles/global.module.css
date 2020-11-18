@@ -172,6 +172,11 @@ select.dropdown {
     right: 20px;
 }
 
+/* STATE MAP */
+.map-container {
+    width:400px;
+}
+
 h3.error-text {
     text-transform: none;
     font-weight: 500;
