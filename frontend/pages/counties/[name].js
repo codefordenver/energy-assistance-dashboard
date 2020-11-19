@@ -31,7 +31,15 @@ function Counties(props) {
           <div className={styles["print-report"]}>
             <span className={styles["print-label"]}>Report for:</span>
             <CountyDropdown countyList={countyList} setLoading={setLoading} />
+            {!loading && selectedCountyData && !error && (
+              <SummaryTable selectedCountyData={selectedCountyData} />
+            )}
           </div>
+          {!loading && selectedCountyData && !error && (
+            <div className={styles["map-container"]}>
+              <StateMap countyId={county.id} />
+            </div>
+          )}
         </div>
       </div>
       <div className={styles["data-container"]}>
@@ -43,12 +51,7 @@ function Counties(props) {
           </h3>
         ) : (
           <div>
-            <div className={styles["map-container"]}>
-              <StateMap countyId={county.id} />
-            </div>
-          
             <div>
-              <SummaryTable selectedCountyData={selectedCountyData} />
               <FullStats selectedCountyData={selectedCountyData} />
             </div>
 
@@ -96,9 +99,9 @@ function Counties(props) {
           background-color: #e6e6e6;
         }
 
-        polygon{
-          fill:blue;
-          fill-opacity:1;
+        polygon {
+          fill: blue;
+          fill-opacity: 1;
         }
 
         a {
