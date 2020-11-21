@@ -108,7 +108,7 @@ select.dropdown {
 
 /* DATA TABLE */
 .stats-table-container {
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .full-stats-table {

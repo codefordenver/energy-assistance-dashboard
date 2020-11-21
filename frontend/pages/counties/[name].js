@@ -19,7 +19,6 @@ export const getKeyByValue = (object, value) =>
 function Counties(props) {
   const { countyList, county } = props;
   const selectedCountyData = county.data;
-  console.log(countyList);
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
