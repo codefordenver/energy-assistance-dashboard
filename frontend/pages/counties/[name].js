@@ -7,6 +7,7 @@ import ParetoChart from "../../components/ParetoChart";
 import HouseholdsAssisted from "../../components/HouseholdsAssisted";
 import ParticipantsChart from "../../components/ParticipantsChart";
 import FullStats from "../../components/FullStats";
+import StateMap from "../../components/StateMap";
 import styles from "../../styles/global.module.css";
 import { BACKEND_URL } from "../../utils/constants";
 
@@ -18,25 +19,30 @@ export const getKeyByValue = (object, value) =>
 function Counties(props) {
   const { countyList, county } = props;
   const selectedCountyData = county.data;
-  
+
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   return (
     <div className={styles.container}>
       <div className={styles["overview"]}>
-        <div className={styles['title-container']}>
+        <div className={styles["title-container"]}>
           <div className={styles["print-report"]}>
             <span className={styles["print-label"]}>Report for:</span>
-            <CountyDropdown
-              countyList={countyList}
-              setLoading={setLoading}
-            />
+            <CountyDropdown countyList={countyList} setLoading={setLoading} />
+            {!loading && selectedCountyData && !error && (
+              <SummaryTable selectedCountyData={selectedCountyData} />
+            )}
           </div>
+          {!loading && selectedCountyData && !error && (
+            <div className={styles["map-container"]}>
+              <StateMap countyId={county.id} />
+            </div>
+          )}
         </div>
       </div>
-      <div className={styles['data-container']}>
-        {(loading || !selectedCountyData) ? (
+      <div className={styles["data-container"]}>
+        {loading || !selectedCountyData ? (
           <Loader />
         ) : error ? (
           <h3 className={styles["error-text"]}>
@@ -44,46 +50,45 @@ function Counties(props) {
           </h3>
         ) : (
           <div>
-              <div>
-                <SummaryTable selectedCountyData={selectedCountyData} />
-                <FullStats selectedCountyData={selectedCountyData} />
-              </div>
+            <div>
+              <FullStats selectedCountyData={selectedCountyData} />
+            </div>
 
-              <div className={styles.charts}>
-                <h3>Historical Trends</h3>
-                <div className={styles["historical-trends-charts"]}>
-                  <ParetoChart
-                    barKey='Households below 200% FPL'
-                    lineKey='Total Households Assisted'
-                    selectedCountyData={selectedCountyData}
-                  />
-                  <ParetoChart
-                    barKey='% Households below 200% FPL'
-                    lineKey='% of Households below 200% FPL Assisted'
-                    selectedCountyData={selectedCountyData}
-                  />
-                </div>
-                <div className={styles["historical-trends-charts"]}>
-                  <HouseholdsAssisted
-                    title='% of Households below 200% FPL Assisted'
-                    selectedCountyData={selectedCountyData}
-                  />
-                  <ParticipantsChart selectedCountyData={selectedCountyData} />
-                </div>
+            <div className={styles.charts}>
+              <h3>Historical Trends</h3>
+              <div className={styles["historical-trends-charts"]}>
+                <ParetoChart
+                  barKey='Households below 200% FPL'
+                  lineKey='Total Households Assisted'
+                  selectedCountyData={selectedCountyData}
+                />
+                <ParetoChart
+                  barKey='% Households below 200% FPL'
+                  lineKey='% of Households below 200% FPL Assisted'
+                  selectedCountyData={selectedCountyData}
+                />
               </div>
-
-              <div className={styles.sources}>
-                <h4>Sources</h4>
-                <p>
-                  American Community Survey 5-Year Estimates by the Census Bureau,
-                  Energy Outreach Colorado's households served, and CDHS LEAP
-                  households served
-                </p>
-                <p>2013 LEAP data is estimated due to lack of data</p>
+              <div className={styles["historical-trends-charts"]}>
+                <HouseholdsAssisted
+                  title='% of Households below 200% FPL Assisted'
+                  selectedCountyData={selectedCountyData}
+                />
+                <ParticipantsChart selectedCountyData={selectedCountyData} />
               </div>
             </div>
-            )}
-        </div>
+
+            <div className={styles.sources}>
+              <h4>Sources</h4>
+              <p>
+                American Community Survey 5-Year Estimates by the Census Bureau,
+                Energy Outreach Colorado's households served, and CDHS LEAP
+                households served
+              </p>
+              <p>2013 LEAP data is estimated due to lack of data</p>
+            </div>
+          </div>
+        )}
+      </div>
 
       <style jsx global>{`
         html,
@@ -92,6 +97,12 @@ function Counties(props) {
           margin: 0;
           background-color: #e6e6e6;
         }
+
+        polygon {
+          fill: blue;
+          fill-opacity: 1;
+        }
+
         a {
           color: inherit;
           text-decoration: none;
@@ -163,7 +174,7 @@ Counties.getInitialProps = async ({ query }) => {
   //req to GET the selected counties data
   const countyName = query.name;
   const countyId = getKeyByValue(countyList.counties, countyName);
-  
+
   const countyDataRes = await fetch(`${BACKEND_URL}/counties/${countyId}`);
   const countyData = await countyDataRes.json();
 
