@@ -180,8 +180,8 @@ select.dropdown {
 }
 
 .map-container {
-  width: 400px;
-  margin: 30px;
+  width: 300px;
+  padding-top: 50px;
 }
 
 h3.error-text {
@@ -210,11 +210,19 @@ h3.error-text {
   }
 }
 
+@media (max-width: 1050px) {
+  .title-container {
+    display: block;
+  }
+  .map-container {
+    padding: 30px 0 30px 60px;
+  }
+}
+
 @media (max-width: 767px) {
   .title-container {
     flex-direction: column;
   }
-
   .content-container {
     padding-left: 10px;
   }
@@ -227,6 +235,10 @@ h3.error-text {
   .print-report {
     padding: 30px 20px 10px 10px;
   }
+  .map-container {
+    max-width: 300px;
+    padding: 10px;
+  }
   .chart-container {
     margin: 0 0 10px 0;
   }
@@ -237,11 +249,6 @@ h3.error-text {
 }
 
 @media (max-width: 500px) {
-  .map-container {
-    max-width: 100%;
-    padding: 30px;
-  }
-
   .print-report {
     padding: 20px 0 0;
   }
