@@ -8,9 +8,9 @@
 }
 
 .content-container {
-  padding-left: 30px;
-  width: 100%;
-  min-height: 85vh;
+    padding-left: 30px;
+    width: 100%;
+    min-height: 85vh;
 }
 
 .layout {
@@ -90,6 +90,7 @@ select.dropdown {
   background-position: right 0.7em top 50%, 0 0;
   background-size: 0.5em auto, 100%;
 }
+
 
 .summarytable {
   padding: 20px 0;
@@ -179,8 +180,8 @@ select.dropdown {
 }
 
 .map-container {
-  width: 400px;
-  margin: 30px;
+  width: 300px;
+  padding-top: 50px;
 }
 
 h3.error-text {
@@ -199,54 +200,58 @@ h3.error-text {
   margin: 2px 0;
 }
 
-@media (max-width: 1200px) {
-  .historical-trends-charts {
-    flex-direction: column;
-    width: fit-content;
-  }
-  .pareto-chart {
-    margin: 20px 0 0;
-  }
+@media (max-width: 1200px){
+    .historical-trends-charts {
+        flex-direction: column;
+        width: fit-content;
+    }
+    .pareto-chart {
+        margin: 20px 0 0;
+    }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1050px) {
   .title-container {
-    flex-direction: column;
+    display: block;
   }
-
-  .content-container {
-    padding-left: 10px;
-  }
-  .layout {
-    flex-direction: column;
-  }
-  .data-container {
-    padding: 10px 20px 10px 10px;
-  }
-  .print-report {
-    padding: 30px 20px 10px 10px;
-  }
-  .chart-container {
-    margin: 0 0 10px 0;
-  }
-  .chart {
-    padding: 0;
-    width: 3.7in;
+  .map-container {
+    padding: 30px 0 30px 60px;
   }
 }
 
-@media (max-width: 500px) {
-  .map-container {
-    max-width: 100%;
-    padding: 30px;
-  }
+@media (max-width:767px){
+    .content-container {
+        padding-left: 10px;
+    }
+    .layout {
+        flex-direction: column;
+    } 
+    .data-container {
+        padding: 10px 20px 10px 10px;
+    }
+    .print-report {
+        padding: 30px 20px 10px 10px;
+    }
+    .map-container {
+      max-width: 300px;
+      padding: 10px;
+    }
+    .chart-container {
+        margin: 0 0 10px 0;
+    }
+    .chart {
+        padding: 0;
+        width: 3.7in;
+    }
+}
 
-  .print-report {
-    padding: 20px 0 0;
-  }
-  .data-container {
-    padding: 0 10px 0 0;
-  }
+@media (max-width:500px){
+    .print-report {
+        padding: 20px 0 0;
+    }
+    .data-container {
+        padding: 0 10px 0 0;
+    }
 }
 
 /* PRINT STYLES */
@@ -284,18 +289,21 @@ h3.error-text {
   }
 
   .title-container {
-      flex-direction: row;
+    display: flex;
+    flex-direction: row;
   }
 
   .print-report {
-    /* display: flex; */
     padding: 0;
   }
   .print-label {
-    display: block;
+    display: inline;
   }
   .no-print {
     display: none !important;
+  }
+  .dropdown-container {
+    display: inline;
   }
   select.dropdown {
     font-size: 15px;
