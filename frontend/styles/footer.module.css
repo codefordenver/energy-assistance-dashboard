@@ -52,6 +52,16 @@
 
 @media print {
 	.footer {
-        display: none;
+        flex-direction:row;
+        margin: 0;
+    }
+
+    .footer-content {
+        font-size: 10px;
+    }
+    
+    .footer .eoc-logo,
+    .footer .cfd-logo {
+        width: 100px;
     }
 }
