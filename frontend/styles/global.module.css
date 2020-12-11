@@ -278,33 +278,34 @@ h3.error-text {
   }
   .container h3 {
     font-size: 14px;
+    margin: 12px 0 6px;
   }
 
   /* Title */
   .map-container {
     padding-top: 0;
     padding-bottom: 0;
-    margin: 0 0 0 125px;
-    width: 250px;
+    margin: 10px 0 0 0;
+    width: 170px;
   }
-
   .title-container {
       flex-direction: row;
   }
-
   .print-report {
-    /* display: flex; */
     padding: 0;
   }
   .print-label {
-    display: block;
+    display: inline;
   }
   .no-print {
     display: none !important;
   }
+  .dropdown-container {
+    display: inline;
+  }
   select.dropdown {
     font-size: 15px;
-    padding: 0 0 20px 0;
+    padding: 0;
     border: none;
     margin: 0 0 0 10px;
   }
@@ -333,10 +334,10 @@ h3.error-text {
 
   /* Sources */
   .sources h4 {
-    margin: 4px 0;
+    font-size: 10px;
+    margin: 0 0 4px;
   }
   .sources p {
     font-size: 8px;
-    margin: 2px 0;
   }
 }
