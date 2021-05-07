@@ -53,7 +53,7 @@ class RedisHelper():
         self.r.flushdb()
 
 
-def GetDataFromAirtable(api_key: str):
+def GetDataFromAirtable(api_url: str, api_key: str):
     """
 
     :return: a dataframe
@@ -64,6 +64,8 @@ def GetDataFromAirtable(api_key: str):
     # list of filename from Airtable
     # skipping these 2 files as of now --> "EOC - Utility Territories.csv","EOC - Primary Energy Sources.csv",
     
+    url = api_url
+    params = {'api_key': api_key}
     
     AirtableFileNames = {
         "EOC - Xcel EA Participants": ROW_TYPE["XEAP_TYPE"], 
@@ -75,9 +77,6 @@ def GetDataFromAirtable(api_key: str):
         "ACS - Households": ROW_TYPE["H_TYPE"], 
         "ACS - Population": ROW_TYPE["P_TYPE"]}
 
-    url = "https://api.airtable.com/v0/appfSbArpaXGKBjzU/"
-
-    params = {'api_key': api_key}
 
     tableDict = collections.defaultdict(dict)
     # get current year

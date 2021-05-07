@@ -18,6 +18,7 @@ jobs:
       REDIS_PORT: ${{ secrets.REDIS_PORT }}
       REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
       AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+      AIRTABLE_API_URL: ${{ secrets.AIRTABLE_API_URL }}
 
     steps:
     - uses: actions/checkout@v2
