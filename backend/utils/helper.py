@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 import redis
-from datetime import datetime,date
+from datetime import datetime, date
 import requests
 import time
 from fastapi import HTTPException
@@ -53,7 +53,7 @@ class RedisHelper():
         self.r.flushdb()
 
 
-def GetDataFromAirtable(api_url: str, api_key: str):
+def GetDataFromAirtable(api_url: str, api_key: str, end_year: int):
     """
 
     :return: a dataframe
@@ -63,24 +63,23 @@ def GetDataFromAirtable(api_url: str, api_key: str):
     """
     # list of filename from Airtable
     # skipping these 2 files as of now --> "EOC - Utility Territories.csv","EOC - Primary Energy Sources.csv",
-    
+
     url = api_url
     params = {'api_key': api_key}
-    
+
     AirtableFileNames = {
-        "EOC - EA Participants": ROW_TYPE["XEAP_TYPE"], 
-        "CDHS - LEAP Participants": ROW_TYPE["LEAPP_TYPE"], 
+        "EOC - EA Participants": ROW_TYPE["XEAP_TYPE"],
+        "CDHS - LEAP Participants": ROW_TYPE["LEAPP_TYPE"],
         "EOC - EA Participants": ROW_TYPE["EAP_TYPE"],
-        "ACS - Population below 200 Percent FPL": ROW_TYPE["PB2_TYPE"], 
+        "ACS - Population below 200 Percent FPL": ROW_TYPE["PB2_TYPE"],
         "ACS - Average Household Size":  ROW_TYPE["AHS_TYPE"],
-        "ACS - Median Household Income": ROW_TYPE["MHI_TYPE"] , 
-        "ACS - Households": ROW_TYPE["H_TYPE"], 
+        "ACS - Median Household Income": ROW_TYPE["MHI_TYPE"],
+        "ACS - Households": ROW_TYPE["H_TYPE"],
         "ACS - Population": ROW_TYPE["P_TYPE"]}
 
-
     tableDict = collections.defaultdict(dict)
-    # get current year
-    current_year = (date.today()).year
+
+    start_year = 2010 #Needs to be hard coded unless loop is updated to check start column
 
     index = 0
     # loop through all the files on Airtable
@@ -98,7 +97,7 @@ def GetDataFromAirtable(api_url: str, api_key: str):
 
             tableDict[index] = []
             length_data = len(response_json['records'])
-            start_year = 2010
+
             # loop through entire length of json response
             for counter in range(length_data):
                 single = {}
@@ -114,12 +113,15 @@ def GetDataFromAirtable(api_url: str, api_key: str):
                     continue
 
                 # loop from 2010 till current year to get data
-                for i in range(start_year,current_year):
+                for i in range(start_year, end_year):
                     try:
-                         single.update({str(i): convert_string_to_float(response_json['records'][counter]['fields'][str(i)])})
+                        single.update({str(i): convert_string_to_float(
+                            response_json['records'][counter]['fields'][str(i)])})
                     except:
                         # Setting value to 0 for now to be able to process the data frame
-                         single.update({str(i): 0})
+
+                        # single.update({str(i): 0})
+                        continue
 
                 # add this single record to the default dictionary
                 tableDict[index] = single
@@ -130,7 +132,8 @@ def GetDataFromAirtable(api_url: str, api_key: str):
 
         else:
             # raise exception if some error in fetching the file and response code is not 200
-            raise HTTPException(status_code=404, detail="Table not found in Airtable database")
+            raise HTTPException(
+                status_code=404, detail="Table not found in Airtable database")
 
     # Put the default dictionary into dataframe
     data = pd.DataFrame(tableDict)
@@ -140,6 +143,7 @@ def GetDataFromAirtable(api_url: str, api_key: str):
     #data = data.set_index(['TYPE', 'CountyFIPS'])
     return data
 
-def convert_string_to_float(string:str):
-    converted_string = string.replace(',','')
+
+def convert_string_to_float(string: str):
+    converted_string = string.replace(',', '')
     return float(converted_string)

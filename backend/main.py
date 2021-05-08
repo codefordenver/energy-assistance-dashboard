@@ -69,7 +69,7 @@ def get_raw_data():
         return r.getDataFrame(RAW_DATA_KEY)
 
     else:
-        raw_data = GetDataFromAirtable(settings.airtable_api_url, settings.airtable_api_key)
+        raw_data = GetDataFromAirtable(settings.airtable_api_url, settings.airtable_api_key, settings.end_year)
         r.setDataFrame(RAW_DATA_KEY, raw_data)
         return r.getDataFrame(RAW_DATA_KEY)
     

@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     redis_password: str
     airtable_api_key: str
     airtable_api_url: str
+    end_year: int
 
     class Config:
         env_file = ".env"
