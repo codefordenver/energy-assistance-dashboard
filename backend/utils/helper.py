@@ -113,7 +113,7 @@ def GetDataFromAirtable(api_url: str, api_key: str, end_year: int):
                     continue
 
                 # loop from 2010 till current year to get data
-                for i in range(start_year, end_year):
+                for i in range(start_year, end_year + 1):
                     try:
                         single.update({str(i): convert_string_to_float(
                             response_json['records'][counter]['fields'][str(i)])})
