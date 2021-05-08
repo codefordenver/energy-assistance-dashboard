@@ -53,7 +53,7 @@ class RedisHelper():
         self.r.flushdb()
 
 
-def GetDataFromAirtable(api_url: str, api_key: str, end_year: int):
+def GetDataFromAirtable(api_url: str, api_key: str, start_year: int, end_year: int):
     """
 
     :return: a dataframe
@@ -78,8 +78,6 @@ def GetDataFromAirtable(api_url: str, api_key: str, end_year: int):
         "ACS - Population": ROW_TYPE["P_TYPE"]}
 
     tableDict = collections.defaultdict(dict)
-
-    start_year = 2010 #Needs to be hard coded unless loop is updated to check start column
 
     index = 0
     # loop through all the files on Airtable
