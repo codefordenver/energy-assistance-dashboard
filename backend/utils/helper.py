@@ -68,7 +68,7 @@ def GetDataFromAirtable(api_url: str, api_key: str):
     params = {'api_key': api_key}
     
     AirtableFileNames = {
-        "EOC - Xcel EA Participants": ROW_TYPE["XEAP_TYPE"], 
+        "EOC - EA Participants": ROW_TYPE["XEAP_TYPE"], 
         "CDHS - LEAP Participants": ROW_TYPE["LEAPP_TYPE"], 
         "EOC - EA Participants": ROW_TYPE["EAP_TYPE"],
         "ACS - Population below 200 Percent FPL": ROW_TYPE["PB2_TYPE"], 
